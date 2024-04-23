@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using ISSProject.Common.DataEncryption;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test
 {
-    internal class EncrypterTest
+    internal class EncrypterTest : ITest
     {
         public static void ShiftEncrypterTest()
         {

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using ISSProject.Common.Logging;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test
 {
-    internal class LoggingModuleTest
+    internal class LoggingModuleTest : ITest
     {
         public static void Test()
         {
