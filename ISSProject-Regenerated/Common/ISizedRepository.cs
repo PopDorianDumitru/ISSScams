@@ -1,12 +1,13 @@
-﻿using ISSProject.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ISSProject.Common;
 
 namespace ISSProject.Common
 {
-    internal interface ISizedRepository<T, K> : IRepository<T, K> where T : IKeyedEntity<K>
+    internal interface ISizedRepository<T, K> : IRepository<T, K>
+        where T : IKeyedEntity<K>
     {
         /// <summary>
         /// Returns the number of elements currently in the repository.
