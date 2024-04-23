@@ -8,9 +8,12 @@ namespace ISSProject.ScamBots
 {
     internal class ScamMessageRepositoryException : Exception
     {
-        public ScamMessageRepositoryException() { }
-        public ScamMessageRepositoryException(string message) : base(message) { }
-        
+        public ScamMessageRepositoryException()
+        {
+        }
+        public ScamMessageRepositoryException(string message) : base(message)
+        {
+        }
     }
 }
 

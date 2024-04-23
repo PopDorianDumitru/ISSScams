@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using ISSProject.ScamBots.Service;
-using ISSProject.Common;
-using ISSProject.Common.Mock;
 using System.Threading;
-using System.Data.SqlClient;
-using System.Data;
+using System.Threading.Tasks;
+using ISSProject.Common;
 using ISSProject.Common.Logging;
-
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots.Service;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
@@ -24,7 +23,10 @@ namespace ISSProject.ScamBots
         private FakeUserGenerator fakeUserGenerator;
 
         private LoggingModule logger = new LoggingModule("scambots.txt", "ScamBot");
-        public bool WriteLogToConsole { get { return logger.WriteToConsole; } set { logger.WriteToConsole = value; } }
+        public bool WriteLogToConsole
+        {
+            get { return logger.WriteToConsole; } set { logger.WriteToConsole = value; }
+        }
 
         private int populationSizePercentage;
 
@@ -72,20 +74,22 @@ namespace ISSProject.ScamBots
         /// Starts the scam bot mechanism on the current thread. Pass this as a worker to a thread object.
         /// Will call startAttackWave
         /// </summary>
-        public void startBotMechanism()
+        public void StartBotMechanism()
         {
             logger.Log(LogSeverity.Event, "Starting scam bots thread with the following parameters:");
             logger.Log(LogSeverity.Info, "MESSAGES_PER_BOT = " + messagesPerBot + " | ATTACK_WAVE_COOLDOWN = " + attackWaveCooldownInHours + " HOURS | BOT_POPULATION_PERCENTAGE = " + populationSizePercentage + ".");
-            
-            try {
+
+            try
+            {
                 while (true)
                 {
                     logger.Log(LogSeverity.Event, "Starting a new scam bots attack wave...");
-                    startAttackWave();
+                    StartAttackWave();
                     logger.Log(LogSeverity.Success, "Attack wave finished! Thread will sleep for " + attackWaveCooldownInHours + " hours.");
                     Thread.Sleep(attackWaveCooldownInHours * 3600 * 1000);
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 logger.Log(LogSeverity.Error, "An error occured in the scam bots thread, shutting it down.");
                 logger.Log(LogSeverity.Error, "Error message: " + ex.Message);
@@ -99,16 +103,16 @@ namespace ISSProject.ScamBots
         /// - generate a set number of scam messages for each bot and send them to legitimate users
         /// </summary>
         /// <returns></returns>
-        public void startAttackWave()
+        public void StartAttackWave()
         {
             int result = 0;
 
             logger.Log(LogSeverity.Event, "Generating new accounts...");
-            result = generateBotAccounts();
+            result = GenerateBotAccounts();
             logger.Log(LogSeverity.Info, "Generated " + result + " new bot accounts.");
 
             logger.Log(LogSeverity.Event, "Sending scam messages to users...");
-            result = sendScamMessages();
+            result = SendScamMessages();
             logger.Log(LogSeverity.Info, "Sent " + result + " messages from bots.");
         }
 
@@ -116,7 +120,7 @@ namespace ISSProject.ScamBots
         /// [NO LONGER USED] Erases all the banned bot accounts from the fake account database.
         /// </summary>
         /// <returns>The number of banned bot accounts that have been erased.</returns>
-        public int removeBannedBotAccounts()
+        public static int RemoveBannedBotAccounts()
         {
             string queryString = "SELECT * FROM BannedUsers WHERE mockuser_id IN (SELECT fake_user_id FROM FakeUsers)";
             int deletedAccountsCount = 0;
@@ -155,7 +159,7 @@ namespace ISSProject.ScamBots
         /// Creates and inserts fake accounts into the database, such that the total number of active fake accounts is equal to the specified population size(default is 5% of total legitimate userbase).
         /// </summary>
         /// <returns>The number of generated accounts.</returns>
-        public int generateBotAccounts(){
+        public int GenerateBotAccounts(){
             long numberOfBotAccounts = fakeUsers.Size();
             long numberOfLegitimateAccounts = new MockUserRepository().Size() - fakeUsers.Size() - fakeUsers.NumberOfBannedFakeAccounts();
             logger.Log(LogSeverity.Warning, "Number of legit accounts: " + numberOfLegitimateAccounts);
@@ -164,7 +168,7 @@ namespace ISSProject.ScamBots
             long desiredNumberOfAccounts = 5 * numberOfLegitimateAccounts / 100;
             int attempts = 0;
 
-            for(long i = numberOfBotAccounts; i < desiredNumberOfAccounts; i++){
+            for (long i = numberOfBotAccounts; i < desiredNumberOfAccounts; i++){
                 try
                 {
                     fakeUsers.Insert(fakeUserGenerator.GenerateFakeUser());
@@ -174,7 +178,7 @@ namespace ISSProject.ScamBots
                     attempts++;
                     i--;
 
-                    if(attempts > 3)
+                    if (attempts > 3)
                     {
                         throw new FakeUserControllerException("Failed user generation after 3rd attempt!");
                     }
@@ -190,23 +194,24 @@ namespace ISSProject.ScamBots
         /// Sends scam messages from all the bots to legitimate users. Each bot will try to send only one message for every unique user. If there are no users left to send the messages to, the algorithm stops.
         /// </summary>
         /// <returns></returns>
-        public int sendScamMessages(){
+        public int SendScamMessages()
+        {
             string queryString = "SELECT * FROM FakeUsers WHERE fake_user_id NOT IN (SELECT * FROM BannedUsers)";
             int messageCount = 0;
-            
+
             using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
             {
                 SqlCommand command1 = new SqlCommand(queryString, connection);
                 connection.Open();
-                
+
                 DataTable fakeUserIds = new DataTable();
-                
+
                 using (SqlDataReader readerFakeUserIds = command1.ExecuteReader())
                 {
                     fakeUserIds.Load(readerFakeUserIds);
                 }
 
-                queryString = "SELECT TOP " + messagesPerBot * populationSizePercentage + " PERCENT Result.mockuser_id FROM " +
+                queryString = "SELECT TOP " + (messagesPerBot * populationSizePercentage) + " PERCENT Result.mockuser_id FROM " +
                     "(SELECT mockuser_id FROM MockUsers WHERE NOT EXISTS " +
                         "(SELECT fake_user_id FROM FakeUsers WHERE fake_user_id = MockUsers.mockuser_id)) Result " +
                         "ORDER BY NEWID()";
@@ -229,7 +234,9 @@ namespace ISSProject.ScamBots
                     for (messagesSent = 0; messagesSent < messagesPerBot; messagesSent++, currentUserIndex++)
                     {
                         if (currentUserIndex >= numberOfSelectedUsers)
+                        {
                             break;
+                        }
 
                         string messageContent = templateMessages.GenerateScamMessage();
                         int selectedUserId = (int)targetedUserIds.Rows[currentUserIndex]["mockuser_id"];
@@ -238,9 +245,11 @@ namespace ISSProject.ScamBots
                     }
 
                     if (messagesSent == 0)
+                    {
                         break;
+                    }
                 }
-  
+
                 connection.Close();
             }
 

@@ -1,20 +1,21 @@
-﻿using ISSProject.ScamBots.Model;
-using ISSProject.Common;
-using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ISSProject.Common;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots.Model;
 using Microsoft.Data.SqlClient;
 
 namespace ISSProject.ScamBots
 {
     internal class ScamMessageRepository : ISizedRepository<ScamMessageTemplate, int>
     {
-        public ScamMessageRepository() { }
+        public ScamMessageRepository()
+        {
+        }
 
         public IEnumerable<ScamMessageTemplate> All()
         {
@@ -65,7 +66,9 @@ namespace ISSProject.ScamBots
             }
 
             if (messageTemplate == null)
+            {
                 throw new ScamMessageRepositoryException("An error occured while trying to get message template from the database: a template with specified id does not exist.");
+            }
 
             return messageTemplate;
         }
@@ -163,7 +166,9 @@ namespace ISSProject.ScamBots
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         result = (int)reader[0];
+                    }
                 }
 
                 connection.Close();
@@ -209,7 +214,7 @@ namespace ISSProject.ScamBots
         public string GetMessageTemplateRandomly()
         {
             string queryString = "SELECT TOP 1 template_content From ScamMessageTemplates ORDER BY NEWID()";
-            string result = "";
+            string result = string.Empty;
 
             using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
             {
