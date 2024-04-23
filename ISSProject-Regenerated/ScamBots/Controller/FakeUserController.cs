@@ -10,10 +10,11 @@ using ISSProject.Common;
 using ISSProject.Common.Logging;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots.Service;
+using ISSProject_Regenerated.ScamBots.Controller;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
-    internal class FakeUserController
+    internal class FakeUserController : IFakeUserController
     {
         private FakeUserRepository fakeUsers;
         private ISizedRepository<MockUser, int> allUsers;
