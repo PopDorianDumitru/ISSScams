@@ -1,21 +1,25 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Repository;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Repository;
+using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Service
 {
     internal class FollowerService
     {
-        private static FollowerService _singleton;
+        private static FollowerService? singleton;
         public static FollowerService Provided()
         {
-            if (_singleton == null) _singleton = new FollowerService();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new FollowerService();
+            }
+
+            return singleton;
         }
 
         /// <summary>
@@ -27,6 +31,5 @@ namespace ISSProject.Common.Service
         {
             return FollowerRepository.Provided().FollowersOf(user);
         }
-
     }
 }

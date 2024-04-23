@@ -1,23 +1,26 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Repository;
-using ISSProject.Common.Service;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Repository;
+using ISSProject.Common.Service;
+using ISSProject.Common.Wrapper;
 
 namespace ISSfixed.ISSProject.Common.Service
 {
     internal class MessageService
     {
-
-        private static MessageService _singleton;
+        private static MessageService? singleton;
         public static MessageService Provided()
         {
-            if (_singleton == null) _singleton = new MessageService();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new MessageService();
+            }
+
+            return singleton;
         }
 
         /// <summary>
@@ -40,6 +43,5 @@ namespace ISSfixed.ISSProject.Common.Service
         {
             return MessageRepository.Provided().GetMessages(sender, receiver);
         }
-
     }
 }

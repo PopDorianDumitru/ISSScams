@@ -1,20 +1,24 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Repository
 {
     internal class MessageRepository : ICachedRepository<MessageWrapper, int>, ISizedRepository<MessageWrapper, int>
     {
-        private static MessageRepository _singleton;
+        private static MessageRepository? singleton;
         public static MessageRepository Provided()
         {
-            if (_singleton == null) _singleton = new MessageRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new MessageRepository();
+            }
+
+            return singleton;
         }
 
         public override IEnumerable<MessageWrapper> All()
@@ -25,7 +29,11 @@ namespace ISSProject.Common.Repository
 
         public override MessageWrapper ById(int id)
         {
-            if (cache.Any(id)) return cache.ById(id);
+            if (cache.Any(id))
+            {
+                return cache.ById(id);
+            }
+
             var user = new MessageWrapper(id);
             cache.Add(user);
             return user;
@@ -33,7 +41,11 @@ namespace ISSProject.Common.Repository
 
         public override bool Delete(MessageWrapper entity)
         {
-            if (cache.Any(entity.GetId())) cache.Remove(entity);
+            if (cache.Any(entity.GetId()))
+            {
+                cache.Remove(entity);
+            }
+
             return MockMessageRepository.Provided().Delete(entity.GetPureReference());
         }
 
