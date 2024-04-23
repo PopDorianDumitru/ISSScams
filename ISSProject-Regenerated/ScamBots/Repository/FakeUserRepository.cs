@@ -1,17 +1,18 @@
-﻿using ISSProject.Common;
-using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-
+using ISSProject.Common;
+using ISSProject.Common.Mock;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
     internal class FakeUserRepository : ISizedRepository<MockUser, int>
     {
-        public FakeUserRepository() {}
+        public FakeUserRepository()
+        {
+        }
 
         public IEnumerable<MockUser> All()
         {
@@ -71,8 +72,10 @@ namespace ISSProject.ScamBots
                 connection.Close();
             }
 
-            if(fakeUser == null)
+            if (fakeUser == null)
+            {
                 throw new FakeUserRepositoryException("An error occured while trying to get fake user from the database: an user with specified id does not exist.");
+            }
 
             return fakeUser;
         }
@@ -101,7 +104,8 @@ namespace ISSProject.ScamBots
                     connection.Close();
                 }
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 throw new FakeUserRepositoryException("An error occured while trying to delete fake user from the database: " + ex.Message);
             }
 
@@ -143,7 +147,8 @@ namespace ISSProject.ScamBots
                     connection.Close();
                 }
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 throw new FakeUserRepositoryException("An error occured while trying to insert fake user into the database: " + ex.Message);
             }
 
@@ -196,7 +201,9 @@ namespace ISSProject.ScamBots
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         result = (int)reader[0];
+                    }
                 }
 
                 connection.Close();
@@ -218,7 +225,9 @@ namespace ISSProject.ScamBots
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         result = (int)reader[0];
+                    }
                 }
 
                 connection.Close();

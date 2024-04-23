@@ -9,8 +9,9 @@ namespace ISSProject.ScamBots
     internal class FakeUserControllerException : Exception
     {
         public FakeUserControllerException() { }
-        public FakeUserControllerException(string message) : base(message) { }
-        
+        public FakeUserControllerException(string message) : base(message)
+        {
+        }
     }
 }
 

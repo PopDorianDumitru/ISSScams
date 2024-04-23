@@ -1,19 +1,20 @@
-﻿using ISSProject.ScamBots.Model;
-using ISSProject.Common;
-using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ISSProject.Common;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots.Model;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
     internal class ScamMessageLinkRepository : ISizedRepository<ScamMessageLink, int>
     {
-        public ScamMessageLinkRepository() { }
+        public ScamMessageLinkRepository()
+        {
+        }
 
         public IEnumerable<ScamMessageLink> All()
         {
@@ -64,7 +65,9 @@ namespace ISSProject.ScamBots
             }
 
             if (messageLink == null)
+            {
                 throw new ScamMessageRepositoryException("An error occured while trying to get scam URL from the database: a link with specified id does not exist.");
+            }
 
             return messageLink;
         }
@@ -119,7 +122,6 @@ namespace ISSProject.ScamBots
                 throw new ScamMessageRepositoryException("An error occured while trying to insert scam URL into the database: " + ex.Message);
             }
 
-
             return result >= 1;
         }
 
@@ -163,7 +165,9 @@ namespace ISSProject.ScamBots
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         result = (int)reader[0];
+                    }
                 }
 
                 connection.Close();
@@ -209,7 +213,7 @@ namespace ISSProject.ScamBots
         public string GetMessageLinkRandomly()
         {
             string queryString = "SELECT TOP 1 link_url From ScamMessageLinks ORDER BY NEWID()";
-            string result = "";
+            string result = string.Empty;
 
             using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
             {

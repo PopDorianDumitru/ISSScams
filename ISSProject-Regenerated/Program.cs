@@ -18,7 +18,7 @@ namespace ISSProject.ScamBots
         {
             FakeUserController controller = new FakeUserController();
             controller.WriteLogToConsole = true;
-            Thread botThread = new Thread(new ThreadStart(controller.startBotMechanism));
+            Thread botThread = new Thread(new ThreadStart(controller.StartBotMechanism));
             botThread.Start();
         }
 
