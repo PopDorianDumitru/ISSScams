@@ -8,25 +8,34 @@ namespace ISSProject.Common.Mock
 {
     internal class MockFollower : IKeyedEntity<int>
     {
+        private int id;
+        public int Id
+        {
+            get { return id; } set { id = value; }
+        }
 
-        private int _id;
-        public int Id { get { return _id; } set { _id = value; } }
+        private int userId;
+        public int UserId
+        {
+            get { return userId; } set { userId = value; }
+        }
 
-        private int _userId;
-        public int UserId { get { return _userId; } set { _userId = value; } }
+        private int followedUserId;
+        public int FollowedUserId
+        {
+            get { return followedUserId; } set { followedUserId = value; }
+        }
 
-        private int _followedUserId;
-        public int FollowedUserId { get { return _followedUserId; } set { _followedUserId = value; } }
-
-        public MockFollower(int id, int userId, int followedUserId) {
-            _id = id;
-            _userId = userId;
-            _followedUserId = followedUserId;
+        public MockFollower(int id, int userId, int followedUserId)
+        {
+            this.id = id;
+            this.userId = userId;
+            this.followedUserId = followedUserId;
         }
 
         public int GetId()
         {
-            return _id;
+            return id;
         }
 
         public object Clone()

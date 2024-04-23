@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ISSProject.Common.Mock;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using ISSProject.Common.Mock;
-using ISSProject.Common.Mock;
-using ISSProject.ScamBots;
 
 namespace ISSProject.Common.Test
 {
@@ -19,21 +19,18 @@ namespace ISSProject.Common.Test
             int initialSize = userRepository.Size();
 
             // get user by id that doesn't exist
-            try
-            {
+            try{
                 userRepository.ById(0);
                 Debug.Assert(false);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception){ }
 
             // insert user into the database
             Debug.Assert(userRepository.Insert(user));
             Debug.Assert(userRepository.Size() == initialSize + 1);
 
             // retrieve assigned id
-            user.Id = userRepository.getUserIdByEmail(user.Email);
+            user.Id = MockUserRepository.GetUserIdByEmail(user.Email);
 
             // retrieve user by its assigned id
             MockUser result = userRepository.ById(user.Id);
@@ -46,7 +43,7 @@ namespace ISSProject.Common.Test
             Debug.Assert(result.Birthdate.Equals(user.Birthdate));
 
             // what is this voodoo shit
-            // Debug.Assert(Math.Abs((result.Birthdate - user.Birthdate).Milliseconds) < 100);
+            //Debug.Assert(Math.Abs((result.Birthdate - user.Birthdate).Milliseconds) < 100);
 
             // update user in the database
             user.FirstName = "Test";
@@ -65,9 +62,7 @@ namespace ISSProject.Common.Test
                 userRepository.ById(user.Id);
                 Debug.Assert(false);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception){ }
         }
     }
 }

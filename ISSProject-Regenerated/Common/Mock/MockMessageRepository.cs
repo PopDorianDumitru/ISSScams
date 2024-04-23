@@ -1,23 +1,28 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.ScamBots;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mock
 {
     internal class MockMessageRepository : ISizedRepository<MockMessage, int>
     {
-        private static MockMessageRepository _singleton;
+        private static MockMessageRepository? singleton;
         public static MockMessageRepository Provided()
         {
-            if (_singleton == null) _singleton = new MockMessageRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new MockMessageRepository();
+            }
+
+            return singleton;
         }
-        public MockMessageRepository() { }
+        public MockMessageRepository()
+        {
+        }
 
         public IEnumerable<MockMessage> All()
         {
@@ -75,7 +80,9 @@ namespace ISSProject.Common.Mock
             }
 
             if (message == null)
+            {
                 throw new MessageRepositoryException("An error occured while trying to get message from the database: a message with specified id does not exist.");
+            }
 
             return message;
         }
@@ -134,7 +141,6 @@ namespace ISSProject.Common.Mock
                 throw new MessageRepositoryException("An error occured while trying to insert message into the database: " + ex.Message);
             }
 
-
             return result >= 1;
         }
 
@@ -182,7 +188,9 @@ namespace ISSProject.Common.Mock
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         result = (int)reader[0];
+                    }
                 }
 
                 connection.Close();
@@ -198,7 +206,7 @@ namespace ISSProject.Common.Mock
         /// <param name="receiverId">The receiver ID from the context.</param>
         /// <param name="communicationDate">The date time when the message was created.</param>
         /// <returns>The ID of a message with specified context, or -1 if such a message does not exist.</returns>
-        public int getMessageIdByConversationStatus(int senderId, int receiverId, DateTime communicationDate)
+        public static int GetMessageIdByConversationStatus(int senderId, int receiverId, DateTime communicationDate)
         {
             string queryString = "SELECT message_id From MockMessages WHERE sender_id = @sender_id AND receiver_id = @receiver_id AND communication_date = @communication_date";
             int messageId = -1;
@@ -247,7 +255,7 @@ namespace ISSProject.Common.Mock
                 {
                     while (reader.Read())
                     {
-                        var messageId = (int) reader[0];
+                        var messageId = (int)reader[0];
                         messages.Add(messageId);
                     }
                 }

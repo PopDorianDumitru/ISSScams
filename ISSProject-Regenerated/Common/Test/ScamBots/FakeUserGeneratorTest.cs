@@ -35,10 +35,10 @@ namespace ISSProject.Common.Test.ScamBots
             Debug.Assert(emailPattern.IsMatch(fakeUser.Email));
 
             Debug.Assert(passwordPattern.IsMatch(fakeUser.Password));
-            Debug.Assert(fakeUser.Password.Equals(encrypter1.encryptString(fakeUser.FirstName) + "_" + encrypter2.encryptString(fakeUser.LastName)));
+            Debug.Assert(fakeUser.Password.Equals(encrypter1.EncryptString(fakeUser.FirstName) + "_" + encrypter2.EncryptString(fakeUser.LastName)));
             string[] pass = fakeUser.Password.Split('_');
             Debug.Assert(pass.Length == 2);
-            Debug.Assert(fakeUser.FirstName.Equals(encrypter1.decryptString(pass[0])) && fakeUser.LastName.Equals(encrypter2.decryptString(pass[1])));
+            Debug.Assert(fakeUser.FirstName.Equals(encrypter1.DecryptString(pass[0])) && fakeUser.LastName.Equals(encrypter2.DecryptString(pass[1])));
 
             Debug.Assert(repository.Delete(fakeUser));
 
@@ -60,10 +60,10 @@ namespace ISSProject.Common.Test.ScamBots
                     Debug.Assert(emailPattern.IsMatch(generatedUser.Email));
 
                     Debug.Assert(passwordPattern.IsMatch(generatedUser.Password));
-                    Debug.Assert(generatedUser.Password.Equals(encrypter1.encryptString(generatedUser.FirstName) + "_" + encrypter2.encryptString(generatedUser.LastName)));
+                    Debug.Assert(generatedUser.Password.Equals(encrypter1.EncryptString(generatedUser.FirstName) + "_" + encrypter2.EncryptString(generatedUser.LastName)));
                     pass = generatedUser.Password.Split('_');
                     Debug.Assert(pass.Length == 2);
-                    Debug.Assert(generatedUser.FirstName.Equals(encrypter1.decryptString(pass[0])) && generatedUser.LastName.Equals(encrypter2.decryptString(pass[1])));
+                    Debug.Assert(generatedUser.FirstName.Equals(encrypter1.DecryptString(pass[0])) && generatedUser.LastName.Equals(encrypter2.DecryptString(pass[1])));
 
                     Debug.Assert(repository.Delete(generatedUser));
                 }

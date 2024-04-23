@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 public class UserRepositoryException : Exception
 {
-    public UserRepositoryException() { }
-    public UserRepositoryException(string message) : base(message) { }
+    public UserRepositoryException()
+    {
+    }
+    public UserRepositoryException(string message) : base(message)
+    {
+    }
 }

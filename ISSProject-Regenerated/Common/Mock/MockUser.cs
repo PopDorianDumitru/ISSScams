@@ -9,92 +9,101 @@ namespace ISSProject.Common.Mock
 {
     internal class MockUser : IKeyedEntity<int>
     {
+        public int Id { get; set; }
+        public string Password { get; set; }
 
-        private int _id;
-        public int Id { get { return _id; } set { _id = value; } }
+        private string email;
+        public string Email
+        {
+            get { return email; } set { email = value; }
+        }
 
-        private string _password;
-        public string Password { get { return _password; } set { _password = value; } }
+        private string first_name;
+        public string FirstName
+        {
+            get { return first_name; } set { first_name = value; }
+        }
 
-        private string _email;
-        public string Email { get { return _email; } set { _email = value; } }
+        private string last_name;
+        public string LastName
+        {
+            get { return last_name; } set { last_name = value; }
+        }
 
+        private string phone_number;
+        public string PhoneNumber
+        {
+            get { return phone_number; } set { phone_number = value; }
+        }
 
-        private string _first_name;
-        public string FirstName { get { return _first_name; } set { _first_name = value; } }
-
-
-        private string _last_name;
-        public string LastName { get { return _last_name; } set { _last_name = value; } }
-
-        private string _phone_number;
-        public string PhoneNumber { get { return _phone_number; } set { _phone_number = value; } }
-
-
-        private DateTime _birthdate;
-        public DateTime Birthdate { get { return _birthdate; } set { _birthdate = value; } }
+        private DateTime birthdate;
+        public DateTime Birthdate
+        {
+            get { return birthdate; } set { birthdate = value; }
+        }
 
         public MockUser()
         {
-            _id = -1;
-            _password = "";
-            _email = "";
-            _first_name = "";
-            _last_name = "";
-            _birthdate = new SqlDateTime(DateTime.Now).Value;
-            _phone_number = "";
+            Id = -1;
+            Password = string.Empty;
+            email = string.Empty;
+            first_name = string.Empty;
+            last_name = string.Empty;
+            birthdate = new SqlDateTime(DateTime.Now).Value;
+            phone_number = string.Empty;
         }
 
         public MockUser(int id, string email, string firstName, string lastName, DateTime birthdate)
         {
-            _id = id;
-            _password = "";
-            _email = email;
-            _first_name = firstName;
-            _last_name = lastName;
-            _birthdate = new SqlDateTime(birthdate).Value;
-            _phone_number = "";
+            this.Id = id;
+            Password = string.Empty;
+            this.email = email;
+            first_name = firstName;
+            last_name = lastName;
+            this.birthdate = new SqlDateTime(birthdate).Value;
+            phone_number = string.Empty;
         }
 
-        public MockUser(int id, string password, string email, string firstName, string lastName, DateTime birthdate) {
-            _id = id;
-            _password = password;
-            _email = email;
-            _first_name = firstName;
-            _last_name = lastName; 
-            _birthdate = new SqlDateTime(birthdate).Value;
-            _phone_number = "";
+        public MockUser(int id, string password, string email, string firstName, string lastName, DateTime birthdate)
+        {
+            this.Id = id;
+            this.Password = password;
+            this.email = email;
+            first_name = firstName;
+            last_name = lastName;
+            this.birthdate = new SqlDateTime(birthdate).Value;
+            phone_number = string.Empty;
         }
 
         public MockUser(int id, string password, string email, string firstName, string lastName, DateTime birthdate, string phoneNumber)
         {
-            _id = id;
-            _password = password;
-            _email = email;
-            _first_name = firstName;
-            _last_name = lastName;
-            _birthdate = new SqlDateTime(birthdate).Value;
-            _phone_number = phoneNumber;
+            this.Id = id;
+            this.Password = password;
+            this.email = email;
+            first_name = firstName;
+            last_name = lastName;
+            this.birthdate = new SqlDateTime(birthdate).Value;
+            phone_number = phoneNumber;
         }
         public MockUser(string password, string email, string firstName, string lastName, DateTime birthdate, string phoneNumber)
         {
-            _id = -1;
-            _password = password;
-            _email = email;
-            _first_name = firstName;
-            _last_name = lastName;
-            _birthdate = new SqlDateTime(birthdate).Value;
-            _phone_number = phoneNumber;
+            Id = -1;
+            this.Password = password;
+            this.email = email;
+            first_name = firstName;
+            last_name = lastName;
+            this.birthdate = new SqlDateTime(birthdate).Value;
+            phone_number = phoneNumber;
         }
 
         public override string ToString()
         {
-            return "User " + _first_name + " " + _last_name + ", with ID " + _id + ", born on " + _birthdate + ", having email address " + _email + " and phone number " + _phone_number;
+            return "User " + first_name + " " + last_name + ", with ID " + Id + ", born on " + birthdate + ", having email address " + email + " and phone number " + phone_number;
         }
 
         public int GetId()
         {
-            return _id;
+            return Id;
         }
 
         public object Clone()

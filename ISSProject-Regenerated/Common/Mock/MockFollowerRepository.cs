@@ -11,11 +11,11 @@ namespace ISSProject.Common.Mock
     internal class MockFollowerRepository : IRepository<MockFollower, int>
     {
         /* Mock Holding Data */
-        private static Dictionary<int, MockFollower> _mockDatabase = new Dictionary<int, MockFollower>();
+        private static Dictionary<int, MockFollower> mockDatabase = new Dictionary<int, MockFollower>();
 
         public static void ResetMockDatabase()
         {
-            _mockDatabase = new Dictionary<int, MockFollower>();
+            mockDatabase = new Dictionary<int, MockFollower>();
 
             IEnumerable<MockUser> users = MockUserRepository.Provided().All();
             Random random = new Random();
@@ -29,63 +29,74 @@ namespace ISSProject.Common.Mock
                     {
                         var randomIndex = random.Next(users.Count());
                         anotherUser = users.ToList()[randomIndex];
-                    } while (anotherUser.Id == user.Id);
-                    _mockDatabase.Add(mockKey++, new MockFollower(mockKey, user.Id, anotherUser.Id));
+                    }
+                    while (anotherUser.Id == user.Id);
+                    mockDatabase.Add(mockKey++, new MockFollower(mockKey, user.Id, anotherUser.Id));
                 }
             }
         }
 
-        private static MockFollowerRepository _singleton;
+        private static MockFollowerRepository? singleton;
+
+        internal static MockFollowerRepository Singleton { get => singleton; set => singleton = value; }
+
         public static MockFollowerRepository Provided()
         {
-            if (_singleton == null) _singleton = new MockFollowerRepository();
-            return _singleton;
+            if (Singleton == null)
+            {
+                Singleton = new MockFollowerRepository();
+            }
+
+            return Singleton;
         }
 
         /* IRepository */
 
         public IEnumerable<MockFollower> All()
         {
-            return _mockDatabase.Values;
+            return mockDatabase.Values;
         }
 
         public MockFollower ById(int id)
         {
-            return _mockDatabase[id];
+            return mockDatabase[id];
         }
 
         public bool Delete(MockFollower entity)
         {
-            return _mockDatabase.Remove(entity.Id);
+            return mockDatabase.Remove(entity.Id);
         }
 
         public bool Insert(MockFollower entity)
         {
-            if (!_mockDatabase.ContainsKey(entity.Id))
+            if (!mockDatabase.ContainsKey(entity.Id))
             {
-                _mockDatabase.Add(entity.Id, entity);
+                mockDatabase.Add(entity.Id, entity);
                 return true;
             }
             else
+            {
                 throw new MockKeyConstraintViolation(entity.Id);
+            }
         }
 
         public bool Update(MockFollower entity)
         {
-            if (!_mockDatabase.ContainsKey(entity.Id))
+            if (!mockDatabase.ContainsKey(entity.Id))
             {
-                _mockDatabase.Add(entity.Id, entity);
+                mockDatabase.Add(entity.Id, entity);
                 return true;
             }
             else
+            {
                 throw new MockNoEntityViolation(entity.Id);
+            }
         }
 
         // Extra
-
         public IEnumerable<int> FollowersOf(int userId)
         {
-            return from follower in _mockDatabase.Values
+            return from follower in mockDatabase.Values
                    where follower.FollowedUserId == userId
                    select follower.UserId;
         }

@@ -11,7 +11,8 @@ namespace ISSProject.Common.Cache
     /// </summary>
     /// <typeparam name="T">The entity this cache contains</typeparam>
     /// <typeparam name="K">The ID of the entity in this cache</typeparam>
-    internal class SimpleKeyedMapCache<T, K> where T : IKeyedEntity<K>
+    internal class SimpleKeyedMapCache<T, K>
+        where T : IKeyedEntity<K>
     {
         private Dictionary<K, T> cacheContent = new Dictionary<K, T>();
 
@@ -19,7 +20,7 @@ namespace ISSProject.Common.Cache
         /// Returns the cached entity T by its id K.
         /// </summary>
         /// <param name="id">The ID of the entity T</param>
-        /// <returns>The entity T, if cached. Otherwise will throw an error. 
+        /// <returns>The entity T, if cached. Otherwise will throw an error.
         /// Check if cached with cache.Any(id) first.</returns>
         public T ById(K id)
         {
@@ -55,9 +56,10 @@ namespace ISSProject.Common.Cache
         {
             if (!Any(entity.GetId()))
             {
-                cacheContent.Add(entity.GetId(), (T) entity.Clone());
+                cacheContent.Add(entity.GetId(), (T)entity.Clone());
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -83,13 +85,13 @@ namespace ISSProject.Common.Cache
         {
             if (Any(entity.GetId()))
             {
-                cacheContent[entity.GetId()] = (T) entity.Clone();
+                cacheContent[entity.GetId()] = (T)entity.Clone();
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
         }
-
     }
 }
