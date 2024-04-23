@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 public class GraphAnalyserLogRepositoryException : Exception
 {
-    public GraphAnalyserLogRepositoryException() { }
-    public GraphAnalyserLogRepositoryException(string message) : base(message) { }
+    public GraphAnalyserLogRepositoryException()
+    {
+    }
+    public GraphAnalyserLogRepositoryException(string message) : base(message)
+    {
+    }
 }

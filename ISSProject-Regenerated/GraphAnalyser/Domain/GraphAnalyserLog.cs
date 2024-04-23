@@ -1,47 +1,65 @@
-﻿using ISSProject.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common;
 
 namespace ISSProject.GraphAnalyser.Domain
 {
     internal class GraphAnalyserLog : IKeyedEntity<int>
     {
-        private int _logId;
-        public int LogId { get { return _logId; } }
+        private readonly int logId;
+        public int LogId
+        {
+            get { return logId; }
+        }
 
-        private DateTime _logTime;
-        public DateTime LogTime { get { return _logTime;} }
+        private readonly DateTime logTime;
+        public DateTime LogTime
+        {
+            get { return logTime; }
+        }
 
-        private int _sourceUserId;
-        public int SourceUserId { get { return _sourceUserId;} }
+        private readonly int sourceUserId;
+        public int SourceUserId
+        {
+            get { return sourceUserId; }
+        }
 
-        private int _targetUserId;
-        public int TargetUserId { get { return _targetUserId; } }
+        private readonly int targetUserId;
+        public int TargetUserId
+        {
+            get { return targetUserId; }
+        }
 
-        private int _score;
-        public int Score { get { return _score; } }
+        private readonly int score;
+        public int Score
+        {
+            get { return score; }
+        }
 
-        private string _generatedMessage;
-        public string GeneratedMessage { get { return _generatedMessage; } }
+        private readonly string generatedMessage;
+        public string GeneratedMessage
+        {
+            get { return generatedMessage; }
+        }
 
         public GraphAnalyserLog(int logId, DateTime logTime,
-                                int sourceUserId, int targetUserId, 
+                                int sourceUserId, int targetUserId,
                                 int score, string generatedMessage)
         {
-            _logId = logId;
-            _logTime = logTime;
-            _sourceUserId = sourceUserId;
-            _targetUserId = targetUserId;
-            _score = score;
-            _generatedMessage = generatedMessage;
+            this.logId = logId;
+            this.logTime = logTime;
+            this.sourceUserId = sourceUserId;
+            this.targetUserId = targetUserId;
+            this.score = score;
+            this.generatedMessage = generatedMessage;
         }
 
         public int GetId()
         {
-            return _logId;
+            return logId;
         }
 
         public object Clone()

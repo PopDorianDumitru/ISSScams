@@ -1,25 +1,24 @@
-﻿using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
 
 namespace ISSProject.Common.Wrapper
 {
     internal class UserWrapper : IDomainEntityWrapper<MockUser, int>, IKeyedEntity<int>
     {
-
-        private MockUser _user;
+        private MockUser user;
 
         public UserWrapper(MockUser user)
         {
-            _user = user;
+            this.user = user;
         }
 
         public UserWrapper(int id, string email, string firstName, string lastName, DateTime birthDate)
         {
-            _user = new MockUser(id, email, firstName, lastName, birthDate);
+            user = new MockUser(id, email, firstName, lastName, birthDate);
         }
 
         public UserWrapper(int id)
@@ -27,21 +26,42 @@ namespace ISSProject.Common.Wrapper
             FetchUsingId(id);
         }
 
-        public MockUser GetPureReference() { return _user; }
+        public MockUser GetPureReference()
+        {
+            return user;
+        }
         public MockUser FetchUsingId(int id)
         {
-            if (_user == null) _user = MockUserRepository.Provided().ById(id);
-            return _user;
+            if (user == null)
+            {
+                user = MockUserRepository.Provided().ById(id);
+            }
+
+            return user;
         }
 
         // Keyed Entity requirements
-        public int GetId() { return _user.Id; }
-        public object Clone() { return MemberwiseClone(); }
+        public int GetId()
+        {
+            return user.Id;
+        }
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
 
         // Anything else we need here...
-        public string GetEmail() { return _user.Email; }
-        public string GetFirstName() { return _user.FirstName; }
-        public string GetLastName() { return _user.LastName; }
-
+        public string GetEmail()
+        {
+            return user.Email;
+        }
+        public string GetFirstName()
+        {
+            return user.FirstName;
+        }
+        public string GetLastName()
+        {
+            return user.LastName;
+        }
     }
 }

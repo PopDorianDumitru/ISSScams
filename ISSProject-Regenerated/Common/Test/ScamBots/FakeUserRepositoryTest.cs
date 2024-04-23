@@ -1,11 +1,11 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.ScamBots;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
 
 namespace ISSProject.Common.Test
 {
@@ -24,7 +24,8 @@ namespace ISSProject.Common.Test
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
 
             // insert fake user into the database
             Debug.Assert(userRepository.Insert(user));
@@ -61,7 +62,8 @@ namespace ISSProject.Common.Test
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using ISSProject.Common.Mikha.Premium_Messages;
-using ISSProject.Common.Mikha.Premium_Users;
-using ISSProject.Common.Repository;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ISSProject.Common.Mikha.Premium_Messages;
+using ISSProject.Common.Mikha.Premium_Users;
+using ISSProject.Common.Repository;
+using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Mikha.Controllers
 {
@@ -35,7 +35,9 @@ namespace ISSProject.Common.Mikha.Controllers
                     {
                         bool insert2Result = premiumPostRepository.Insert(new PostWrapper(post));
                         if (insert2Result)
+                        {
                             return true;
+                        }
                         else
                         {
                             premiumPostRepository.Delete(new PostWrapper(post));
@@ -43,7 +45,9 @@ namespace ISSProject.Common.Mikha.Controllers
                         }
                     }
                     else
+                    {
                         return false;
+                    }
                 }
                 return false;
             }
@@ -60,12 +64,11 @@ namespace ISSProject.Common.Mikha.Controllers
                 if (premiumUserRepository.ById(post.PosterId) != null)
                 {
                     premiumPostRepository.Delete(new PostWrapper(post));
-                    //For completeness
+                    // For completeness
                     mockPostRepository.Delete(post);
                     return true;
                 }
                 return false;
-
             }
             catch
             {
@@ -76,12 +79,16 @@ namespace ISSProject.Common.Mikha.Controllers
         public PriorityQueue<MockPost, int> GetPostQueue()
         {
             PriorityQueue<MockPost, int> posts = new PriorityQueue<MockPost, int>();
-            foreach(MockPost post in mockPostRepository.All())
+            foreach (MockPost post in mockPostRepository.All())
             {
                 if (premiumPostRepository.ById(post.Id) != null)
+                {
                     posts.Enqueue(post, 0);
+                }
                 else
+                {
                     posts.Enqueue(post, 1);
+                }
             }
             return posts;
         }

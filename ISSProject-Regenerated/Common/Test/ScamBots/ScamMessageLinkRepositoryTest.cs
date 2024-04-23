@@ -1,11 +1,11 @@
-﻿using ISSProject.ScamBots.Model;
-using ISSProject.ScamBots;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
+using ISSProject.ScamBots.Model;
 
 namespace ISSProject.Common.Test.ScamBots
 {
@@ -24,7 +24,8 @@ namespace ISSProject.Common.Test.ScamBots
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
 
             // insert website link into the database
             Debug.Assert(scamMessageLinkRepository.Insert(websiteLink));
@@ -56,7 +57,8 @@ namespace ISSProject.Common.Test.ScamBots
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
         }
     }
 }

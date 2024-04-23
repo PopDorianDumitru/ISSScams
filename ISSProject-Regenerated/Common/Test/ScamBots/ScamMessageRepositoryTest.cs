@@ -1,13 +1,13 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Mock;
-using ISSProject.ScamBots;
-using ISSProject.ScamBots.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
+using ISSProject.ScamBots.Model;
 
 namespace ISSProject.Common.Test.ScamBots
 {
@@ -26,7 +26,8 @@ namespace ISSProject.Common.Test.ScamBots
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
 
             // insert message template into the database
             Debug.Assert(scamMessageRepository.Insert(messageTemplate));
@@ -41,7 +42,7 @@ namespace ISSProject.Common.Test.ScamBots
             Debug.Assert(result.MessageContent.Equals(messageTemplate.MessageContent));
 
             // update message template in the database
-            messageTemplate.MessageContent= "This template has been modified to remove some obvious grammar mistakes :)";
+            messageTemplate.MessageContent = "This template has been modified to remove some obvious grammar mistakes :)";
             Debug.Assert(scamMessageRepository.Update(messageTemplate));
 
             // retrieve message template from database and check if the changes persist
@@ -58,7 +59,8 @@ namespace ISSProject.Common.Test.ScamBots
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
         }
     }
 }

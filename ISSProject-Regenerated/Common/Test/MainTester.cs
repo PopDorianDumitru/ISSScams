@@ -1,14 +1,14 @@
-﻿using ISSProject.Common.Test.ScamBots;
-using ISSProject.Common.Mock;
-using ISSProject.Common.Logging;
-using ISSProject.Common.Mock;
-using ISSProject.Common.Test;
-using ISSProject.Common.Test.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using ISSProject.Common.Logging;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Test;
+using ISSProject.Common.Test.Common;
+using ISSProject.Common.Test.ScamBots;
 
 namespace ISSProject.Common.Test
 {
@@ -23,7 +23,7 @@ namespace ISSProject.Common.Test
             Console.WriteLine("Running encryption/decryption module test...");
             EncrypterTest.Test();
             Console.WriteLine("Finished encryption/decryption module test!");
-            
+
             Console.WriteLine();
 
             Console.WriteLine("Running logging module test...");
@@ -45,7 +45,7 @@ namespace ISSProject.Common.Test
             Console.WriteLine("Running fake user repository test...");
             FakeUserRepositoryTest.Test();
             Console.WriteLine("Finished fake user repository test!");
-            
+
             Console.WriteLine();
 
             Console.WriteLine("Running message repository test...");
