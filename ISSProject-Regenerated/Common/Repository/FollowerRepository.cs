@@ -1,20 +1,24 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Repository
 {
     internal class FollowerRepository : ICachedRepository<FollowerWrapper, int>, ISizedRepository<FollowerWrapper, int>
     {
-        private static FollowerRepository _singleton;
+        private static FollowerRepository? singleton;
         public static FollowerRepository Provided()
         {
-            if (_singleton == null) _singleton = new FollowerRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new FollowerRepository();
+            }
+
+            return singleton;
         }
 
         public override IEnumerable<FollowerWrapper> All()
@@ -25,7 +29,11 @@ namespace ISSProject.Common.Repository
 
         public override FollowerWrapper ById(int id)
         {
-            if (cache.Any(id)) return cache.ById(id);
+            if (cache.Any(id))
+            {
+                return cache.ById(id);
+            }
+
             var user = new FollowerWrapper(id);
             cache.Add(user);
             return user;
@@ -33,7 +41,11 @@ namespace ISSProject.Common.Repository
 
         public override bool Delete(FollowerWrapper entity)
         {
-            if (cache.Any(entity.GetId())) cache.Remove(entity);
+            if (cache.Any(entity.GetId()))
+            {
+                cache.Remove(entity);
+            }
+
             return MockFollowerRepository.Provided().Delete(entity.GetPureReference());
         }
 

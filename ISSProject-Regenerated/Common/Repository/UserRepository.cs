@@ -1,21 +1,25 @@
-﻿using ISSProject.Common;
-using ISSProject.Common.Mock;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Repository
 {
     internal class UserRepository : ICachedRepository<UserWrapper, int>, ISizedRepository<UserWrapper, int>
     {
-        private static UserRepository _singleton;
+        private static UserRepository? singleton;
         public static UserRepository Provided()
         {
-            if (_singleton == null) _singleton = new UserRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new UserRepository();
+            }
+
+            return singleton;
         }
 
         public override IEnumerable<UserWrapper> All()
@@ -26,7 +30,11 @@ namespace ISSProject.Common.Repository
 
         public override UserWrapper ById(int id)
         {
-            if (cache.Any(id)) return cache.ById(id);
+            if (cache.Any(id))
+            {
+                return cache.ById(id);
+            }
+
             var user = new UserWrapper(id);
             cache.Add(user);
             return user;
@@ -34,12 +42,17 @@ namespace ISSProject.Common.Repository
 
         public bool Any(int id)
         {
-            if (cache.Any(id)) return true;
+            if (cache.Any(id))
+            {
+                return true;
+            }
+
             try
             {
                 new UserWrapper(id);
                 return true;
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 return false;
             }
@@ -48,8 +61,16 @@ namespace ISSProject.Common.Repository
         public UserWrapper ByEmail(string email)
         {
             int id = MockUserRepository.Provided().getUserIdByEmail(email);
-            if (id == -1) return null;
-            if (cache.Any(id)) return cache.ById(id);
+            if (id == -1)
+            {
+                return null;
+            }
+
+            if (cache.Any(id))
+            {
+                return cache.ById(id);
+            }
+
             var user = new UserWrapper(id);
             cache.Add(user);
             return user;
@@ -57,7 +78,11 @@ namespace ISSProject.Common.Repository
 
         public override bool Delete(UserWrapper entity)
         {
-            if (cache.Any(entity.GetId())) cache.Remove(entity);
+            if (cache.Any(entity.GetId()))
+            {
+                cache.Remove(entity);
+            }
+
             return MockUserRepository.Provided().Delete(entity.GetPureReference());
         }
 
