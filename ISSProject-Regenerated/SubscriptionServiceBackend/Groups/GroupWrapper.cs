@@ -8,11 +8,11 @@ namespace ISSProject.Common.Mikha.Groups
 {
     internal class GroupWrapper : IDomainEntityWrapper<MockGroup, int>, IKeyedEntity<int>
     {
-        private MockGroup _group;
+        private MockGroup group;
 
         public GroupWrapper(MockGroup post)
         {
-            _group = post;
+            group = post;
         }
 
         public GroupWrapper(int id)
@@ -20,31 +20,44 @@ namespace ISSProject.Common.Mikha.Groups
             FetchUsingId(id);
         }
 
-        public MockGroup GetPureReference() { return _group; }
+        public MockGroup GetPureReference()
+        {
+            return group;
+        }
         public MockGroup FetchUsingId(int id)
         {
-            if (_group == null) _group = MockGroupRepository.Provided().ById(id);
-            return _group;
+            if (group == null)
+            {
+                group = MockGroupRepository.Provided().ById(id);
+            }
+
+            return group;
         }
 
         // Keyed Entity requirements
-        public int GetId() { return _group.Id; }
-        public object Clone() { return MemberwiseClone(); }
+        public int GetId()
+        {
+            return group.Id;
+        }
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
 
         // Anything else we need here...
         public List<int> GetUsersIDs()
         {
-            return _group.MembersID.ToList();
+            return group.MembersID.ToList();
         }
 
         public string GetGroupName()
         {
-            return _group.GroupName;
+            return group.GroupName;
         }
 
         public bool GetGroupVisibility()
         {
-            return _group.IsPrivate;
+            return group.IsPrivate;
         }
     }
 }

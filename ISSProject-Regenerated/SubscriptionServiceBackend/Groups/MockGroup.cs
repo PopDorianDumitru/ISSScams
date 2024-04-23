@@ -8,28 +8,37 @@ namespace ISSProject.Common.Mikha.Groups
 {
     internal class MockGroup : IKeyedEntity<int>
     {
-        private int _id;
-        public int Id { get { return _id; } set { _id = value; } }
+        private int id;
+        public int Id
+        {
+            get { return id; } set { id = value; }
+        }
 
-        private string _group_name;
-        public string GroupName { get { return _group_name; } set { _group_name = value; } }
+        private string group_name;
+        public string GroupName { get { return group_name; } set { group_name = value; } }
 
-        private bool _is_private;
-        public bool IsPrivate { get { return _is_private; } set { _is_private = value; } }
+        private bool is_private;
+        public bool IsPrivate
+        {
+            get { return is_private; } set { is_private = value; }
+        }
 
-        private List<int> _members_id;
-        public List<int> MembersID { get { return _members_id; } set { _members_id = value; } }
+        private List<int> members_id;
+        public List<int> MembersID
+        {
+            get { return members_id; } set { members_id = value; }
+        }
 
         public MockGroup(int id, string group_name, bool is_private)
         {
-            _id = id;
-            _group_name = group_name;
-            _is_private = is_private;
+            this.id = id;
+            this.group_name = group_name;
+            this.is_private = is_private;
         }
 
         public int GetId()
         {
-            return _id;
+            return id;
         }
 
         public object Clone()
@@ -37,11 +46,14 @@ namespace ISSProject.Common.Mikha.Groups
             return MemberwiseClone();
         }
 
-        public bool addMember(int member_id)
+        public bool AddMember(int member_id)
         {
-            if(_members_id.Contains(member_id))
+            if (members_id.Contains(member_id))
+            {
                 return false;
-            _members_id.Add(member_id); 
+            }
+
+            members_id.Add(member_id);
             return true;
         }
     }

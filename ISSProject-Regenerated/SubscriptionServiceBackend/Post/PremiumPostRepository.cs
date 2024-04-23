@@ -1,15 +1,14 @@
-﻿using ISSfixed.ISSProject.Common.Mikha.Post;
-using ISSProject.Common.Cache;
-using ISSProject.Common.Mock;
-using ISSProject.Common.Wrapper;
-using ISSProject.ScamBots;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ISSfixed.ISSProject.Common.Mikha.Post;
+using ISSProject.Common.Cache;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Wrapper;
+using ISSProject.ScamBots;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha
 {
@@ -17,7 +16,7 @@ namespace ISSProject.Common.Mikha
     {
         private SimpleKeyedMapCache<PostWrapper, int> SimpleKeyedMapCache { get; set; }
 
-        public  IEnumerable<PostWrapper> All()
+        public IEnumerable<PostWrapper> All()
         {
             string queryString = "SELECT * From PremiumPostsView";
 
@@ -46,7 +45,7 @@ namespace ISSProject.Common.Mikha
             }
         }
 
-        public  PostWrapper ById(int id)
+        public PostWrapper ById(int id)
         {
             string queryString = "SELECT * From PremiumPostsView WHERE mockpost_id = @id";
             MockPost newPost = null;
@@ -77,13 +76,14 @@ namespace ISSProject.Common.Mikha
             }
 
             if (newPost == null)
+            {
                 newPostWrapper = null;
-                //throw new PremiumPostRepositoryException("An error occured while trying to get user from the database: a post with specified id does not exist.");
-
+            }
+            // throw new PremiumPostRepositoryException("An error occured while trying to get user from the database: a post with specified id does not exist.");
             return newPostWrapper;
         }
 
-        public  bool Delete(PostWrapper entity)
+        public bool Delete(PostWrapper entity)
         {
             int result = 0;
             string queryString = "DELETE FROM PremiumPosts WHERE mockpost_id = @mockpost_id";
@@ -110,7 +110,7 @@ namespace ISSProject.Common.Mikha
             return result >= 1;
         }
 
-        public  bool Insert(PostWrapper entity)
+        public bool Insert(PostWrapper entity)
         {
             int result = 0;
             string queryString = "INSERT INTO PremiumPosts(mockpost_id) VALUES(@mockpost_id)";
@@ -133,12 +133,10 @@ namespace ISSProject.Common.Mikha
             {
                 throw new PremiumPostRepositoryException("An error occured while trying to insert post into the database: " + ex.Message);
             }
-
-
             return result >= 1;
         }
 
-        public  bool Update(PostWrapper entity)
+        public bool Update(PostWrapper entity)
         {
             return false;
         }

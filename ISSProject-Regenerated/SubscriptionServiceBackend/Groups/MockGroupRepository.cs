@@ -1,31 +1,34 @@
-﻿using ISSfixed.ISSProject.Common.Mikha.Post;
-using ISSfixed.ISSProject.Mikha.Groups;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ISSfixed.ISSProject.Common.Mikha.Post;
+using ISSfixed.ISSProject.Mikha.Groups;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha.Groups
 {
     internal class MockGroupRepository : IRepository<MockGroup, int>
     {
         /* Mock Holding Data */
-        private static Dictionary<int, MockGroup> _mockDatabase = new Dictionary<int, MockGroup>();
+        private static Dictionary<int, MockGroup> mockDatabase = new Dictionary<int, MockGroup>();
 
         // TODO: Check if it is enough to clear or if it needs new elements
         public static void ResetMockDatabase()
         {
-            _mockDatabase = new Dictionary<int, MockGroup>();
+            mockDatabase = new Dictionary<int, MockGroup>();
         }
 
-        private static MockGroupRepository _singleton;
+        private static MockGroupRepository singleton;
         public static MockGroupRepository Provided()
         {
-            if (_singleton == null) _singleton = new MockGroupRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new MockGroupRepository();
+            }
+
+            return singleton;
         }
 
         public static int AddAllMembers(MockGroup group, SqlConnection connection)
@@ -38,7 +41,7 @@ namespace ISSProject.Common.Mikha.Groups
             {
                 while (reader2.Read())
                 {
-                    group.addMember((int)reader2[0]);
+                    group.AddMember((int)reader2[0]);
                     no_items++;
                 }
             }
@@ -50,7 +53,6 @@ namespace ISSProject.Common.Mikha.Groups
         public IEnumerable<MockGroup> All()
         {
             string queryString = "SELECT * From MockGroups";
-
 
             using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
             {
@@ -66,8 +68,7 @@ namespace ISSProject.Common.Mikha.Groups
                         bool is_private = (bool)reader[2];
                         MockGroup currentGroup = new MockGroup(group_id, group_name, is_private);
 
-                        //AddAllMembers(currentGroup, connection); // ACCOMODATE FOR THIS IN THE FUTURE
-
+                        // AddAllMembers(currentGroup, connection); // ACCOMODATE FOR THIS IN THE FUTURE
                         yield return currentGroup;
                     }
                 }
@@ -96,7 +97,7 @@ namespace ISSProject.Common.Mikha.Groups
                         bool is_private = (bool)reader[2];
                         MockGroup currentGroup = new MockGroup(group_id, group_name, is_private);
 
-                        //AddAllMembers(currentGroup, connection);  // ACCOMODATE FOR THIS IN THE FUTURE
+                        // AddAllMembers(currentGroup, connection);  // ACCOMODATE FOR THIS IN THE FUTURE
                     }
                 }
 
@@ -104,7 +105,9 @@ namespace ISSProject.Common.Mikha.Groups
             }
 
             if (newGroup == null)
+            {
                 throw new GroupRepositoryError("An error occured while trying to get group from the database: a group with specified id does not exist.");
+            }
 
             return newGroup;
         }
@@ -124,7 +127,6 @@ namespace ISSProject.Common.Mikha.Groups
                     command = new SqlCommand(queryString, connection);
                     command.Parameters.AddWithValue("@mockgroup_id", entity.Id);
                     result = command.ExecuteNonQuery();
-
 
                     SqlCommand command1 = new SqlCommand("Delete From GroupUserRelationship where mockgroup_id = @mockgroup_id", connection);
                     command1.Parameters.AddWithValue("@mockgroup_id", entity.Id);
@@ -164,7 +166,6 @@ namespace ISSProject.Common.Mikha.Groups
             {
                 throw new GroupRepositoryError("An error occured while trying to insert group into the database: " + ex.Message);
             }
-
 
             return result >= 1;
         }

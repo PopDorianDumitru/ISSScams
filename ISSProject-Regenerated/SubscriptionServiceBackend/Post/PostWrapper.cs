@@ -1,19 +1,19 @@
-﻿using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
 
 namespace ISSProject.Common.Mikha
 {
     internal class PostWrapper : IDomainEntityWrapper<MockPost, int>, IKeyedEntity<int>
     {
-        private MockPost _post;
+        private MockPost post;
 
         public PostWrapper(MockPost post)
         {
-            _post = post;
+            this.post = post;
         }
 
         public PostWrapper(int id)
@@ -21,18 +21,34 @@ namespace ISSProject.Common.Mikha
             FetchUsingId(id);
         }
 
-        public MockPost GetPureReference() { return _post; }
+        public MockPost GetPureReference()
+        {
+            return post;
+        }
         public MockPost FetchUsingId(int id)
         {
-            if (_post == null) _post = MockPostRepository.Provided().ById(id);
-            return _post;
+            if (post == null)
+            {
+                post = MockPostRepository.Provided().ById(id);
+            }
+
+            return post;
         }
 
         // Keyed Entity requirements
-        public int GetId() { return _post.Id; }
-        public object Clone() { return MemberwiseClone(); }
+        public int GetId()
+        {
+            return post.Id;
+        }
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
 
         // Anything else we need here...
-        public int GetUserId() { return _post.PosterId; }
+        public int GetUserId()
+        {
+            return post.PosterId;
+        }
     }
 }

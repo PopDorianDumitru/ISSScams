@@ -8,9 +8,12 @@ namespace ISSfixed.ISSProject.Mikha.Groups
 {
     internal class GroupRepositoryError : Exception
     {
-        public GroupRepositoryError() { }
-        public GroupRepositoryError(string message) : base(message) { }
-
+        public GroupRepositoryError()
+        {
+        }
+        public GroupRepositoryError(string message) : base(message)
+        {
+        }
     }
 }
 
