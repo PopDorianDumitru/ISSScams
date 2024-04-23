@@ -9,10 +9,10 @@ using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Service
 {
-    internal class FollowerService
+    internal class FollowerService : IFollowerService
     {
         private static FollowerService? singleton;
-        public static FollowerService Provided()
+        public static IFollowerService Provided()
         {
             if (singleton == null)
             {

@@ -60,7 +60,7 @@ namespace ISSProject.Common.Repository
 
         public UserWrapper ByEmail(string email)
         {
-            int id = MockUserRepository.Provided().getUserIdByEmail(email);
+            int id = MockUserRepository.GetUserIdByEmail(email);
             if (id == -1)
             {
                 return null;

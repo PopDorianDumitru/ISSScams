@@ -15,7 +15,7 @@ namespace ISSProject.Common.Test
         {
             MockFollowerRepository.ResetMockDatabase();
 
-            FollowerService followService = new FollowerService();
+            IFollowerService followService = new FollowerService();
 
             foreach (var item in MockFollowerRepository.Provided().All())
             {
