@@ -9,21 +9,21 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
     internal class CreditCard : IKeyedEntity<int>
     {
-        private readonly int ID;
+        private readonly int iD;
         private int userID;
         private string creditCardHolder;
         private string creditCardNumber;
         private string expirationDate;
-        private string CVV;
+        private readonly string cVV;
 
-        public CreditCard(int ID, int userID, string creditCardHolder, string creditCardNumber, string expirationDate, string CVV)
+        public CreditCard(int iD, int userID, string creditCardHolder, string creditCardNumber, string expirationDate, string cVV)
         {
-            this.ID = ID;
+            this.iD = iD;
             this.userID = userID;
             this.creditCardHolder = creditCardHolder;
             this.creditCardNumber = creditCardNumber;
             this.expirationDate = expirationDate;
-            this.CVV = CVV;
+            this.cVV = cVV;
         }
 
         public object Clone()
@@ -33,15 +33,15 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 
         public int GetId()
         {
-            return ID;
+            return iD;
         }
 
-        public int GetUserID() 
+        public int GetUserID()
         {
             return userID;
         }
 
-        public string GetCreditCardHolder() 
+        public string GetCreditCardHolder()
         {
             return creditCardHolder;
         }
@@ -58,7 +58,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 
         public string GetCVV()
         {
-            return CVV;
+            return cVV;
         }
     }
 }

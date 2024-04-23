@@ -2,12 +2,10 @@
 using Microsoft.Data.SqlClient;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
 
-
 namespace ISSProject.CompanyForm.Controller
 {
     internal class ProcessedCompanyInformation
     {
-
         private CompanyToken companyInfo;
         private static int lastId = 100;
 
@@ -20,9 +18,15 @@ namespace ISSProject.CompanyForm.Controller
         public bool ValidateCompanyToken()
         {
             if (!companyInfo.GetLinkToAPI().StartsWith("http://"))
+            {
                 return false;
+            }
+
             if (companyInfo.GetServiceSeverity() != 0 && companyInfo.GetServiceSeverity() != 1)
+            {
                 return false;
+            }
+
             return true;
         }
 
@@ -42,7 +46,6 @@ namespace ISSProject.CompanyForm.Controller
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 return true;
-
             }
             catch (Exception ex)
             {

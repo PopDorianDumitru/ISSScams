@@ -9,7 +9,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Domain
     internal class PostData
     {
         public string SelfJSON { get; set; }
-        public PostData() 
+        public PostData()
         {
             SelfJSON = string.Empty;
         }

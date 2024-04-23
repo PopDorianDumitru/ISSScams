@@ -17,7 +17,6 @@ namespace GUICompanyForm
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +27,6 @@ namespace GUICompanyForm
             // Here is actually should just return to previous page
             // we don't currently have a previous page
             // so for now the cancel button will help with clearing the window of information
-
             this.companyName.Clear();
             this.emailAddress.Clear();
             this.validationToken.Clear();
@@ -40,13 +38,15 @@ namespace GUICompanyForm
             this.warningLabel.Visibility = Visibility.Hidden;
         }
 
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             // Takes the company information and saves it to the database
             int severity = 0;
 
             if (radioButtonSubscription.IsChecked.Value)
+            {
                 severity = 1;
+            }
 
             ProcessedCompanyInformation controller = new ProcessedCompanyInformation(
             this.companyName.Text, this.serviceAPI.Text, severity, this.validationToken.Text);
@@ -64,13 +64,11 @@ namespace GUICompanyForm
                     this.warningLabel.Visibility = Visibility.Visible;
                 }
             }
-            else {
-
+            else
+            {
                 this.warningLabel.Content = "Incorect company information. Please reformat";
                 this.warningLabel.Visibility = Visibility.Visible;
             }
-            
-
         }
     }
 }

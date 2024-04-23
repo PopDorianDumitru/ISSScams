@@ -1,18 +1,17 @@
-﻿using ISSProject.Common;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Microsoft.Data.SqlClient;
-using ISSProject.MaliciousSubscriptionsBackend.Domain;
+using ISSProject.Common;
 using ISSProject.Common.Cache;
+using ISSProject.Common.Wrapper;
+using ISSProject.MaliciousSubscriptionsBackend.Domain;
+using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Storage
 {
-    internal class CreditCardRepository : ICachedRepository<CreditCard, int> 
+    internal class CreditCardRepository : ICachedRepository<CreditCard, int>
     {
         public CreditCardRepository() : base()
         {
