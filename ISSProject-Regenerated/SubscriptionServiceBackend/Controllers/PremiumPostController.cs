@@ -1,0 +1,89 @@
+﻿using ISSProject.Common.Mikha.Premium_Messages;
+using ISSProject.Common.Mikha.Premium_Users;
+using ISSProject.Common.Repository;
+using ISSProject.Common.Wrapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ISSProject.Common.Mikha.Controllers
+{
+    internal class PremiumPostController
+    {
+        private MockPostRepository mockPostRepository;
+        private PremiumPostRepository premiumPostRepository;
+        private PremiumUserRepository premiumUserRepository;
+
+        public PremiumPostController(MockPostRepository mockPostRepository, PremiumPostRepository premiumPostRepository, PremiumUserRepository premiumUserRepository)
+        {
+            this.mockPostRepository = mockPostRepository;
+            this.premiumPostRepository = premiumPostRepository;
+            this.premiumUserRepository = premiumUserRepository;
+        }
+
+        public bool AddPremiumPost(MockPost post)
+        {
+            try
+            {
+                if (premiumUserRepository.ById(post.PosterId) != null)
+                {
+                    bool insert1Result = mockPostRepository.Insert(post);
+                    if (insert1Result)
+                    {
+                        bool insert2Result = premiumPostRepository.Insert(new PostWrapper(post));
+                        if (insert2Result)
+                            return true;
+                        else
+                        {
+                            premiumPostRepository.Delete(new PostWrapper(post));
+                            return false;
+                        }
+                    }
+                    else
+                        return false;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool DeletePremiumPost(MockPost post)
+        {
+            try
+            {
+                if (premiumUserRepository.ById(post.PosterId) != null)
+                {
+                    premiumPostRepository.Delete(new PostWrapper(post));
+                    //For completeness
+                    mockPostRepository.Delete(post);
+                    return true;
+                }
+                return false;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public PriorityQueue<MockPost, int> GetPostQueue()
+        {
+            PriorityQueue<MockPost, int> posts = new PriorityQueue<MockPost, int>();
+            foreach(MockPost post in mockPostRepository.All())
+            {
+                if (premiumPostRepository.ById(post.Id) != null)
+                    posts.Enqueue(post, 0);
+                else
+                    posts.Enqueue(post, 1);
+            }
+            return posts;
+        }
+    }
+}

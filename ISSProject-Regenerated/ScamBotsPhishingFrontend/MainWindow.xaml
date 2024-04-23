@@ -1,0 +1,181 @@
+﻿<Window x:Class="Credit_card_donation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Credit_card_donation"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Black"
+        Title="MainWindow" Height="500" Width="800">
+
+    <Window.Resources>
+        <Geometry x:Key="Xlogo">M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z</Geometry>
+
+        <Style x:Key="TitleText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Heavy"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+        </Style>
+
+        <Style x:Key="musinel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style x:Key="FooterText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+        </Style>
+
+        <Style x:Key="DonateButton" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="Foreground" Value="black"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="White">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e8e8e8"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+                <Trigger Property="IsMouseCaptured" Value="True">
+                    <Setter Property="Background" Value="#d9d9d9"/>
+                    <Setter Property="Foreground" Value="DimGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TextHint" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+            <Setter Property="Foreground" Value="#acb0af"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+        </Style>
+
+        <Style x:Key="TextForm" TargetType="TextBox">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="Foreground" Value="white"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid RenderTransformOrigin="0.507,0.505">
+
+        <!-- layout (left column takes 1.3* out of the 2* page width in legth twitter also does this, it's not half/half)-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+       
+        <!-- left column properties -->
+        <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Path Data="{StaticResource Xlogo}" Fill="white" Stroke="black" StrokeThickness="1" Margin="-107,-100,107,100">
+                <Path.RenderTransform>
+                    <ScaleTransform ScaleX="10" ScaleY="10"/>
+                </Path.RenderTransform>
+            </Path>
+        </Grid>
+
+        <!-- right column properties -->
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="0,55,0,0" >
+            <TextBlock Text="Make a donation" Style="{StaticResource TitleText}" Height="35"/>
+
+            <!-- text boxes for user input -->
+            <Border BorderThickness="1" BorderBrush="#acb0af" Margin="5 35 0 15" CornerRadius="5">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TextBlockName" Text="Full name" Style="{StaticResource TextHint}" MouseDown="TextNameMD"/>
+                    <!-- MouseDown="text_mousedown"-->
+                    <TextBox x:Name="TextBoxName" Background="Black"  Style="{StaticResource TextForm}" TextChanged="TextNameChanged" BorderThickness="0"/>
+                </Grid>
+            </Border>
+            
+            <Border BorderThickness="1" BorderBrush="#acb0af" Margin="5 15" CornerRadius="5">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TextBlockCreditNr" Text="Credit card number" Style="{StaticResource TextHint}" MouseDown="TextCreditNrMD"/>
+                    <!-- MouseDown="text_mousedown"-->
+                    <TextBox x:Name="TextBoxCreditNr" Background="Black" Style="{StaticResource TextForm}" TextChanged="TextCreditNrChanged" BorderThickness="0"/>
+                </Grid>
+            </Border>
+
+            <Border BorderThickness="1" BorderBrush="#acb0af" Margin="5 15" CornerRadius="5">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TextBlockCVV" Text="CVV" Style="{StaticResource TextHint}" MouseDown="TextCVVMD"/>
+                    <!-- MouseDown="text_mousedown"-->
+                    <TextBox x:Name="TextBoxCVV" Background="Black" Style="{StaticResource TextForm}" TextChanged="TextCVVChanged" BorderThickness="0"/>
+                </Grid>
+            </Border>
+
+            <Border BorderThickness="1" BorderBrush="#acb0af" Margin="5 15" CornerRadius="5">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TextBlockExpYear" Text="Expiration date MM/YY" Style="{StaticResource TextHint}" MouseDown="TextExpYearMD"/>
+                    <!-- MouseDown="text_mousedown"-->
+                    <TextBox x:Name="TextBoxExpYear" Background="Black" Style="{StaticResource TextForm}" TextChanged="TextExpYearChanged" BorderThickness="0"/>
+                </Grid>
+            </Border>
+
+            <!-- button to donate -->
+            <Button x:Name="DonateButton" Content="Donate" Click="DonateButton_Click" Margin="0, 10, 0, 0" Style="{StaticResource DonateButton}" Height="40"/>
+
+
+        </StackPanel>
+    
+         <!-- links for footer, might not be used in the final form-->
+         <Grid Grid.ColumnSpan="2">
+             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="6,467,0,0" Width="794">
+                 <TextBlock Text="About" Style="{StaticResource FooterText}" Margin="5,1,5,0"/>
+                 <TextBlock Text="Download the X app" Style="{StaticResource FooterText}" Margin="5,1,5,0"/>
+                 <TextBlock Text="Help Center" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="Terms of Service" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="Privacy Policy" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="Cookie Policy" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="Blog" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="Ads info" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="X for Business" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="Brand Resources" Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+                 <TextBlock Text="© 2024 X Corp." Style="{StaticResource FooterText}" HorizontalAlignment="Center" Margin="5,1,5,0"/>
+
+             </StackPanel>
+         </Grid>
+    </Grid>
+</Window>

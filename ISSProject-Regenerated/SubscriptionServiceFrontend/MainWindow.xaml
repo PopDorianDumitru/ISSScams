@@ -1,0 +1,219 @@
+﻿<Window x:Class="SubscriptionServicePart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SubscriptionServicePart"
+        mc:Ignorable="d"
+        Width="1024" Height="900"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        Background="White">
+    <Window.Resources>
+        <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+            <Style BasedOn="{StaticResource {x:Type TextBox}}"
+           TargetType="{x:Type TextBox}"
+           x:Key="TextBoxTheme">
+                <Style.Setters>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="8"
+                                Background="White"
+                                Height="48"
+                                >
+                                    <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Background="Transparent"
+                                     BorderBrush="Transparent"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     FontWeight="{TemplateBinding FontWeight}"
+                                     Padding="16, 10, 0, 0"
+                                     CaretBrush="{TemplateBinding CaretBrush}"
+                                     />
+                                </Border>
+
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Foreground" Value="#828282"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+                    <Setter Property="CaretBrush" Value="Black"/>
+                </Style.Setters>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="IBeam"/>
+                    </Trigger>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="BorderBrush" Value="Red" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="{x:Type Button}"
+           x:Key="PayButtonTheme">
+                <Style.Setters>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="8">
+                                    <Grid>
+
+                                        <TextBlock Text="{TemplateBinding Property=Content}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       FontWeight="{TemplateBinding FontWeight}"/>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="40"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+
+                </Style.Setters>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#757fe0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border Background="White"
+            CornerRadius="10" RenderTransformOrigin="0.498,0.519">
+        <Grid Margin="200,160,200, 100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <!-- Row = 0 - Title -->
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="80"/>
+                <!-- Row = 2 - Name -->
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <!-- Row = 4 - Card Number -->
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <!-- Row = 6 - Other info -->
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <!-- Row = 8 - Pay Button -->
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock
+                   Text="Payment"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Foreground="Black"
+                   FontSize="64"
+                   FontWeight="Bold"
+                   />
+                <Image Source="Images/lock-img.png" Width="34" Margin="20, 0, 0, -14" Panel.ZIndex="10"/>
+            </StackPanel>
+
+
+            <TextBlock Grid.Row="1"
+                       Text="Please input the required information in order to complete your payment"
+                       Foreground="#828282"
+                       FontSize="16"
+                       FontWeight="Regular"
+                       Margin="0, 14, 0, 0"/>
+
+            <StackPanel Grid.Row="2">
+
+                <TextBlock Text="CARDHOLDER'S NAME"
+                           Foreground="Black"
+                           FontSize="16"
+                           FontWeight="Medium"/>
+                <TextBox x:Name="NameTextBox"
+                         Text="Name on card"
+                         GotFocus="NameTextBox_GotFocus"
+                         LostFocus="NameTextBox_LostFocus"
+                         Style="{StaticResource TextBoxTheme}"
+                         />
+            </StackPanel>
+
+            <StackPanel Grid.Row="4">
+                <TextBlock Text="CARD NUMBER"
+                           Foreground="Black"
+                           FontSize="16"
+                           FontWeight="Medium"/>
+                <TextBox x:Name="CardNumberTextBox"
+                     Text="- - - -   - - - -   - - - -   - - - -"
+                     GotFocus="CardNumberTextBox_GotFocus"
+                     LostFocus="CardNumberTextBox_LostFocus"
+                     Style="{StaticResource TextBoxTheme}"/>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock Text="EXPIRATION DATE"
+                           Foreground="Black"
+                           FontSize="16"
+                           FontWeight="Medium"/>
+
+                    <TextBox x:Name="ExpirationDateTextBox"
+                     Text="MM/YY"
+                     GotFocus="ExpirationDateTextBox_GotFocus"
+                     LostFocus="ExpirationDateTextBox_LostFocus"
+                     Width="290"
+                     Style="{StaticResource TextBoxTheme}"/>
+                </StackPanel>
+
+                <StackPanel Margin="28, 0, 0, 0">
+                    <TextBlock Text="CVV"
+                           Foreground="Black"
+                           FontSize="16"
+                           FontWeight="Medium"/>
+
+                    <TextBox x:Name="CVVTextBox"
+                     Text="- - -"
+                     GotFocus="CVVTextBox_GotFocus"
+                     LostFocus="CVVTextBox_LostFocus"
+                     Width="290"
+                     Style="{StaticResource TextBoxTheme}"
+                     />
+                </StackPanel>
+            </StackPanel>
+
+            <Button Grid.Row="8"
+                    x:Name="PayButton"
+                    Content="Pay"
+                    Style="{StaticResource PayButtonTheme}"
+                    MouseEnter="PayButton_MouseEnter" 
+                    MouseLeave="PayButton_MouseLeave"
+                    Click="PayButton_Click"
+                    />
+
+
+        </Grid>
+
+
+    </Border>
+</Window>

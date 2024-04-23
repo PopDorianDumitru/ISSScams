@@ -1,0 +1,89 @@
+﻿<Window x:Class="GUICompanyForm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUICompanyForm"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="800">
+    <Grid Background="#FFC8F6F8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.ColumnSpan="6" Grid.RowSpan="21" Fill="White" Margin="133,0,133,0" />
+        <Label Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0"  Grid.RowSpan="2" Content="Company Subscriptions" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="33.3"/>
+
+        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Content="Company Name" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Arial" FontSize="20" FontWeight="Light" Foreground="#FF373737"/>
+        <Border CornerRadius="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2"  Margin="40,42,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="350" Background="#FFD9D9D9" Grid.RowSpan="2">
+            <TextBox x:Name="companyName" TextWrapping="Wrap" Text="" BorderBrush="{x:Null}" Background="{x:Null}" />
+        </Border>
+
+        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Content="Email Address" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Arial" FontSize="20" FontWeight="Light" Foreground="#FF373737"/>
+        <Border CornerRadius="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4"  Margin="40,42,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="350" Background="#FFD9D9D9" Grid.RowSpan="2">
+            <TextBox x:Name="emailAddress" TextWrapping="Wrap" Text="" BorderBrush="{x:Null}" Background="{x:Null}"  />
+        </Border>
+
+        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Content="Validation Token" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Arial" FontSize="20" FontWeight="Light" Foreground="#FF373737"/>
+        <Border CornerRadius="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="7"  Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="350" Background="#FFD9D9D9">
+            <TextBox x:Name="validationToken" TextWrapping="Wrap" Text="" BorderBrush="{x:Null}" Background="{x:Null}"  />
+        </Border>
+
+        <Label Grid.Column="1" Grid.Row="8" Content="Offers" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Arial" FontSize="20" FontWeight="Light" Foreground="#FF373737"/>
+        <RadioButton x:Name="radioButtonServices"  Grid.Column="1" Content="Services" HorizontalAlignment="Left" Margin="40,0,0,0" Grid.Row="9" VerticalAlignment="Top" FontFamily="Arial" Padding="4,1,0,0" ScrollViewer.CanContentScroll="True" FontSize="13" IsChecked="True"/>
+        <RadioButton x:Name="radioButtonSubscription"  Grid.Column="1" Content="Subscription" HorizontalAlignment="Left" Margin="40,20,0,0" Grid.Row="9" VerticalAlignment="Top" FontFamily="Arial" Padding="4,1,0,0" ScrollViewer.CanContentScroll="True" FontSize="13"/>
+
+        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="10" Content="Service API" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Arial" FontSize="20" FontWeight="Light" Foreground="#FF373737"/>
+        <Border CornerRadius="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="10"  Margin="40,42,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="350" Background="#FFD9D9D9" Grid.RowSpan="2">
+            <TextBox x:Name="serviceAPI" TextWrapping="Wrap" Text="" BorderBrush="{x:Null}" Background="{x:Null}"  />
+        </Border>
+
+        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="12" Content="Additional Information" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0" FontFamily="Arial" FontSize="20" FontWeight="Light" Foreground="#FF373737"/>
+        <Border CornerRadius="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="12"  Margin="40,42,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="350" Background="#FFD9D9D9" Grid.RowSpan="2">
+            <TextBox x:Name="additionalInfo" TextWrapping="Wrap" Text="" BorderBrush="{x:Null}" Background="{x:Null}"  />
+        </Border>
+
+        <Button x:Name="cancelButton" Grid.Column="1" Content="Cancel" Grid.ColumnSpan="2" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0,0" Padding="50,3,50,3" Grid.IsSharedSizeScope="True" UseLayoutRounding="False" Click="ClearFormat">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="17"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="saveButton" Grid.Column="3" Content="Save" Grid.ColumnSpan="2" Grid.Row="15" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="20" RenderTransformOrigin="0,0" Padding="50,3,50,3" Grid.IsSharedSizeScope="True" UseLayoutRounding="False" Background="#FFC8F6F8" Click="saveButton_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="17"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Label x:Name="warningLabel" Grid.Column="2" Grid.ColumnSpan="2" Content="Please complete all empty fields!" Grid.Row="14" Foreground="#FF8F0A0A" FontFamily="Arial" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" />
+
+    </Grid>
+</Window>
