@@ -1,12 +1,12 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Mock;
-using ISSProject.ScamBots;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
 
 namespace ISSProject.Common.Test.Common
 {
@@ -34,7 +34,8 @@ namespace ISSProject.Common.Test.Common
                 Debug.Assert(false);
             }
             catch (Exception)
-            { }
+            {
+            }
 
             DateTime messageDateTime = new SqlDateTime(DateTime.Now).Value;
             MockMessage testMessage = new MockMessage(user1.Id, user2.Id, "Hello! This is a test message.", messageDateTime);
@@ -69,26 +70,33 @@ namespace ISSProject.Common.Test.Common
                 messageRepository.ById(testMessage.Id);
                 Debug.Assert(false);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
-            ///         --- Clean-up ----       ///
+            /// --- Clean-up ----       ///
 
             // delete users from the database
             Debug.Assert(userRepository.Delete(user1));
             Debug.Assert(userRepository.Delete(user2));
 
             // check that test users are no longer in the database
-            try{
+            try
+            {
                 userRepository.ById(user1.Id);
                 Debug.Assert(false);
-
             }
-            catch (Exception){ }
-            try{
+            catch (Exception)
+            {
+            }
+            try
+            {
                 userRepository.ById(user2.Id);
                 Debug.Assert(false);
             }
-            catch (Exception){ }
+            catch (Exception)
+            {
+            }
         }
     }
 }

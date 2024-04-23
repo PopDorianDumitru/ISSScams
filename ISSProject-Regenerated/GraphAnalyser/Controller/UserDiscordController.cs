@@ -1,37 +1,46 @@
-﻿using ISSProject.Common.Logging;
-using ISSProject.Common.Repository;
-using ISSProject.Common.Wrapper;
-using ISSProject.GraphAnalyser.Domain;
-using ISSProject.GraphAnalyser.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Logging;
+using ISSProject.Common.Repository;
+using ISSProject.Common.Wrapper;
+using ISSProject.GraphAnalyser.Domain;
+using ISSProject.GraphAnalyser.Repository;
 
 namespace ISSProject.GraphAnalyser.Controller
 {
     internal class UserDiscordController
     {
-        private UserDiscordGraph _givenUserGraph;
+        private readonly UserDiscordGraph givenUserGraph;
         public UserDiscordController(UserDiscordGraph givenUserGraph)
         {
-            _givenUserGraph = givenUserGraph;
+            this.givenUserGraph = givenUserGraph;
         }
 
-        private bool _verbose = false;
-        public bool Verbose { 
-            get { return _verbose; }
-            set { _verbose = value; logger.WriteToConsole = value; } 
+        private bool verbose = false;
+        public bool Verbose
+        {
+            get
+            {
+                return verbose;
+            }
+
+            set
+            {
+                verbose = value;
+                logger.WriteToConsole = value;
+            }
         }
         private LoggingModule logger = new LoggingModule($"user_discord_controller.txt",
                                                          "User Discord Controller");
-        
+
         public void MessageUserAfterMinMax(UserWrapper user)
         {
-            var targetUser = _givenUserGraph.FindMinMaxImbalance(user);
-            var score = _givenUserGraph.ComputeRelationScore(user, targetUser);
+            var targetUser = givenUserGraph.FindMinMaxImbalance(user);
+            var score = givenUserGraph.ComputeRelationScore(user, targetUser);
 
             var userName = user.GetFirstName() + " " + user.GetLastName();
             var targetName = targetUser.GetFirstName() + " " + targetUser.GetLastName();
@@ -39,7 +48,7 @@ namespace ISSProject.GraphAnalyser.Controller
             var messageContent = $"Please bother your friend {targetName} more, " +
                                  $"they seem to be getting bored of you...";
 
-            MessageWrapper message = new MessageWrapper(-1, _systemUser.GetId(), user.GetId(), 
+            MessageWrapper message = new MessageWrapper(-1, systemUser.GetId(), user.GetId(),
                                                         messageContent, DateTime.Now);
 
             MessageRepository.Provided().Insert(message);
@@ -51,26 +60,28 @@ namespace ISSProject.GraphAnalyser.Controller
             logger.Log(LogSeverity.Info, $"Messaged {userName} about {targetName} >> {messageContent}");
         }
 
-        private UserWrapper _systemUser;
+        private UserWrapper systemUser;
         public void TraverseAllUsers()
         {
-            logger.Log(LogSeverity.Event, 
+            logger.Log(LogSeverity.Event,
                 "Beginning User Discord graph traversal... This might take a bit.");
 
-            _systemUser = UserRepository.Provided().ByEmail("graph.traverser@system.ro");
-            if (_systemUser == null)
+            systemUser = UserRepository.Provided().ByEmail("graph.traverser@system.ro");
+            if (systemUser == null)
             {
                 logger.Log(LogSeverity.Event,
                     "No system user found. Making one for you!");
-                UserWrapper _systemUser = 
+                UserWrapper systemUser =
                     new UserWrapper(-1, "graph.traverser@system.ro", "System", "Account", DateTime.Now);
-                UserRepository.Provided().Insert(_systemUser);
+                UserRepository.Provided().Insert(systemUser);
 
-                _systemUser = UserRepository.Provided().ByEmail("graph.traverser@system.ro");
+                systemUser = UserRepository.Provided().ByEmail("graph.traverser@system.ro");
             }
 
-            foreach (var user in _givenUserGraph.Users)
+            foreach (var user in givenUserGraph.Users)
+            {
                 MessageUserAfterMinMax(user);
+            }
 
             logger.Log(LogSeverity.Event,
                 "Ended User Discord graph traversal. Next one up in 1 hour...");

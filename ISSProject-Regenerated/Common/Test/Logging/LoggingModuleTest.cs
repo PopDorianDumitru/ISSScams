@@ -1,11 +1,11 @@
-﻿using ISSProject.Common.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ISSProject.Common.Logging;
 
 namespace ISSProject.Common.Test
 {
@@ -16,8 +16,9 @@ namespace ISSProject.Common.Test
             LoggingModule logger = new LoggingModule("log_test.txt");
             logger.WriteToConsole = true;
 
-            string basePattern = @"\A\[[0-9]{2}/[01][0-9]/[0-9]{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]] : (\[[A-Z]*] )?\["; 
-            List<string> logOutputs = new List<string>(){
+            string basePattern = @"\A\[[0-9]{2}/[01][0-9]/[0-9]{4} [0-2][0-9]:[0-5][0-9]:[0-5][0-9]] : (\[[A-Z]*] )?\[";
+            List<string> logOutputs = new List<string>()
+            {
                 @"INFO] -> This is an information log; its colour should be white.\Z",
                 @"EVENT] -> This is an event log; its colour should be cyan.\Z",
                 @"WARNING] -> This is a warning log; its colour should be yellow.\Z",
@@ -25,11 +26,12 @@ namespace ISSProject.Common.Test
                 @"ERROR] -> This is an error log; its colour should be red.\Z"
             };
 
-            String line;
+            string line;
             int currentLine = 0;
-            try{
+            try
+            {
                 StreamWriter writer = new StreamWriter("log_test.txt", false);
-                writer.Write("");
+                writer.Write(string.Empty);
                 writer.Flush();
                 writer.Close();
 
@@ -53,7 +55,8 @@ namespace ISSProject.Common.Test
 
                 reader.Close();
             }
-            catch (Exception e){
+            catch (Exception e)
+            {
                 Console.WriteLine("Exception: " + e.Message);
             }
         }

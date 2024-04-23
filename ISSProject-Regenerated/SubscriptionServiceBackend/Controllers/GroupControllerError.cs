@@ -8,8 +8,11 @@ namespace ISSfixed.ISSProject.Mikha.Controllers
 {
     internal class GroupControllerError : Exception
     {
-        public GroupControllerError() { }
-        public GroupControllerError(string message) : base(message) { }
-
+        public GroupControllerError()
+        {
+        }
+        public GroupControllerError(string message) : base(message)
+        {
+        }
     }
 }

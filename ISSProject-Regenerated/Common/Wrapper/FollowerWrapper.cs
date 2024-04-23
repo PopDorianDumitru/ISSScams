@@ -1,20 +1,19 @@
-﻿using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
 
 namespace ISSProject.Common.Wrapper
 {
     internal class FollowerWrapper : IDomainEntityWrapper<MockFollower, int>, IKeyedEntity<int>
     {
-
-        private MockFollower _follower;
+        private MockFollower follower;
 
         public FollowerWrapper(MockFollower follower)
         {
-            _follower = follower;
+            this.follower = follower;
         }
 
         public FollowerWrapper(int id)
@@ -22,20 +21,38 @@ namespace ISSProject.Common.Wrapper
             FetchUsingId(id);
         }
 
-        public MockFollower GetPureReference() { return _follower; }
+        public MockFollower GetPureReference()
+        {
+            return follower;
+        }
         public MockFollower FetchUsingId(int id)
         {
-            if (_follower == null) _follower = MockFollowerRepository.Provided().ById(id);
-            return _follower;
+            if (follower == null)
+            {
+                follower = MockFollowerRepository.Provided().ById(id);
+            }
+
+            return follower;
         }
 
         // Keyed Entity requirements
-        public int GetId() { return _follower.Id; }
-        public object Clone() { return MemberwiseClone(); }
+        public int GetId()
+        {
+            return follower.Id;
+        }
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
 
         // Anything else we need here...
-        public int GetUserId() { return _follower.UserId; }
-        public int GetFollowerId() { return _follower.FollowedUserId; }
-
+        public int GetUserId()
+        {
+            return follower.UserId;
+        }
+        public int GetFollowerId()
+        {
+            return follower.FollowedUserId;
+        }
     }
 }

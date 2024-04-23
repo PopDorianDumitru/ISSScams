@@ -1,27 +1,30 @@
-﻿using ISSProject.GraphAnalyser.Domain;
-using ISSProject;
-using ISSProject.Common;
-using ISSProject.ScamBots;
-using ISSProject.ScamBots.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject;
+using ISSProject.Common;
 using ISSProject.Common.Mock;
-
+using ISSProject.GraphAnalyser.Domain;
+using ISSProject.ScamBots;
+using ISSProject.ScamBots.Model;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.GraphAnalyser.Repository
 {
     internal class GraphAnalyserLogRepository : IRepository<GraphAnalyserLog, int>
     {
-        private static GraphAnalyserLogRepository _singleton;
+        private static GraphAnalyserLogRepository? singleton;
         public static GraphAnalyserLogRepository Provided()
         {
-            if (_singleton == null) _singleton = new GraphAnalyserLogRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new GraphAnalyserLogRepository();
+            }
+
+            return singleton;
         }
 
         public IEnumerable<GraphAnalyserLog> All()
