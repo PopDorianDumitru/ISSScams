@@ -6,10 +6,11 @@ using System.Text;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots;
 using ISSProject.ScamBots.Model;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test.ScamBots
 {
-    internal class ScamMessageLinkRepositoryTest
+    internal class ScamMessageLinkRepositoryTest : ITest
     {
         public static void Test()
         {

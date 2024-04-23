@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ISSProject.Common.Cache;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test
 {
-    internal class SimpleKeyedMapCacheTest
+    internal class SimpleKeyedMapCacheTest : ITest
     {
         public static void Test(string[] args)
         {

@@ -7,10 +7,11 @@ using System.Text;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test.Common
 {
-    internal class MessageRepositoryTest
+    internal class MessageRepositoryTest : ITest
     {
         public static void Test()
         {

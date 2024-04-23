@@ -9,10 +9,11 @@ using ISSProject.Common.Mock;
 using ISSProject.ScamBots;
 using ISSProject.ScamBots.Model;
 using ISSProject.ScamBots.Service;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test.ScamBots
 {
-    internal class FakeUserGeneratorTest
+    internal class FakeUserGeneratorTest : ITest
     {
         public static void Test()
         {

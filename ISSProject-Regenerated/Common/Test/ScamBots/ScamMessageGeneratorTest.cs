@@ -6,10 +6,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ISSProject.ScamBots;
 using ISSProject.ScamBots.Model;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test.ScamBots
 {
-    internal class ScamMessageGeneratorTest
+    internal class ScamMessageGeneratorTest : ITest
     {
         public static void Test()
         {

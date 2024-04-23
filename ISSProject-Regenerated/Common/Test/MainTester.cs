@@ -9,10 +9,11 @@ using ISSProject.Common.Mock;
 using ISSProject.Common.Test;
 using ISSProject.Common.Test.Common;
 using ISSProject.Common.Test.ScamBots;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test
 {
-    internal class MainTester
+    internal class MainTester : ITest
     {
         public static void Test()
         {

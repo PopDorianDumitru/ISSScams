@@ -9,10 +9,11 @@ using ISSProject.Common.Repository;
 using ISSProject.Common.Wrapper;
 using ISSProject.GraphAnalyser.Domain;
 using ISSProject.GraphAnalyser.Repository;
+using ISSProject_Regenerated.GraphAnalyser.Controller;
 
 namespace ISSProject.GraphAnalyser.Controller
 {
-    internal class UserDiscordController
+    internal class UserDiscordController : IUserDiscordController
     {
         private readonly UserDiscordGraph givenUserGraph;
         public UserDiscordController(UserDiscordGraph givenUserGraph)

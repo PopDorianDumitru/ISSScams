@@ -9,10 +9,11 @@ using ISSProject.Common.Repository;
 using ISSProject.Common.Service;
 using ISSProject.Common.Wrapper;
 using ISSProject_Regenerated.Common.Service;
+using ISSProject_Regenerated.GraphAnalyser.Domain;
 
 namespace ISSProject.GraphAnalyser.Domain
 {
-    internal class UserDiscordGraph
+    internal class UserDiscordGraph : IUserDiscordGraph
     {
         private List<UserWrapper> users = new List<UserWrapper>();
         private readonly Dictionary<Tuple<UserWrapper, UserWrapper>, int> relations =
