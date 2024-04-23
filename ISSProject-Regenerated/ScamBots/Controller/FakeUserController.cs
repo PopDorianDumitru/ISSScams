@@ -159,7 +159,8 @@ namespace ISSProject.ScamBots
         /// Creates and inserts fake accounts into the database, such that the total number of active fake accounts is equal to the specified population size(default is 5% of total legitimate userbase).
         /// </summary>
         /// <returns>The number of generated accounts.</returns>
-        public int GenerateBotAccounts(){
+        public int GenerateBotAccounts()
+        {
             long numberOfBotAccounts = fakeUsers.Size();
             long numberOfLegitimateAccounts = new MockUserRepository().Size() - fakeUsers.Size() - fakeUsers.NumberOfBannedFakeAccounts();
             logger.Log(LogSeverity.Warning, "Number of legit accounts: " + numberOfLegitimateAccounts);
@@ -168,13 +169,15 @@ namespace ISSProject.ScamBots
             long desiredNumberOfAccounts = 5 * numberOfLegitimateAccounts / 100;
             int attempts = 0;
 
-            for (long i = numberOfBotAccounts; i < desiredNumberOfAccounts; i++){
+            for (long i = numberOfBotAccounts; i < desiredNumberOfAccounts; i++)
+            {
                 try
                 {
                     fakeUsers.Insert(fakeUserGenerator.GenerateFakeUser());
                     generatedAccountsCount++;
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     attempts++;
                     i--;
 
