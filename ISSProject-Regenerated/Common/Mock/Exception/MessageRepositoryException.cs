@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 public class MessageRepositoryException : Exception
 {
-    public MessageRepositoryException() { }
-    public MessageRepositoryException(string message) : base(message) { }
+    public MessageRepositoryException()
+    {
+    }
+    public MessageRepositoryException(string message) : base(message)
+    {
+    }
 }

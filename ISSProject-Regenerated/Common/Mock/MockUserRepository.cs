@@ -1,27 +1,32 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common;
-using ISSProject.ScamBots;
-using ISSProject;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Data;
-
+using ISSProject;
+using ISSProject.Common;
+using ISSProject.Common.Mock;
+using ISSProject.ScamBots;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mock
 {
     internal class MockUserRepository : ISizedRepository<MockUser, int>
     {
-        private static MockUserRepository _singleton;
+        private static MockUserRepository? singleton;
         public static MockUserRepository Provided()
         {
-            if (_singleton == null) _singleton = new MockUserRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new MockUserRepository();
+            }
+
+            return singleton;
         }
 
-        public MockUserRepository() { }
+        public MockUserRepository()
+        {
+        }
 
         public IEnumerable<MockUser> All()
         {
@@ -83,7 +88,9 @@ namespace ISSProject.Common.Mock
             }
 
             if (newUser == null)
+            {
                 throw new UserRepositoryException("An error occured while trying to get user from the database: an user with specified id does not exist.");
+            }
 
             return newUser;
         }
@@ -144,7 +151,6 @@ namespace ISSProject.Common.Mock
                 throw new UserRepositoryException("An error occured while trying to insert user into the database: " + ex.Message);
             }
 
-
             return result >= 1;
         }
 
@@ -193,7 +199,9 @@ namespace ISSProject.Common.Mock
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
+                    {
                         result = (int)reader[0];
+                    }
                 }
 
                 connection.Close();
@@ -207,7 +215,7 @@ namespace ISSProject.Common.Mock
         /// </summary>
         /// <param name="email">The email address to look for.</param>
         /// <returns>The ID of an user with specified email, or -1 if such an user does not exist.</returns>
-        public int getUserIdByEmail(string email)
+        public static int GetUserIdByEmail(string email)
         {
             string queryString = "SELECT mockuser_id From MockUsers WHERE email = @email";
             int userId = -1;

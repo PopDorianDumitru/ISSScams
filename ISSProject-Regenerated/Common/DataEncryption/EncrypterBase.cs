@@ -13,47 +13,54 @@ namespace ISSProject.Common.DataEncryption
 
         // Encrypts a character and returns the result.
         // Parameter: character = character to be encrypted
-        public char encryptCharacter(char character)
+        public char EncryptCharacter(char character)
         {
             if (encryptionMap.ContainsKey(character))
+            {
                 return encryptionMap[character];
-
+            }
             else
+            {
                 return character;
+            }
         }
-
 
         // Encrypts a string and returns the result
         // Parameter: inputString = string to be encrypted
-        public string encryptString(string inputString)
+        public string EncryptString(string inputString)
         {
-            string result = "";
+            string result = string.Empty;
             for (int i = 0; i < inputString.Length; ++i)
-                result += encryptCharacter(inputString[i]);
+            {
+                result += EncryptCharacter(inputString[i]);
+            }
 
             return result;
         }
 
-
         // Decrypts a character and returns the result.
         // Parameter: character = character to be decrypted
-        public char decryptCharacter(char character)
+        public char DecryptCharacter(char character)
         {
             if (decryptionMap.ContainsKey(character))
+            {
                 return decryptionMap[character];
-
+            }
             else
+            {
                 return character;
+            }
         }
-
 
         // Decrypts a string and returns the result.
         // Parameter: encryptedString = string to be decrypted
-        public string decryptString(string encryptedString)
+        public string DecryptString(string encryptedString)
         {
-            string result = "";
+            string result = string.Empty;
             for (int i = 0; i < encryptedString.Length; ++i)
-                result += decryptCharacter(encryptedString[i]);
+            {
+                result += DecryptCharacter(encryptedString[i]);
+            }
 
             return result;
         }

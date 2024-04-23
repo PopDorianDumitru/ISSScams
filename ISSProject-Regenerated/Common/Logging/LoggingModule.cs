@@ -13,7 +13,7 @@ namespace ISSProject.Common.Logging
     /// Event <br/>
     /// Warning <br/>
     /// Success <br/>
-    /// Error 
+    /// Error
     /// </summary>
     public enum LogSeverity
     {
@@ -30,27 +30,30 @@ namespace ISSProject.Common.Logging
 
         private string fileName;
         private string context;
-        private bool _writeToConsole = false;
-        public bool WriteToConsole { get { return _writeToConsole; } set { _writeToConsole = value; } }
+        private bool writeToConsole;
+        public bool WriteToConsole
+        {
+            get { return writeToConsole; } set { writeToConsole = value; }
+        }
         public LoggingModule()
         {
             this.fileName = "logs.txt";
-            context = "";
-            _writeToConsole = false;
+            context = string.Empty;
+            writeToConsole = false;
         }
 
         public LoggingModule(string fileName)
         {
             this.fileName = fileName;
-            context = "";
-            _writeToConsole = false;
+            context = string.Empty;
+            writeToConsole = false;
         }
 
         public LoggingModule(string fileName, string context)
         {
             this.fileName = fileName;
             this.context = context;
-            _writeToConsole = false;
+            writeToConsole = false;
         }
 
         public void Log(LogSeverity severity, string message)
@@ -58,8 +61,10 @@ namespace ISSProject.Common.Logging
             string line;
             string level = Enum.GetName(typeof(LogSeverity), severity).ToUpper();
             line = "[" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "] : ";
-            if (context != "")
+            if (context != string.Empty)
+            {
                 line += "[" + context.ToUpper() + "] ";
+            }
 
             line += "[" + level + "] -> " + message;
 
@@ -70,13 +75,12 @@ namespace ISSProject.Common.Logging
                 sw.Flush();
                 sw.Close();
 
-                if (_writeToConsole)
+                if (writeToConsole)
                 {
                     Console.ForegroundColor = colors[(int)severity];
                     Console.WriteLine(line);
                     Console.ResetColor();
                 }
-
             }
             catch (Exception e)
             {

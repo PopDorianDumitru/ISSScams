@@ -61,7 +61,7 @@ namespace ISSProject.ScamBots.Service
 
             email = firstName.ToLower() + "_" + lastName.ToLower() + "_" + randomCode + "_" + phoneNumber + "@gmail.com";
 
-            password = encrypter1.encryptString(firstName) + "_" + encrypter2.encryptString(lastName);
+            password = encrypter1.EncryptString(firstName) + "_" + encrypter2.EncryptString(lastName);
 
             DateTime birthdate = DateTime.Today.AddYears(-(randomGenerator.Next(20, 46)));
 
