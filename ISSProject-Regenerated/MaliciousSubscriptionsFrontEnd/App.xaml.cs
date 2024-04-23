@@ -10,5 +10,4 @@ namespace GUICompanyForm
     public partial class App : Application
     {
     }
-
 }

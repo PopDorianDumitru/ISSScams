@@ -1,23 +1,23 @@
-﻿using ISSProject.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
     internal class CompanyToken : IKeyedEntity<int>
     {
-        private readonly int ID;
+        private readonly int iD;
         private string companyName;
         private string linkToAPI;
         private string token;
         private int serviceSeverity;
 
-        public CompanyToken(int ID, string companyName, string linkToAPI, string token, int serviceSeverity)
+        public CompanyToken(int iD, string companyName, string linkToAPI, string token, int serviceSeverity)
         {
-            this.ID = ID;
+            this.iD = iD;
             this.companyName = companyName;
             this.linkToAPI = linkToAPI;
             this.token = token;
@@ -32,26 +32,25 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 
         public int GetId()
         {
-            return ID;
+            return iD;
         }
 
         /* GETTERS and SETTERS */
-        public string GetCompanyName() 
+        public string GetCompanyName()
         {
             return companyName;
         }
-        public string GetLinkToAPI() 
+        public string GetLinkToAPI()
         {
             return linkToAPI;
         }
-        public string GetToken() 
+        public string GetToken()
         {
             return token;
         }
-        public int GetServiceSeverity() 
+        public int GetServiceSeverity()
         {
             return serviceSeverity;
         }
-
     }
 }

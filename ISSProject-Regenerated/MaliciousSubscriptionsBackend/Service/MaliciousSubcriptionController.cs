@@ -1,18 +1,17 @@
-﻿using ISSProject.Common.Mock;
-using ISSProject.Common.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
-using ISSProject.MaliciousSubscriptionsBackend.Storage;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Wrapper;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
+using ISSProject.MaliciousSubscriptionsBackend.Storage;
 using Microsoft.Data.SqlClient;
-using System.Net.Http;
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
     internal class MaliciousSubcriptionController
@@ -25,15 +24,17 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 
         private List<UserWrapper> affectedUsers;
 
-        CompanyToken? prioritizedCompany;
-        int numberOfUsersToTarget;
-        int numberOfUsersFromAlreadyAffected;
-        int numberOfUsersFromUnaffected;
+        private CompanyToken? prioritizedCompany;
+        private int numberOfUsersToTarget;
+        private int numberOfUsersFromAlreadyAffected;
+        private int numberOfUsersFromUnaffected;
+
+        internal CompanyToken? PrioritizedCompany { get => prioritizedCompany; set => prioritizedCompany = value; }
 
         public MaliciousSubcriptionController(CompanyToken? prioritizedCompany = null, int numberOfUsersToTarget = 0)
         {
             affectedUsers = new List<UserWrapper>();
-            this.prioritizedCompany = prioritizedCompany;
+            this.PrioritizedCompany = prioritizedCompany;
             this.numberOfUsersToTarget = numberOfUsersToTarget;
 
             HandleCompanyChoosing();
@@ -42,25 +43,31 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 
         private void HandleCompanyChoosing()
         {
-            if (prioritizedCompany != null)
+            if (PrioritizedCompany != null)
+            {
                 return;
+            }
 
-            //need a random company from the company list
-            prioritizedCompany = companyTokens.All().ToList().PerformFisherYatesShuffle().Take(1).ToList().ElementAt(0);
+            // need a random company from the company list
+            PrioritizedCompany = companyTokens.All().ToList().PerformFisherYatesShuffle().Take(1).ToList().ElementAt(0);
         }
 
         private void HandleUserDistribution()
         {
             if (numberOfUsersToTarget == 0)
             {
-                double coefficient = (prioritizedCompany.GetServiceSeverity() == 0) ? 15.0 / 100.0 : 5.0 / 100.0; // FOR NOW, TAKE 15% if benign, 5% if SEVERE
+                double coefficient = (PrioritizedCompany.GetServiceSeverity() == 0) ? 15.0 / 100.0 : 5.0 / 100.0; // FOR NOW, TAKE 15% if benign, 5% if SEVERE
                 numberOfUsersToTarget = (int)Math.Ceiling((double)(users.All().Count() * coefficient));
             }
 
-            if (prioritizedCompany.GetServiceSeverity() == 0)
-                numberOfUsersFromAlreadyAffected = (int)Math.Floor((double)(numberOfUsersToTarget * (2.0 / 5.0))); //TAKE FLOOR OF 40% FROM ALREADY AFFECTED IF BENIGN
+            if (PrioritizedCompany.GetServiceSeverity() == 0)
+            {
+                numberOfUsersFromAlreadyAffected = (int)Math.Floor((double)(numberOfUsersToTarget * (2.0 / 5.0))); // TAKE FLOOR OF 40% FROM ALREADY AFFECTED IF BENIGN
+            }
             else
-                numberOfUsersFromAlreadyAffected = (int)Math.Ceiling((double)(numberOfUsersToTarget * (4.0 / 5.0))); //TAKE FLOOR OF 80% FROM ALREADY AFFECTED IF SEVERE
+            {
+                numberOfUsersFromAlreadyAffected = (int)Math.Ceiling((double)(numberOfUsersToTarget * (4.0 / 5.0))); // TAKE FLOOR OF 80% FROM ALREADY AFFECTED IF SEVERE
+            }
 
             numberOfUsersFromUnaffected = numberOfUsersToTarget - numberOfUsersFromAlreadyAffected;
         }
@@ -69,8 +76,8 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
         private List<UserID> GetUserIDsFromAffectedDataset()
         {
             Random randomizer = new Random();
-            List<UserID> userIDs = (prioritizedCompany.GetServiceSeverity() == 0) ? benignFlaggedUsers.All().ToList() : severeFlaggedUsers.All().ToList();
-            userIDs.FilterOutAlreadySubscribed(prioritizedCompany);
+            List<UserID> userIDs = (PrioritizedCompany.GetServiceSeverity() == 0) ? benignFlaggedUsers.All().ToList() : severeFlaggedUsers.All().ToList();
+            userIDs.FilterOutAlreadySubscribed(PrioritizedCompany);
             userIDs.PerformFisherYatesShuffle();  // List is randomized, now we need to get either the specified number or all of them
 
             List<UserID> chosenIDs = new List<UserID>();
@@ -87,20 +94,21 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
             }
 
             return chosenIDs;
-
         }
 
         private List<UserID> GetUserIDsFromUnaffectedUserbase()
         {
             Random randomizer = new Random();
             List<UserID> userIDs;
-            if (prioritizedCompany.GetServiceSeverity() == 0)
+            if (PrioritizedCompany.GetServiceSeverity() == 0)
+            {
                 userIDs = users.All().Select(user => new UserID(user.GetId())).Except(benignFlaggedUsers.All().ToList()).ToList();  // FILTER OUT USERS THAT WERE ALREADY SELECTED FOR BENIGN PRIOR
+            }
             else
             {
                 var usersWithCCs = creditCards.All().Select(creditCard => creditCard.GetUserID()).ToList();
                 userIDs = users.All().Select(user => new UserID(user.GetId()))
-                    .Except(severeFlaggedUsers.All().ToList()).ToList()   // FILTER OUT USERS THAT WERE ALREADY SELECTED FOR SEVERE PRIOR
+                    .Except(severeFlaggedUsers.All().ToList()).ToList() // FILTER OUT USERS THAT WERE ALREADY SELECTED FOR SEVERE PRIOR
                     .Where(userID => usersWithCCs.Contains(userID.GetId())) // FILTER OUT USERS THAT DON'T HAVE A CREDIT CARD
                     .ToList();
             }
@@ -134,7 +142,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 
             affectedUserIDs.AddRange(unaffectedUserIDs);
 
-            foreach(UserID id in affectedUserIDs)
+            foreach (UserID id in affectedUserIDs)
             {
                 affectedUsers.Add(new UserWrapper(users.ById(id.GetId())));
             }
@@ -143,13 +151,15 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
         private void ExecuteSubscriptions()
         {
             HttpClient postToCompany = new HttpClient();
-            postToCompany.BaseAddress = new Uri(prioritizedCompany.GetLinkToAPI() + "/");
+            postToCompany.BaseAddress = new Uri(PrioritizedCompany.GetLinkToAPI() + "/");
 
-            foreach (UserWrapper user in affectedUsers) 
+            foreach (UserWrapper user in affectedUsers)
             {
                 PostData dataToSend = new PostData();
-                if (prioritizedCompany.GetServiceSeverity() == 0)
+                if (PrioritizedCompany.GetServiceSeverity() == 0)
+                {
                     dataToSend.SelfJSON = JsonSerializer.Serialize(new BenignPostData(user.GetEmail()));
+                }
                 else
                 {
                     CreditCard cardToSend = creditCards.ById(user.GetId());
@@ -160,23 +170,22 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 
                 try
                 {
-                    var response = postToCompany.PostAsync(prioritizedCompany.GetToken(), content).Result;
+                    var response = postToCompany.PostAsync(PrioritizedCompany.GetToken(), content).Result;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("[-] ADDRESS NOT EXISTENT.");
                 }
-
             }
         }
 
         private void MapCreditCardCachesForAffectedUsers()
         {
             List<CreditCard> creditCardCachePrepend = creditCards.All().ToList();
-            foreach (var user in affectedUsers) 
+            foreach (var user in affectedUsers)
             {
                 CreditCard creditCardToAdd = creditCardCachePrepend.Where(creditCard => creditCard.GetUserID() == user.GetId()).First();
-                //VOODOO FIX: WHEN WE CACHE FOR CREDIT CARDS, WE'D RATHER DO IT VIA USER IDs, AND TO NOT CHANGE THE CACHE COMPONENT, WE CREATE A CREDIT CARD W/ ID AND USER ID EQUAL, SO WE CAN QUERY BY USER IDs
+                // VOODOO FIX: WHEN WE CACHE FOR CREDIT CARDS, WE'D RATHER DO IT VIA USER IDs, AND TO NOT CHANGE THE CACHE COMPONENT, WE CREATE A CREDIT CARD W/ ID AND USER ID EQUAL, SO WE CAN QUERY BY USER IDs
                 CreditCard creditCardToCache = new CreditCard(creditCardToAdd.GetUserID(), creditCardToAdd.GetUserID(), creditCardToAdd.GetCreditCardHolder(), creditCardToAdd.GetCreditCardNumber(), creditCardToAdd.GetExpirationDate(), creditCardToAdd.GetCVV());
                 creditCards.Insert(creditCardToCache);
             }
@@ -187,7 +196,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
             using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
             {
                 conn.Open();
-                string dbToInsert = (prioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedUserIDs" : "SevereFlaggedUserIDs";
+                string dbToInsert = (PrioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedUserIDs" : "SevereFlaggedUserIDs";
                 string queryString = $@"INSERT INTO {dbToInsert} VALUES (@UserID)";
                 foreach (UserWrapper user in affectedUsers.GetRange(numberOfUsersFromAlreadyAffected, affectedUsers.Count - numberOfUsersFromAlreadyAffected))
                 {
@@ -201,13 +210,13 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
             using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
             {
                 conn.Open();
-                string dbToInsert = (prioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";
+                string dbToInsert = (PrioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";
                 string queryString = $@"INSERT INTO {dbToInsert} VALUES (@UserID, @CompanyID)";
                 foreach (UserWrapper user in affectedUsers)
                 {
                     SqlCommand command = new SqlCommand(queryString, conn);
                     command.Parameters.AddWithValue("@UserID", user.GetId());
-                    command.Parameters.AddWithValue("@CompanyID", prioritizedCompany.GetId());
+                    command.Parameters.AddWithValue("@CompanyID", PrioritizedCompany.GetId());
                     command.ExecuteNonQuery();
                     command.Dispose();
                 }
@@ -218,8 +227,11 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
         public void RUN()
         {
             PrepareListOfAffectedUsers();
-            if (prioritizedCompany.GetServiceSeverity() == 1)
+            if (PrioritizedCompany.GetServiceSeverity() == 1)
+            {
                 MapCreditCardCachesForAffectedUsers();
+            }
+
             ExecuteSubscriptions();
             ProjectChangesOntoDatabase();
         }

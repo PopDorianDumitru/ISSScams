@@ -1,9 +1,9 @@
-﻿using ISSProject.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
@@ -29,7 +29,10 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Domain
         public override bool Equals(object? obj)
         {
             if (obj is UserID)
+            {
                 return this.userID == ((UserID)obj).userID;
+            }
+
             return false;
         }
 
