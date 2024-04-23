@@ -8,6 +8,7 @@ using ISSProject.Common.Logging;
 using ISSProject.Common.Repository;
 using ISSProject.Common.Service;
 using ISSProject.Common.Wrapper;
+using ISSProject_Regenerated.Common.Service;
 
 namespace ISSProject.GraphAnalyser.Domain
 {

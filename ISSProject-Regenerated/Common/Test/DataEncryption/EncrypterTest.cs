@@ -1,6 +1,6 @@
-﻿using ISSProject.Common.DataEncryption;
+﻿using System;
 using System.Diagnostics;
-using System;
+using ISSProject.Common.DataEncryption;
 
 namespace ISSProject.Common.Test
 {
@@ -30,7 +30,7 @@ namespace ISSProject.Common.Test
             EncrypterBase bigShiftEnc2 = new ShiftEncrypter(290);
             Debug.Assert(bigShiftEnc2.EncryptString("aBc dEf?") == "EfG HiJ?");
             Debug.Assert(bigShiftEnc2.DecryptString("EfG HiJ?") == "aBc dEf?");
-            
+
             Debug.WriteLine("Shift encrypter test completed successfully.");
         }
 
@@ -50,7 +50,7 @@ namespace ISSProject.Common.Test
             Debug.Assert(substitutionEnc.EncryptString("aBc dEf?") == "?fa dEBc");
             Debug.Assert(substitutionEnc.DecryptString("?fa dEBc") == "aBc dEf?");
 
-            //  ------------------------------------------  //
+            // ------------------------------------------  //
             // test usage of invalid substitution ciphers
 
             // multiple values for one key
@@ -58,20 +58,22 @@ namespace ISSProject.Common.Test
             {
                 EncrypterBase substitutionEncErr = new SubstitutionEncrypter("xyx", "yyx");
                 Debug.Assert(false);
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             // invalid map
             try
             {
                 EncrypterBase substitutionEncErr = new SubstitutionEncrypter("1", "ab3");
                 Debug.Assert(false);
-
             }
-            catch (Exception) { }
-            //  ------------------------------------------  //
+            catch (Exception)
+            {
+            }
 
+            // ------------------------------------------
             Debug.WriteLine("Substitution encrypter test completed successfully.");
         }
 
