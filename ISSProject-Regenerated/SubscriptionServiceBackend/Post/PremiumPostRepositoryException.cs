@@ -7,8 +7,11 @@ namespace ISSfixed.ISSProject.Common.Mikha.Post
 {
     internal class PremiumPostRepositoryException : Exception
     {
-        public PremiumPostRepositoryException() { }
-        public PremiumPostRepositoryException(string message) : base(message) { }
-
+        public PremiumPostRepositoryException()
+        {
+        }
+        public PremiumPostRepositoryException(string message) : base(message)
+        {
+        }
     }
 }

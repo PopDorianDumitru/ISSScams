@@ -1,32 +1,35 @@
-﻿using ISSfixed.ISSProject.Common.Mikha.Post;
-using ISSProject.Common.Mock;
-using ISSProject.Common.Wrapper;
-using ISSProject.ScamBots;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ISSfixed.ISSProject.Common.Mikha.Post;
+using ISSProject.Common.Mock;
+using ISSProject.Common.Wrapper;
+using ISSProject.ScamBots;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha
 {
     internal class MockPostRepository : IRepository<MockPost, int>
     {
         /* Mock Holding Data */
-        private static Dictionary<int, MockPost> _mockDatabase = new Dictionary<int, MockPost>();
-        
+        private static Dictionary<int, MockPost> mockDatabase = new Dictionary<int, MockPost>();
+
         public static void ResetMockDatabase()
         {
-            _mockDatabase = new Dictionary<int, MockPost>();
+            mockDatabase = new Dictionary<int, MockPost>();
         }
 
-        private static MockPostRepository _singleton;
+        private static MockPostRepository singleton;
         public static MockPostRepository Provided()
         {
-            if (_singleton == null) _singleton = new MockPostRepository();
-            return _singleton;
+            if (singleton == null)
+            {
+                singleton = new MockPostRepository();
+            }
+
+            return singleton;
         }
 
         /* IRepository */
@@ -87,10 +90,11 @@ namespace ISSProject.Common.Mikha
             }
 
             if (newPost == null)
+            {
                 throw new MockPostError("An error occured while trying to get group from the database: a post with specified id does not exist.");
+            }
 
             return newPost;
-
         }
 
         public bool Delete(MockPost entity)
@@ -137,7 +141,6 @@ namespace ISSProject.Common.Mikha
                     command.Parameters.AddWithValue("@mockpost_creator_id", entity.PosterId);
                     command.Parameters.AddWithValue("@mockpost_date", entity.PostDate);
 
-
                     result = command.ExecuteNonQuery();
 
                     connection.Close();
@@ -147,7 +150,6 @@ namespace ISSProject.Common.Mikha
             {
                 throw new MockPostError("An error occured while trying to insert post into the database: " + ex.Message);
             }
-
 
             return result >= 1;
         }
