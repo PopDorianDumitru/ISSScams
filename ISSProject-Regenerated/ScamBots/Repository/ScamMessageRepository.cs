@@ -21,7 +21,7 @@ namespace ISSProject.ScamBots
         {
             string queryString = "SELECT * From ScamMessageTemplates";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -47,7 +47,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT * From ScamMessageTemplates WHERE template_id = @id";
             ScamMessageTemplate messageTemplate = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -80,7 +80,7 @@ namespace ISSProject.ScamBots
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -107,7 +107,7 @@ namespace ISSProject.ScamBots
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -133,7 +133,7 @@ namespace ISSProject.ScamBots
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -158,7 +158,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT COUNT(template_id) From ScamMessageTemplates";
             int result = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -187,7 +187,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT template_id From ScamMessageTemplates WHERE template_content = @template_content";
             int messageId = -1;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -216,7 +216,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT TOP 1 template_content From ScamMessageTemplates ORDER BY NEWID()";
             string result = string.Empty;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();

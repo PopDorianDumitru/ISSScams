@@ -25,7 +25,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Storage
                       @"Integrated Security=true;";
 
             List<CreditCard> creditCards = new List<CreditCard>();
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string queryString = "SELECT * FROM CreditCards";

@@ -20,7 +20,7 @@ namespace ISSProject.Common.Mikha
         {
             string queryString = "SELECT * From PremiumPostsView";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -51,7 +51,7 @@ namespace ISSProject.Common.Mikha
             MockPost newPost = null;
             PostWrapper newPostWrapper = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -90,7 +90,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -117,7 +117,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

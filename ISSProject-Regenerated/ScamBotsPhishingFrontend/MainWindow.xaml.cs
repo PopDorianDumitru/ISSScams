@@ -195,7 +195,7 @@ namespace Credit_card_donation
 
             try
             {
-                SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING); // SQL connection string
+                SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING); // SQL connection string
                 conn.Open();
                 string query = "INSERT INTO CreditCards VALUES (" +
                                                                 randomUserId + ",'" +

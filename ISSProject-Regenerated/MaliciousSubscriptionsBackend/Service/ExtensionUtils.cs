@@ -14,7 +14,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
         public static List<UserID> FilterOutAlreadySubscribed(this List<UserID> userIDs, CompanyToken company)
         {
             List<UserID> discrepancyIDs = new List<UserID>();
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToSelect = (company.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";

@@ -34,7 +34,7 @@ namespace ISSProject.CompanyForm.Controller
         {
             try
             {
-                SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING);
+                SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING);
                 conn.Open();
 
                 // Inserting without id because id increments automatically

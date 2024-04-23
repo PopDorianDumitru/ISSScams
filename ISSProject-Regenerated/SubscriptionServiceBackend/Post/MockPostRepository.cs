@@ -38,7 +38,7 @@ namespace ISSProject.Common.Mikha
         {
             string queryString = "SELECT * From MockPosts";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -67,7 +67,7 @@ namespace ISSProject.Common.Mikha
             string queryString = "SELECT * From MockPosts WHERE mockpost_id = @id";
             MockPost newPost = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -104,7 +104,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -131,7 +131,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -161,7 +161,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

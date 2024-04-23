@@ -31,7 +31,7 @@ namespace ISSProject.GraphAnalyser.Repository
         {
             string queryString = "SELECT * From GraphAnalyzerLogs";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -61,7 +61,7 @@ namespace ISSProject.GraphAnalyser.Repository
             string queryString = "SELECT * From GraphAnalyzerLogs WHERE LogID=@id";
             GraphAnalyserLog log = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -93,7 +93,7 @@ namespace ISSProject.GraphAnalyser.Repository
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -125,7 +125,7 @@ namespace ISSProject.GraphAnalyser.Repository
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -162,7 +162,7 @@ namespace ISSProject.GraphAnalyser.Repository
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

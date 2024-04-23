@@ -8,6 +8,7 @@
 	<CodeAnalysisRuleSet>SE.ruleset</CodeAnalysisRuleSet>
     <Nullable>enable</Nullable>
 	  <UseWPF>true</UseWPF>
+	  <AssemblyName>ISSProject-Regenerated</AssemblyName>
 	
   </PropertyGroup>
 

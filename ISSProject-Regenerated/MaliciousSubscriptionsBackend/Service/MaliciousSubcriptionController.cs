@@ -193,7 +193,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 
         private void ProjectChangesOntoDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToInsert = (PrioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedUserIDs" : "SevereFlaggedUserIDs";
@@ -207,7 +207,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
                 }
             }
 
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToInsert = (PrioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";

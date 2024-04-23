@@ -16,9 +16,9 @@ namespace ISSProject.ScamBots
     {
         private static void CreateBotThread()
         {
-            FakeUserController controller = new FakeUserController();
-            controller.WriteLogToConsole = true;
-            Thread botThread = new Thread(new ThreadStart(controller.StartBotMechanism));
+            FakeUserController fakeUserController = new FakeUserController();
+            fakeUserController.WriteLogToConsole = true;
+            Thread botThread = new Thread(new ThreadStart(fakeUserController.StartBotMechanism));
             botThread.Start();
         }
 
@@ -28,10 +28,10 @@ namespace ISSProject.ScamBots
             MockFollowerRepository.ResetMockDatabase();
 
             // select some users for the analysing phase
-            UserDiscordGraph graph = new UserDiscordGraph();
-            graph.Verbose = true;
+            UserDiscordGraph undiscoveredGraph = new UserDiscordGraph();
+            undiscoveredGraph.Verbose = true;
 
-            graph.Users = UserRepository.Provided().All()
+            undiscoveredGraph.Users = UserRepository.Provided().All()
                                         .Where(user =>
                                             { // enjoy clearing up this "functional programming"
                                                 return user.GetEmail() != "graph.traverser@system.ro";
@@ -39,13 +39,13 @@ namespace ISSProject.ScamBots
                                         .ToList();
 
             // instantiate user discord stuff
-            UserDiscordController controller = new UserDiscordController(graph);
-            controller.Verbose = true;
+            UserDiscordController userDiscordController = new UserDiscordController(undiscoveredGraph);
+            userDiscordController.Verbose = true;
 
             // start async thread
             Thread thread = new Thread(new ThreadStart(() =>
                 { // enjoy clearing up this "functional programming"
-                    controller.TraverseAllUsers();
+                    userDiscordController.TraverseAllUsers();
                     Thread.Sleep(3600 * 1000); // re-analyse in 1 hour
                 }));
             thread.Start();
@@ -58,25 +58,25 @@ namespace ISSProject.ScamBots
 
         private static void HandleSubscriptionServiceFrontendViaThread()
         {
-            Thread sTAThread = new Thread(new ThreadStart(() =>
+            Thread statThread = new Thread(new ThreadStart(() =>
             {
-                SubscriptionServicePart.MainWindow main = new SubscriptionServicePart.MainWindow();
-                main.Activate();
-                main.Show();
+                SubscriptionServicePart.MainWindow subscriptionServiceMainWindow = new SubscriptionServicePart.MainWindow();
+                subscriptionServiceMainWindow.Activate();
+                subscriptionServiceMainWindow.Show();
                 System.Windows.Threading.Dispatcher.Run();
             }));
 
-            sTAThread.SetApartmentState(ApartmentState.STA);
-            sTAThread.Start();
+            statThread.SetApartmentState(ApartmentState.STA);
+            statThread.Start();
         }
 
         private static void HandleMaliciousSubscriptionsFrontendViaThread()
         {
             Thread sTAThread = new Thread(new ThreadStart(() =>
             {
-                GUICompanyForm.MainWindow main = new GUICompanyForm.MainWindow();
-                main.Activate();
-                main.Show();
+                GUICompanyForm.MainWindow guiCompanyFormMainWindow = new GUICompanyForm.MainWindow();
+                guiCompanyFormMainWindow.Activate();
+                guiCompanyFormMainWindow.Show();
                 System.Windows.Threading.Dispatcher.Run();
             }));
 
@@ -87,8 +87,8 @@ namespace ISSProject.ScamBots
         private static void HandleSubscriptionServiceBackendOperations()
         {
             Console.WriteLine("HAVE YOU MODIFIED THE SQL IDS ? (Y/N)");
-            char input = Console.ReadLine().ToLower().ToCharArray()[0];
-            if (input == 'y')
+            char userAgrees = Console.ReadLine().ToLower().ToCharArray()[0];
+            if (userAgrees == 'y')
             {
                 UserRepository userRepository = new UserRepository();
                 PremiumUserRepository premiumUserRepository = new PremiumUserRepository();
@@ -102,16 +102,16 @@ namespace ISSProject.ScamBots
 
         private static void HandleScamBotsPhishingFrontendViaThread()
         {
-            Thread sTAThread = new Thread(new ThreadStart(() =>
+            Thread statThread = new Thread(new ThreadStart(() =>
             {
-                Credit_card_donation.MainWindow main = new Credit_card_donation.MainWindow();
-                main.Activate();
-                main.Show();
+                Credit_card_donation.MainWindow creditCardDonationMainWindow = new Credit_card_donation.MainWindow();
+                creditCardDonationMainWindow.Activate();
+                creditCardDonationMainWindow.Show();
                 System.Windows.Threading.Dispatcher.Run();
             }));
 
-            sTAThread.SetApartmentState(ApartmentState.STA);
-            sTAThread.Start();
+            statThread.SetApartmentState(ApartmentState.STA);
+            statThread.Start();
         }
 
         [STAThread]
