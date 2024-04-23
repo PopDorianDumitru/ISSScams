@@ -18,6 +18,5 @@ namespace ISSProject.Common
         /// </summary>
         /// <returns>The ID of this entity</returns>
         K GetId();
-
     }
 }

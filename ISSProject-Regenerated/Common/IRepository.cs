@@ -13,9 +13,9 @@ namespace ISSProject.Common
     /// </summary>
     /// <typeparam name="T">The entity this repository manages</typeparam>
     /// <typeparam name="K">The ID of the entity in this repository</typeparam>
-    internal interface IRepository<T, K> where T : IKeyedEntity<K>
+    internal interface IRepository<T, K>
+        where T : IKeyedEntity<K>
     {
-
         /// <summary>
         /// Gets all T objects from this repository in any order.
         /// </summary>
