@@ -15,7 +15,10 @@ namespace ISSProject.Common.Mikha.Groups
         }
 
         private string group_name;
-        public string GroupName { get { return group_name; } set { group_name = value; } }
+        public string GroupName
+        {
+            get { return group_name; } set { group_name = value; }
+        }
 
         private bool is_private;
         public bool IsPrivate
