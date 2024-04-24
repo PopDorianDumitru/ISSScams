@@ -1,10 +1,10 @@
 ﻿using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
-
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha.Premium_Users
 {
-    internal class PremiumUserRepository : IRepository<UserWrapper, int>
+    internal class PremiumUserRepository : IPremiumUserRepository
     {
         public IEnumerable<UserWrapper> All()
         {

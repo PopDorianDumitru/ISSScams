@@ -9,7 +9,7 @@ using ISSProject.Common.Wrapper;
 using ISSProject.GraphAnalyser.Controller;
 using ISSProject.GraphAnalyser.Domain;
 using ISSProject.MaliciousSubscriptionsBackend;
-using ISSProject_Regenerated.Mikha___SubscriptionServiceBackend;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Groups;
 namespace ISSProject.ScamBots
 {
     internal class Program

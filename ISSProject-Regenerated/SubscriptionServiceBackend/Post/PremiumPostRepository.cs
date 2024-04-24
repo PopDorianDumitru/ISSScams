@@ -9,10 +9,11 @@ using ISSProject.Common.Cache;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.ScamBots;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Post;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha
 {
-    internal class PremiumPostRepository : IRepository<PostWrapper, int>
+    internal class PremiumPostRepository : IPremiumPostRepository
     {
         private SimpleKeyedMapCache<PostWrapper, int> SimpleKeyedMapCache { get; set; }
 

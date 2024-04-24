@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ISSfixed.ISSProject.Common.Mikha.Post;
 using ISSfixed.ISSProject.Mikha.Groups;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Groups;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha.Groups
 {
-    internal class MockGroupRepository : IRepository<MockGroup, int>
+    internal class MockGroupRepository : IMockGroupRepository
     {
         /* Mock Holding Data */
         private static Dictionary<int, MockGroup> mockDatabase = new Dictionary<int, MockGroup>();

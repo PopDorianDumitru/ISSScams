@@ -8,10 +8,11 @@ using ISSfixed.ISSProject.Common.Mikha.Post;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.ScamBots;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Post;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha
 {
-    internal class MockPostRepository : IRepository<MockPost, int>
+    internal class MockPostRepository : IMockPostRepository
     {
         /* Mock Holding Data */
         private static Dictionary<int, MockPost> mockDatabase = new Dictionary<int, MockPost>();

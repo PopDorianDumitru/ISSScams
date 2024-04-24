@@ -25,7 +25,6 @@ namespace SubscriptionServicePart
         private bool validExpirationDate = false;
         private bool validCVV = false;
 
-        private List<string> vendorIdentifier = new List<string>();
         public MainWindow()
         {
             InitializeComponent();

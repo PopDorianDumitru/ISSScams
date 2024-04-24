@@ -11,7 +11,7 @@ using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Mikha.Controllers
 {
-    internal class PremiumPostController
+    internal class PremiumPostController : IPremiumPostController
     {
         private MockPostRepository mockPostRepository;
         private PremiumPostRepository premiumPostRepository;
