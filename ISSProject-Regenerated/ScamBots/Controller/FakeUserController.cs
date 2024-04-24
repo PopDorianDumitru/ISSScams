@@ -11,19 +11,20 @@ using ISSProject.Common.Logging;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots.Service;
 using ISSProject_Regenerated.ScamBots.Controller;
+using ISSProject_Regenerated.ScamBots.Service;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
     internal class FakeUserController : IFakeUserController
     {
-        private FakeUserRepository fakeUsers;
+        private IFakeUserRepository fakeUsers;
         private ISizedRepository<MockUser, int> allUsers;
         private ISizedRepository<MockMessage, int> messageRepository;
 
-        private ScamMessageGenerator templateMessages;
-        private FakeUserGenerator fakeUserGenerator;
+        private IScamMessageGenerator templateMessages;
+        private IFakeUserGenerator fakeUserGenerator;
 
-        private LoggingModule logger = new LoggingModule("scambots.txt", "ScamBot");
+        private ILoggingModule logger = new LoggingModule("scambots.txt", "ScamBot");
         public bool WriteLogToConsole
         {
             get { return logger.WriteToConsole; } set { logger.WriteToConsole = value; }

@@ -8,10 +8,11 @@ using ISSProject;
 using ISSProject.Common.DataEncryption;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots;
+using ISSProject_Regenerated.ScamBots.Service;
 
 namespace ISSProject.ScamBots.Service
 {
-    internal class FakeUserGenerator
+    internal class FakeUserGenerator : IFakeUserGenerator
     {
         private readonly List<string> fakeFirstNames;
         private readonly List<string> fakeLastNames;
