@@ -122,10 +122,10 @@ namespace ISSProject.ScamBots
 
             // HandleMaliciousSubscriptionsBackendViaThread(); // Razvan - WORKS
             // createBotThread(); // Florin - WORKS
-            // AnalyseRandomUsers(); // Rares - WORKS
-            HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
+            AnalyseRandomUsers(); // Rares - WORKS
+            // HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
             // HandleMaliciousSubscriptionsFrontendViaThread(); // Nico - WORKS
-            HandleSubscriptionServiceBackendOperations(); // Dragos - WORKS
+            // HandleSubscriptionServiceBackendOperations(); // Dragos - WORKS
             // HandleScamBotsPhishingFrontendViaThread(); // Dan - WORKS
             Console.ReadLine();
         }
