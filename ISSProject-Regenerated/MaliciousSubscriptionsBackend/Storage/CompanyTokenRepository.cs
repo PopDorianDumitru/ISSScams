@@ -13,7 +13,7 @@ using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Storage
 {
-    internal class CompanyTokenRepository : ICachedRepository<CompanyToken, int>
+    internal class CompanyTokenRepository : ICachedRepository<CompanyToken, int>, ICompanyTokenRepository
     {
         public CompanyTokenRepository() : base()
         {

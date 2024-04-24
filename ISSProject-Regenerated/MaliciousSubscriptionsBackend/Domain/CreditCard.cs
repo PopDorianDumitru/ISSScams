@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ISSProject.Common;
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
-    internal class CreditCard : IKeyedEntity<int>
+    internal class CreditCard : IKeyedEntity<int>, ICreditCard
     {
         private readonly int iD;
         private int userID;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
-    internal class PostData
+    internal class PostData : IPostData
     {
         public string SelfJSON { get; set; }
         public PostData()

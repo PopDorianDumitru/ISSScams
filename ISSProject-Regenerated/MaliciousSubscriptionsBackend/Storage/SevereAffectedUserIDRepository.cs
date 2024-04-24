@@ -12,7 +12,7 @@ using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Storage
 {
-    internal class SevereAffectedUserIDRepository : ICachedRepository<UserID, int>
+    internal class SevereAffectedUserIDRepository : ICachedRepository<UserID, int>, ISevereAffectedUserIDRepository
     {
         public SevereAffectedUserIDRepository() : base()
         {

@@ -13,7 +13,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
     internal static class ExtensionUtils
     {
-        public static List<UserID> FilterOutAlreadySubscribed(this List<UserID> userIDs, CompanyToken company)
+        public static List<UserID> FilterOutAlreadySubscribed(this List<UserID> userIDs, ICompanyToken company)
         {
             List<UserID> discrepancyIDs = new List<UserID>();
             using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
