@@ -11,28 +11,27 @@ using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using ISSProject.MaliciousSubscriptionsBackend.Storage;
-using ISSProject_Regenerated.MaliciousSubscriptionsBackend.Service;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
     internal class MaliciousSubcriptionController : IMaliciousSubcriptionController
     {
-        private MockUserRepository users = new MockUserRepository();
-        private CreditCardRepository creditCards = new CreditCardRepository();
-        private CompanyTokenRepository companyTokens = new CompanyTokenRepository();
-        private BenignAffectedUserIDRepository benignFlaggedUsers = new BenignAffectedUserIDRepository();
-        private SevereAffectedUserIDRepository severeFlaggedUsers = new SevereAffectedUserIDRepository();
+        private IMockUserRepository users = new MockUserRepository();
+        private ICreditCardRepository creditCards = new CreditCardRepository();
+        private ICompanyTokenRepository companyTokens = new CompanyTokenRepository();
+        private IBenignAffectedUserIDRepository benignFlaggedUsers = new BenignAffectedUserIDRepository();
+        private ISevereAffectedUserIDRepository severeFlaggedUsers = new SevereAffectedUserIDRepository();
 
         private List<UserWrapper> affectedUsers;
 
-        private CompanyToken? prioritizedCompany;
+        private ICompanyToken? prioritizedCompany;
         private int numberOfUsersToTarget;
         private int numberOfUsersFromAlreadyAffected;
         private int numberOfUsersFromUnaffected;
 
-        internal CompanyToken? PrioritizedCompany { get => prioritizedCompany; set => prioritizedCompany = value; }
+        internal ICompanyToken? PrioritizedCompany { get => prioritizedCompany; set => prioritizedCompany = value; }
 
-        public MaliciousSubcriptionController(CompanyToken? prioritizedCompany = null, int numberOfUsersToTarget = 0)
+        public MaliciousSubcriptionController(ICompanyToken? prioritizedCompany = null, int numberOfUsersToTarget = 0)
         {
             affectedUsers = new List<UserWrapper>();
             this.PrioritizedCompany = prioritizedCompany;

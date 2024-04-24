@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ISSProject.Common.Mock;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
-using ISSProject_Regenerated.MaliciousSubscriptionsBackend.Service;
 using Microsoft.Data.SqlClient;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
