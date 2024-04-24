@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject_Regenerated.Common.Cache;
 
 namespace ISSProject.Common.Cache
 {
@@ -11,7 +12,7 @@ namespace ISSProject.Common.Cache
     /// </summary>
     /// <typeparam name="T">The entity this cache contains</typeparam>
     /// <typeparam name="K">The ID of the entity in this cache</typeparam>
-    internal class SimpleKeyedMapCache<T, K>
+    internal class SimpleKeyedMapCache<T, K> : ISimpleKeyedMapCache<T, K>
         where T : IKeyedEntity<K>
     {
         private Dictionary<K, T> cacheContent = new Dictionary<K, T>();

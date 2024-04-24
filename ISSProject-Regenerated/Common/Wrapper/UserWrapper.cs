@@ -7,7 +7,7 @@ using ISSProject.Common.Mock;
 
 namespace ISSProject.Common.Wrapper
 {
-    internal class UserWrapper : IDomainEntityWrapper<MockUser, int>, IKeyedEntity<int>
+    internal class UserWrapper : IDomainEntityWrapper<MockUser, int>, IKeyedEntity<int>, IUserWrapper
     {
         private MockUser user;
 

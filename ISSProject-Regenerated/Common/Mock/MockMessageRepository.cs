@@ -8,7 +8,7 @@ using ISSProject.ScamBots;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mock
 {
-    internal class MockMessageRepository : ISizedRepository<MockMessage, int>
+    internal class MockMessageRepository : IMockMessageRepository
     {
         private static MockMessageRepository? singleton;
         public static MockMessageRepository Provided()

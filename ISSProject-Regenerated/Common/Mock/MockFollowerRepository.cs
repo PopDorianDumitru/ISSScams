@@ -5,10 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject_Regenerated.Common.Mock;
 
 namespace ISSProject.Common.Mock
 {
-    internal class MockFollowerRepository : IRepository<MockFollower, int>
+    internal class MockFollowerRepository : IMockFollowerRepository
     {
         /* Mock Holding Data */
         private static Dictionary<int, MockFollower> mockDatabase = new Dictionary<int, MockFollower>();

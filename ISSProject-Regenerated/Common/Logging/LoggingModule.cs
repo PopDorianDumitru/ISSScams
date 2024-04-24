@@ -24,7 +24,7 @@ namespace ISSProject.Common.Logging
         Error
     }
 
-    internal class LoggingModule
+    internal class LoggingModule : ILoggingModule
     {
         private static List<ConsoleColor> colors = new List<ConsoleColor>() { ConsoleColor.White, ConsoleColor.Cyan, ConsoleColor.Yellow, ConsoleColor.Green, ConsoleColor.Red };
 
@@ -33,7 +33,8 @@ namespace ISSProject.Common.Logging
         private bool writeToConsole;
         public bool WriteToConsole
         {
-            get { return writeToConsole; } set { writeToConsole = value; }
+            get { return writeToConsole; }
+            set { writeToConsole = value; }
         }
         public LoggingModule()
         {

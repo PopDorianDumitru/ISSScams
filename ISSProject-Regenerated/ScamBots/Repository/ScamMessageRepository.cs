@@ -11,7 +11,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ISSProject.ScamBots
 {
-    internal class ScamMessageRepository : ISizedRepository<ScamMessageTemplate, int>
+    internal class ScamMessageRepository : IScamMessageRepository
     {
         public ScamMessageRepository()
         {
