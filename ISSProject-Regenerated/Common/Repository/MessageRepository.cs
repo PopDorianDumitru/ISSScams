@@ -8,7 +8,7 @@ using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Repository
 {
-    internal class MessageRepository : ICachedRepository<MessageWrapper, int>, ISizedRepository<MessageWrapper, int>
+    internal class MessageRepository : ICachedRepository<MessageWrapper, int>, IMessageRepository
     {
         private static MessageRepository? singleton;
         public static MessageRepository Provided()

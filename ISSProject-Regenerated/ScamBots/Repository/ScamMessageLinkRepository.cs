@@ -10,7 +10,7 @@ using ISSProject.ScamBots.Model;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
-    internal class ScamMessageLinkRepository : ISizedRepository<ScamMessageLink, int>
+    internal class ScamMessageLinkRepository : IScamMessageLinkRepository
     {
         public ScamMessageLinkRepository()
         {

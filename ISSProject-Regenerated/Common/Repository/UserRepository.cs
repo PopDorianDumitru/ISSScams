@@ -9,7 +9,7 @@ using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Repository
 {
-    internal class UserRepository : ICachedRepository<UserWrapper, int>, ISizedRepository<UserWrapper, int>
+    internal class UserRepository : ICachedRepository<UserWrapper, int>,  IUserRepository
     {
         private static UserRepository? singleton;
         public static UserRepository Provided()

@@ -8,7 +8,7 @@ using ISSProject.Common.Mock;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
-    internal class FakeUserRepository : ISizedRepository<MockUser, int>
+    internal class FakeUserRepository : IFakeUserRepository
     {
         public FakeUserRepository()
         {

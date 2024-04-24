@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISSProject.Common.DataEncryption
 {
-    internal abstract class EncrypterBase
+    internal abstract class EncrypterBase : IEncrypterBase
     {
         protected Dictionary<char, char> encryptionMap = new Dictionary<char, char>();
         protected Dictionary<char, char> decryptionMap = new Dictionary<char, char>();

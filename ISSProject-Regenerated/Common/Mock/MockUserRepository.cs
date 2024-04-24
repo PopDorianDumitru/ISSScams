@@ -11,7 +11,7 @@ using ISSProject.ScamBots;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mock
 {
-    internal class MockUserRepository : ISizedRepository<MockUser, int>
+    internal class MockUserRepository : IMockUserRepository
     {
         private static MockUserRepository? singleton;
         public static MockUserRepository Provided()

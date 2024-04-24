@@ -14,7 +14,7 @@ using ISSProject.ScamBots.Model;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.GraphAnalyser.Repository
 {
-    internal class GraphAnalyserLogRepository : IRepository<GraphAnalyserLog, int>
+    internal class GraphAnalyserLogRepository : IGraphAnalyserLogRepository
     {
         private static GraphAnalyserLogRepository? singleton;
         public static GraphAnalyserLogRepository Provided()

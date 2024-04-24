@@ -7,7 +7,7 @@ using ISSProject.Common.Mock;
 
 namespace ISSProject.Common.Wrapper
 {
-    internal class FollowerWrapper : IDomainEntityWrapper<MockFollower, int>, IKeyedEntity<int>
+    internal class FollowerWrapper : IDomainEntityWrapper<MockFollower, int>, IKeyedEntity<int>, IFollowerWrapper
     {
         private MockFollower follower;
 

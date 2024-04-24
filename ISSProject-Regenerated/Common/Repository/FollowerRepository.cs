@@ -8,7 +8,7 @@ using ISSProject.Common.Wrapper;
 
 namespace ISSProject.Common.Repository
 {
-    internal class FollowerRepository : ICachedRepository<FollowerWrapper, int>, ISizedRepository<FollowerWrapper, int>
+    internal class FollowerRepository : ICachedRepository<FollowerWrapper, int>, IFollowerRepository
     {
         private static FollowerRepository? singleton;
         public static FollowerRepository Provided()

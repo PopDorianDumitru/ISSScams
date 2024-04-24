@@ -7,7 +7,7 @@ using ISSProject.Common;
 
 namespace ISSProject.GraphAnalyser.Domain
 {
-    internal class GraphAnalyserLog : IKeyedEntity<int>
+    internal class GraphAnalyserLog : IKeyedEntity<int>, IGraphAnalyserLog
     {
         private readonly int logId;
         public int LogId
