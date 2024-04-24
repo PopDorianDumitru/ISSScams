@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
-    internal class BenignPostData
+    internal class BenignPostData : IBenignPostData
     {
         public string Email { get; set; }
 

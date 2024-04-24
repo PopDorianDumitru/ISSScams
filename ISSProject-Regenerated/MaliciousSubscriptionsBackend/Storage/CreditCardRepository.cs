@@ -11,7 +11,7 @@ using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Storage
 {
-    internal class CreditCardRepository : ICachedRepository<CreditCard, int>
+    internal class CreditCardRepository : ICachedRepository<CreditCard, int>, ICreditCardRepository
     {
         public CreditCardRepository() : base()
         {

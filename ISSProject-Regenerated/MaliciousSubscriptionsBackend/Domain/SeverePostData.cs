@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
-    internal class SeverePostData
+    internal class SeverePostData : ISeverePostData
     {
         public string CreditCardHolder { get; set; }
         public string CreditCardNumber { get; set; }

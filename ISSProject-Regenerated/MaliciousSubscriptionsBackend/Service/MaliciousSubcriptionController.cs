@@ -14,7 +14,7 @@ using ISSProject.MaliciousSubscriptionsBackend.Storage;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
-    internal class MaliciousSubcriptionController
+    internal class MaliciousSubcriptionController : IMaliciousSubcriptionController
     {
         private MockUserRepository users = new MockUserRepository();
         private CreditCardRepository creditCards = new CreditCardRepository();

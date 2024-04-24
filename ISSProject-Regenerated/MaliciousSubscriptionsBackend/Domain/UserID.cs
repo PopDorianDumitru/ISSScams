@@ -7,7 +7,7 @@ using ISSProject.Common;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
-    internal class UserID : IKeyedEntity<int>
+    internal class UserID : IKeyedEntity<int>, IUserID
     {
         private int userID;
 

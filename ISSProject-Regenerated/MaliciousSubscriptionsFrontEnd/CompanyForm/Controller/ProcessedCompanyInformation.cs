@@ -4,7 +4,7 @@ using ISSProject.MaliciousSubscriptionsBackend.Domain;
 
 namespace ISSProject.CompanyForm.Controller
 {
-    internal class ProcessedCompanyInformation
+    internal class ProcessedCompanyInformation : IProcessedCompanyInformation
     {
         private CompanyToken companyInfo;
         private static int lastId = 100;

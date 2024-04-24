@@ -7,7 +7,7 @@ using ISSProject.Common;
 
 namespace ISSProject.MaliciousSubscriptionsBackend.Domain
 {
-    internal class CompanyToken : IKeyedEntity<int>
+    internal class CompanyToken : IKeyedEntity<int>, ICompanyToken
     {
         private readonly int iD;
         private string companyName;
