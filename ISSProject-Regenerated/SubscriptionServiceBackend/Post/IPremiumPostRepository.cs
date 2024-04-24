@@ -1,5 +1,4 @@
-﻿
-namespace ISSProject.Common.Mikha
+﻿namespace ISSProject.Common.Mikha
 {
     internal interface IPremiumPostRepository
     {

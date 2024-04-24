@@ -12,12 +12,15 @@ using ISSProject.Common.Mikha.Premium_Users;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Repository;
 using ISSProject.Common.Wrapper;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Post;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Messages;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
 
 namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
 {
     internal static class ContextAgnosticTester
     {
-        public static Tuple<UserWrapper, UserWrapper> AddTestSubjects(UserRepository userRepository, PremiumUserRepository premiumUserRepository)
+        public static Tuple<UserWrapper, UserWrapper> AddTestSubjects(IUserRepository userRepository, IPremiumUserRepository premiumUserRepository)
         {
             int sqlReflectedVanillaID = 107;
             int sqlReflectedPremiumID = 108;
@@ -29,12 +32,12 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
             // premiumUserRepository.Insert(new UserWrapper(testPremium));
             return new Tuple<UserWrapper, UserWrapper>(new UserWrapper(testPremium), new UserWrapper(testVanilla));
         }
-        public static void MessageChecker(UserRepository userRepository, PremiumUserRepository premiumUserRepository, int sqlReflectedPremiumID, int sqlReflectedVanillaID)
+        public static void MessageChecker(IUserRepository userRepository, IPremiumUserRepository premiumUserRepository, int sqlReflectedPremiumID, int sqlReflectedVanillaID)
         {
-            MessageRepository messageRepository = new MessageRepository();
-            PremiumMessageRepository premiumMessageRepository = new PremiumMessageRepository();
+            IMessageRepository messageRepository = (IMessageRepository)new MessageRepository();
+            IPremiumMessageRepository premiumMessageRepository = new PremiumMessageRepository();
 
-            PremiumMessageController premiumMessageController = new PremiumMessageController(premiumUserRepository, messageRepository, premiumMessageRepository);
+            IPremiumMessageController premiumMessageController = new PremiumMessageController(premiumUserRepository, messageRepository, premiumMessageRepository);
 
             // MAKE SURE TO CHANGE THESE VALUES BEFORE ATTEMPTING THIS TEST
             int sqlReflectedPremiumMessageID = 119;
@@ -51,10 +54,10 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
             Debug.Assert(succesfullydeletedvanilla == false && succesfullyinsertedvanilla == false);
         }
 
-        public static void GroupChecker(UserRepository userRepository, PremiumUserRepository premiumUserRepository, UserWrapper testPremium, UserWrapper testVanilla)
+        public static void GroupChecker(IUserRepository userRepository, IPremiumUserRepository premiumUserRepository, UserWrapper testPremium, UserWrapper testVanilla)
         {
-            MockGroupRepository mockGroupRepository = new MockGroupRepository();
-            GroupController groupController = new GroupController(premiumUserRepository, mockGroupRepository);
+            IMockGroupRepository mockGroupRepository = new MockGroupRepository();
+            IGroupController groupController = new GroupController(premiumUserRepository, mockGroupRepository);
 
             bool noGroupsPremium = groupController.ExecuteSearch(testPremium, string.Empty).Count == 3;
             bool noGroupsVanilla = groupController.ExecuteSearch(testVanilla, string.Empty).Count == 2;
@@ -62,12 +65,12 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
             Debug.Assert(noGroupsVanilla && noGroupsPremium);
         }
 
-        public static void PostChecker(UserRepository userRepository, PremiumUserRepository premiumUserRepository, int sqlReflectedPremiumID, int sqlReflectedVanillaID)
+        public static void PostChecker(IUserRepository userRepository, IPremiumUserRepository premiumUserRepository, int sqlReflectedPremiumID, int sqlReflectedVanillaID)
         {
-            MockPostRepository mockPostRepository = new MockPostRepository();
-            PremiumPostRepository premiumPostRepository = new PremiumPostRepository();
+            IMockPostRepository mockPostRepository = new MockPostRepository();
+            IPremiumPostRepository premiumPostRepository = new PremiumPostRepository();
 
-            PremiumPostController premiumPostController = new PremiumPostController(mockPostRepository, premiumPostRepository, premiumUserRepository);
+            IPremiumPostController premiumPostController = new PremiumPostController(mockPostRepository, premiumPostRepository, premiumUserRepository);
 
             // MAKE SURE TO CHANGE THESE VALUES BEFORE ATTEMPTING THIS TEST
             int sqlReflectedPremiumPostID = 10;
@@ -90,6 +93,11 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
                 var elem = prioQueue.Dequeue();
                 Console.WriteLine(elem);
             }
+        }
+
+        internal static void MessageChecker(UserRepository userRepository, PremiumUserRepository premiumUserRepository, int v1, int v2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -49,7 +49,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
             }
 
             // need a random company from the company list
-            PrioritizedCompany = companyTokens.All().ToList().PerformFisherYatesShuffle().Take(1).ToList().ElementAt(0);
+            PrioritizedCompany = (ICompanyToken?)companyTokens.All().ToList().PerformFisherYatesShuffle().Take(1).ToList().ElementAt(0);
         }
 
         private void HandleUserDistribution()

@@ -8,16 +8,18 @@ using ISSProject.Common.Mikha.Premium_Messages;
 using ISSProject.Common.Mikha.Premium_Users;
 using ISSProject.Common.Repository;
 using ISSProject.Common.Wrapper;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Post;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
 
 namespace ISSProject.Common.Mikha.Controllers
 {
     internal class PremiumPostController : IPremiumPostController
     {
-        private MockPostRepository mockPostRepository;
-        private PremiumPostRepository premiumPostRepository;
-        private PremiumUserRepository premiumUserRepository;
+        private IMockPostRepository mockPostRepository;
+        private IPremiumPostRepository premiumPostRepository;
+        private IPremiumUserRepository premiumUserRepository;
 
-        public PremiumPostController(MockPostRepository mockPostRepository, PremiumPostRepository premiumPostRepository, PremiumUserRepository premiumUserRepository)
+        public PremiumPostController(IMockPostRepository mockPostRepository, IPremiumPostRepository premiumPostRepository, IPremiumUserRepository premiumUserRepository)
         {
             this.mockPostRepository = mockPostRepository;
             this.premiumPostRepository = premiumPostRepository;

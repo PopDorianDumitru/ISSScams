@@ -17,7 +17,7 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
         private IPremiumUserRepository premiumUserRepository;
         private IMockGroupRepository groupRepository;
 
-        public GroupController(PremiumUserRepository premiumUserRepository, MockGroupRepository groupRepository)
+        public GroupController(IPremiumUserRepository premiumUserRepository, IMockGroupRepository groupRepository)
         {
             this.premiumUserRepository = premiumUserRepository;
             this.groupRepository = groupRepository;

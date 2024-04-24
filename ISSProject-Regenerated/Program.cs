@@ -92,10 +92,10 @@ namespace ISSProject.ScamBots
             {
                 UserRepository userRepository = new UserRepository();
                 PremiumUserRepository premiumUserRepository = new PremiumUserRepository();
-                Tuple<UserWrapper, UserWrapper> testSubjects = ContextAgnosticTester.AddTestSubjects(userRepository, premiumUserRepository);
-                ContextAgnosticTester.MessageChecker(userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
-                ContextAgnosticTester.GroupChecker(userRepository, premiumUserRepository, testSubjects.Item1, testSubjects.Item2);
-                ContextAgnosticTester.PostChecker(userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
+                Tuple<UserWrapper, UserWrapper> testSubjects = ContextAgnosticTester.AddTestSubjects((IUserRepository)userRepository, premiumUserRepository);
+                ContextAgnosticTester.MessageChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
+                ContextAgnosticTester.GroupChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1, testSubjects.Item2);
+                ContextAgnosticTester.PostChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
                 Console.WriteLine("[+] PASSED");
             }
         }

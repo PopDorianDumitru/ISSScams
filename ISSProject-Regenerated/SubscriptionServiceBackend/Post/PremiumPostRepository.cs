@@ -15,8 +15,6 @@ namespace ISSProject.Common.Mikha
 {
     internal class PremiumPostRepository : IPremiumPostRepository
     {
-        private SimpleKeyedMapCache<PostWrapper, int> SimpleKeyedMapCache { get; set; }
-
         public IEnumerable<PostWrapper> All()
         {
             string queryString = "SELECT * From PremiumPostsView";

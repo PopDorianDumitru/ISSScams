@@ -9,16 +9,17 @@ using ISSProject.Common.Mikha.Premium_Users;
 using ISSProject.Common.Repository;
 using ISSProject.Common.Wrapper;
 using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Messages;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
 
 namespace ISSProject.Common.Mikha.Controllers
 {
     internal class PremiumMessageController : IPremiumMessageController
     {
-        private PremiumUserRepository premiumUserRepository;
-        private MessageRepository messageRepository;
-        private PremiumMessageRepository premiumMessageRepository;
+        private IPremiumUserRepository premiumUserRepository;
+        private IMessageRepository messageRepository;
+        private IPremiumMessageRepository premiumMessageRepository;
 
-        public PremiumMessageController(PremiumUserRepository premiumUserRepository, MessageRepository messageRepository, PremiumMessageRepository premiumMessageRepository)
+        public PremiumMessageController(IPremiumUserRepository premiumUserRepository, IMessageRepository messageRepository, IPremiumMessageRepository premiumMessageRepository)
         {
             this.premiumUserRepository = premiumUserRepository;
             this.messageRepository = messageRepository;
