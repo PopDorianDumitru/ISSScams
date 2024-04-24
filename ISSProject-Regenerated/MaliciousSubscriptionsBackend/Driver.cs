@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using ISSProject.MaliciousSubscriptionsBackend.Service;
-using ISSProject_Regenerated.MaliciousSubscriptionsBackend;
 
 namespace ISSProject.MaliciousSubscriptionsBackend
 {

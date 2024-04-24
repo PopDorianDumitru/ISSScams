@@ -11,7 +11,6 @@ using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using ISSProject.MaliciousSubscriptionsBackend.Storage;
-using ISSProject_Regenerated.MaliciousSubscriptionsBackend.Service;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {

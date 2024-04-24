@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ISSProject.Common;
+using ISSProject_Regenerated.ScamBots.Service;
 
 namespace ISSProject.ScamBots
 {
-    internal class ScamMessageGenerator
+    internal class ScamMessageGenerator : IScamMessageGenerator
     {
-        private readonly ScamMessageRepository messageTemplates;
-        private readonly ScamMessageLinkRepository scamWebsiteLinks;
+        private readonly IScamMessageRepository messageTemplates;
+        private readonly IScamMessageLinkRepository scamWebsiteLinks;
         private readonly Random randomGenerator;
 
         public ScamMessageGenerator()
