@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Service;
 using ISSProject.Common.Wrapper;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test
 {
-    internal class FollowServiceTest
+    internal class FollowServiceTest : ITest
     {
         public static void Test(string[] args)
         {

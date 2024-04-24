@@ -12,7 +12,7 @@ namespace SubscriptionServicePart.MVVM.ViewModel
     {
         static public void Commit(int userID, string holderName, string creditCardNumber, string expirationDate, string cvv)
         {
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToInsert = "CreditCards";
@@ -28,7 +28,7 @@ namespace SubscriptionServicePart.MVVM.ViewModel
                 command.Dispose();
             }
 
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToInsert = "PremiumUsers";

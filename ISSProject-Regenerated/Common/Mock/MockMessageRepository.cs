@@ -28,7 +28,7 @@ namespace ISSProject.Common.Mock
         {
             string queryString = "SELECT * From MockMessages";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -57,7 +57,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT * From MockMessages WHERE message_id = @id";
             MockMessage message = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -94,7 +94,7 @@ namespace ISSProject.Common.Mock
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -121,7 +121,7 @@ namespace ISSProject.Common.Mock
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -151,7 +151,7 @@ namespace ISSProject.Common.Mock
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -180,7 +180,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT COUNT(message_id) From MockMessages";
             int result = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -211,7 +211,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT message_id From MockMessages WHERE sender_id = @sender_id AND receiver_id = @receiver_id AND communication_date = @communication_date";
             int messageId = -1;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -244,7 +244,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT message_id From MockMessages WHERE sender_id = @sender_id AND receiver_id = @receiver_id";
             List<int> messages = new List<int>();
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -276,7 +276,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT receiver_id From MockMessages WHERE sender_id = @sender_id";
             List<int> receivers = new List<int>();
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();

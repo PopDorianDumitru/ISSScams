@@ -10,10 +10,11 @@ using ISSProject.Common;
 using ISSProject.Common.Logging;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots.Service;
+using ISSProject_Regenerated.ScamBots.Controller;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
-    internal class FakeUserController
+    internal class FakeUserController : IFakeUserController
     {
         private FakeUserRepository fakeUsers;
         private ISizedRepository<MockUser, int> allUsers;
@@ -125,14 +126,14 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT * FROM BannedUsers WHERE mockuser_id IN (SELECT fake_user_id FROM FakeUsers)";
             int deletedAccountsCount = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    SqlConnection connection2 = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING);
+                    SqlConnection connection2 = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING);
                     connection2.Open();
                     string queryString2 = "DELETE FROM FakeUsers WHERE fake_user_id = @userId";
 
@@ -202,7 +203,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT * FROM FakeUsers WHERE fake_user_id NOT IN (SELECT * FROM BannedUsers)";
             int messageCount = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command1 = new SqlCommand(queryString, connection);
                 connection.Open();

@@ -13,7 +13,7 @@ using ISSProject.Common.Mock;
 using ISSProject.Common.Repository;
 using ISSProject.Common.Wrapper;
 
-namespace ISSProject_Regenerated.Mikha___SubscriptionServiceBackend
+namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
 {
     internal static class ContextAgnosticTester
     {

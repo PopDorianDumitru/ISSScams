@@ -32,9 +32,9 @@ namespace ISSProject.Common.Mock
         {
             string queryString = "SELECT * From MockUsers";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
-                Console.WriteLine(ProgramConfig.DB_CONNECTION_STRING);
+                Console.WriteLine(ProgramConfig.DATABASE_CONNECTION_STRING);
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -63,7 +63,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT * From MockUsers WHERE mockuser_id = @id";
             MockUser newUser = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -102,7 +102,7 @@ namespace ISSProject.Common.Mock
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -129,7 +129,7 @@ namespace ISSProject.Common.Mock
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -161,7 +161,7 @@ namespace ISSProject.Common.Mock
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -191,7 +191,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT COUNT(mockuser_id) From MockUsers";
             int result = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -220,7 +220,7 @@ namespace ISSProject.Common.Mock
             string queryString = "SELECT mockuser_id From MockUsers WHERE email = @email";
             int userId = -1;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();

@@ -1,4 +1,4 @@
-﻿namespace ISSProject.MaliciousSubscriptionsBackend.Service
+namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
     internal interface IMaliciousSubcriptionController
     {

@@ -8,10 +8,11 @@ using ISSfixed.ISSProject.Common.Mikha.Post;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.ScamBots;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Post;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha
 {
-    internal class MockPostRepository : IRepository<MockPost, int>
+    internal class MockPostRepository : IMockPostRepository
     {
         /* Mock Holding Data */
         private static Dictionary<int, MockPost> mockDatabase = new Dictionary<int, MockPost>();
@@ -38,7 +39,7 @@ namespace ISSProject.Common.Mikha
         {
             string queryString = "SELECT * From MockPosts";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -67,7 +68,7 @@ namespace ISSProject.Common.Mikha
             string queryString = "SELECT * From MockPosts WHERE mockpost_id = @id";
             MockPost newPost = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -104,7 +105,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -131,7 +132,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -161,7 +162,7 @@ namespace ISSProject.Common.Mikha
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

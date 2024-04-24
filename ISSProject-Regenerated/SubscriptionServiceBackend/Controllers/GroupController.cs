@@ -8,13 +8,14 @@ using ISSfixed.ISSProject.Mikha.Controllers;
 using ISSProject.Common.Mikha.Groups;
 using ISSProject.Common.Mikha.Premium_Users;
 using ISSProject.Common.Wrapper;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
 
-namespace ISSProject.Common.Mikha.Controllers
+namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
 {
-    internal class GroupController
+    internal class GroupController : IGroupController
     {
-        private PremiumUserRepository premiumUserRepository;
-        private MockGroupRepository groupRepository;
+        private IPremiumUserRepository premiumUserRepository;
+        private IMockGroupRepository groupRepository;
 
         public GroupController(PremiumUserRepository premiumUserRepository, MockGroupRepository groupRepository)
         {

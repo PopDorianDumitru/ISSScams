@@ -20,7 +20,7 @@ namespace ISSProject.ScamBots
                 "(SELECT FakeUsers.fake_user_id FROM FakeUsers WHERE MockUsers.mockuser_id = FakeUsers.fake_user_id AND NOT EXISTS" +
                 "(SELECT BannedUsers.mockuser_id FROM BannedUsers WHERE BannedUsers.mockuser_id = FakeUsers.fake_user_id))";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -48,7 +48,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT * From MockUsers WHERE mockuser_id = (SELECT fake_user_id FROM FakeUsers WHERE fake_user_id = @id)";
             MockUser fakeUser = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -87,7 +87,7 @@ namespace ISSProject.ScamBots
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -119,7 +119,7 @@ namespace ISSProject.ScamBots
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -162,7 +162,7 @@ namespace ISSProject.ScamBots
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -193,7 +193,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT COUNT(fake_user_id) From FakeUsers WHERE NOT EXISTS (SELECT BannedUsers.mockuser_id FROM BannedUsers WHERE BannedUsers.mockuser_id = FakeUsers.fake_user_id)";
             int result = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -217,7 +217,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT COUNT(fake_user_id) From FakeUsers WHERE EXISTS (SELECT BannedUsers.mockuser_id FROM BannedUsers WHERE BannedUsers.mockuser_id = FakeUsers.fake_user_id)";
             int result = 0;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -241,7 +241,7 @@ namespace ISSProject.ScamBots
             string queryString = "SELECT mockuser_id From MockUsers WHERE email = @email";
             int userId = -1;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();

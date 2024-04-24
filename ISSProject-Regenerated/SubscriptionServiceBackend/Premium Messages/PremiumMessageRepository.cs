@@ -9,16 +9,18 @@ using ISSProject.Common.Cache;
 using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.ScamBots;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Messages;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha.Premium_Messages
 {
-    internal class PremiumMessageRepository : IRepository<MessageWrapper, int>
+    internal class PremiumMessageRepository : IPremiumMessageRepository
     {
         public IEnumerable<MessageWrapper> All()
         {
             string queryString = "SELECT * From PremiumMessagesView";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -49,7 +51,7 @@ namespace ISSProject.Common.Mikha.Premium_Messages
             MockMessage newMessage = null;
             MessageWrapper newMessageWrapper = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -88,7 +90,7 @@ namespace ISSProject.Common.Mikha.Premium_Messages
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -115,7 +117,7 @@ namespace ISSProject.Common.Mikha.Premium_Messages
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

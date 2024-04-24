@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ISSfixed.ISSProject.Common.Mikha.Post;
 using ISSfixed.ISSProject.Mikha.Groups;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Groups;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.Common.Mikha.Groups
 {
-    internal class MockGroupRepository : IRepository<MockGroup, int>
+    internal class MockGroupRepository : IMockGroupRepository
     {
         /* Mock Holding Data */
         private static Dictionary<int, MockGroup> mockDatabase = new Dictionary<int, MockGroup>();
@@ -54,7 +55,7 @@ namespace ISSProject.Common.Mikha.Groups
         {
             string queryString = "SELECT * From MockGroups";
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -82,7 +83,7 @@ namespace ISSProject.Common.Mikha.Groups
             string queryString = "SELECT * From MockGroups WHERE mockgroup_id = @id";
             MockGroup newGroup = null;
 
-            using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 connection.Open();
@@ -119,7 +120,7 @@ namespace ISSProject.Common.Mikha.Groups
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -150,7 +151,7 @@ namespace ISSProject.Common.Mikha.Groups
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
@@ -177,7 +178,7 @@ namespace ISSProject.Common.Mikha.Groups
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+                using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
                 {
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();

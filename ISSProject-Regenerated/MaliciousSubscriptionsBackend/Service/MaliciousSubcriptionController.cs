@@ -11,6 +11,7 @@ using ISSProject.Common.Mock;
 using ISSProject.Common.Wrapper;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using ISSProject.MaliciousSubscriptionsBackend.Storage;
+using ISSProject_Regenerated.MaliciousSubscriptionsBackend.Service;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
@@ -193,7 +194,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
 
         private void ProjectChangesOntoDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToInsert = (PrioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedUserIDs" : "SevereFlaggedUserIDs";
@@ -207,7 +208,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
                 }
             }
 
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToInsert = (PrioritizedCompany.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";

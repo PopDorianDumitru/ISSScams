@@ -8,10 +8,11 @@ using ISSProject.Common.Mock;
 using ISSProject.Common.Mock;
 using ISSProject.ScamBots;
 using ISSProject.ScamBots.Model;
+using ISSProject_Regenerated.Common.Test;
 
 namespace ISSProject.Common.Test.ScamBots
 {
-    internal class ScamMessageRepositoryTest
+    internal class ScamMessageRepositoryTest : ITest
     {
         public static void Test()
         {

@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ISSProject.Common.Mock;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
+using ISSProject_Regenerated.MaliciousSubscriptionsBackend.Service;
 using Microsoft.Data.SqlClient;
+
 namespace ISSProject.MaliciousSubscriptionsBackend.Service
 {
     internal static class ExtensionUtils
@@ -14,7 +16,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
         public static List<UserID> FilterOutAlreadySubscribed(this List<UserID> userIDs, ICompanyToken company)
         {
             List<UserID> discrepancyIDs = new List<UserID>();
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string dbToSelect = (company.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";

@@ -26,7 +26,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Storage
           @"Integrated Security=true;";
 
             List<UserID> severeUserIDs = new List<UserID>();
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DB_CONNECTION_STRING))
+            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
                 string queryString = "SELECT * FROM SevereFlaggedUserIDs";
