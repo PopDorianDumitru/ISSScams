@@ -34,6 +34,8 @@ namespace TestSubscriptionService
 
             premiumMessageController = new PremiumMessageController(premiumUserRepository, messageRepository, premiumMessageRepository);
 
+           // premiumUserRepository = new PremiumUserInMemoryRepository();
+           // messageRepository = new Message;
 
         }
     }
