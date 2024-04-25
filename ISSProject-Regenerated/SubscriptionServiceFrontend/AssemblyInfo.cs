@@ -11,7 +11,8 @@ using System.Windows;
     InternalsVisibleTo("ISSProject-Regenerated"),
     InternalsVisibleTo("MaliciousSubscriptionsDomain"),
                                               // app, or any theme specific resource dictionaries)
+    InternalsVisibleTo("TestSubscriptionService"),
+    InternalsVisibleTo("ScamBotsService"),
     InternalsVisibleTo("TestGraphAnalyzer"),
     InternalsVisibleTo("TestCommon"),
-    InternalsVisibleTo("TestSubscriptionService")
 ]
