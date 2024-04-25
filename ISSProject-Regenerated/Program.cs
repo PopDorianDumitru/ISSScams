@@ -9,7 +9,11 @@ using ISSProject.Common.Wrapper;
 using ISSProject.GraphAnalyser.Controller;
 using ISSProject.GraphAnalyser.Domain;
 using ISSProject.MaliciousSubscriptionsBackend;
+using ISSProject.MaliciousSubscriptionsBackend.Storage;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
+using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
 using ISSProject_Regenerated.SubscriptionServiceBackend.Groups;
+using SubscriptionServicePart.MVVM.ViewModel;
 namespace ISSProject.ScamBots
 {
     internal class Program
@@ -60,7 +64,11 @@ namespace ISSProject.ScamBots
         {
             Thread statThread = new Thread(new ThreadStart(() =>
             {
-                SubscriptionServicePart.MainWindow subscriptionServiceMainWindow = new SubscriptionServicePart.MainWindow();
+                ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards.ICreditCardRepository creditCardRepository = new CreditCardInMemoryRepository();
+                ICreditCardController creditCardController = new CreditCardController(creditCardRepository);
+                ICreditCardValidatorService creditCardValidatorService = new CreditCardValidatorService();
+                MainViewModel mainViewModel = new MainViewModel(creditCardController, creditCardValidatorService);
+                SubscriptionServicePart.MainWindow subscriptionServiceMainWindow = new SubscriptionServicePart.MainWindow(mainViewModel);
                 subscriptionServiceMainWindow.Activate();
                 subscriptionServiceMainWindow.Show();
                 System.Windows.Threading.Dispatcher.Run();
@@ -84,22 +92,21 @@ namespace ISSProject.ScamBots
             sTAThread.Start();
         }
 
-        private static void HandleSubscriptionServiceBackendOperations()
-        {
-            Console.WriteLine("HAVE YOU MODIFIED THE SQL IDS ? (Y/N)");
-            char userAgrees = Console.ReadLine().ToLower().ToCharArray()[0];
-            if (userAgrees == 'y')
-            {
-                UserRepository userRepository = new UserRepository();
-                PremiumUserRepository premiumUserRepository = new PremiumUserRepository();
-                Tuple<UserWrapper, UserWrapper> testSubjects = ContextAgnosticTester.AddTestSubjects((IUserRepository)userRepository, premiumUserRepository);
-                ContextAgnosticTester.MessageChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
-                ContextAgnosticTester.GroupChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1, testSubjects.Item2);
-                ContextAgnosticTester.PostChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
-                Console.WriteLine("[+] PASSED");
-            }
-        }
-
+        // private static void HandleSubscriptionServiceBackendOperations()
+        // {
+        //    Console.WriteLine("HAVE YOU MODIFIED THE SQL IDS ? (Y/N)");
+        //    char userAgrees = Console.ReadLine().ToLower().ToCharArray()[0];
+        //    if (userAgrees == 'y')
+        //    {
+        //        UserRepository userRepository = new UserRepository();
+        //        PremiumUserRepository premiumUserRepository = new PremiumUserRepository();
+        //        Tuple<UserWrapper, UserWrapper> testSubjects = ContextAgnosticTester.AddTestSubjects((IUserRepository)userRepository, premiumUserRepository);
+        //        ContextAgnosticTester.MessageChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
+        //        ContextAgnosticTester.GroupChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1, testSubjects.Item2);
+        //        ContextAgnosticTester.PostChecker((IUserRepository)userRepository, premiumUserRepository, testSubjects.Item1.GetId(), testSubjects.Item2.GetId());
+        //        Console.WriteLine("[+] PASSED");
+        //    }
+        // }
         private static void HandleScamBotsPhishingFrontendViaThread()
         {
             Thread statThread = new Thread(new ThreadStart(() =>
@@ -122,8 +129,8 @@ namespace ISSProject.ScamBots
 
             // HandleMaliciousSubscriptionsBackendViaThread(); // Razvan - WORKS
             // createBotThread(); // Florin - WORKS
-            AnalyseRandomUsers(); // Rares - WORKS
-            // HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
+            // AnalyseRandomUsers(); // Rares - WORKS
+            HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
             // HandleMaliciousSubscriptionsFrontendViaThread(); // Nico - WORKS
             // HandleSubscriptionServiceBackendOperations(); // Dragos - WORKS
             // HandleScamBotsPhishingFrontendViaThread(); // Dan - WORKS

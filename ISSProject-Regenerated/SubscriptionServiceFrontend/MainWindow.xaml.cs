@@ -3,7 +3,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using ISSProject.Common.Mock;
-using ISSProject_Regenerated.SubscriptionServiceBackend;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
+using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
 using SubscriptionServicePart.MVVM.ViewModel;
 
 namespace SubscriptionServicePart
@@ -13,21 +14,17 @@ namespace SubscriptionServicePart
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MockUser userToInsertCreditCard = new MockUser(58, "8h717xii2u8", "nicol.nikolaus@yahoo.com", "Johnathan", "Bins", DateTime.Now, "+40780880054");
-
         private string creditCardHolder = string.Empty;
         private string creditCardNumber = string.Empty;
         private string expirationDate = string.Empty;
         private string cVV = string.Empty;
-        private string cvvPattern = @"^\d{3}$";
         private bool validCreditCradNumber = false;
         private bool validExpirationDate = false;
         private bool validCVV = false;
-        private ICreditCardValidatorService creditCardInformationValidator;
-        private List<string> vendorIdentifier = new List<string>();
-        public MainWindow()
+        public MainWindow(MainViewModel model)
         {
             InitializeComponent();
+            this.DataContext = model;
         }
 
         private void PayButton_Click(object sender, RoutedEventArgs e)
@@ -36,15 +33,11 @@ namespace SubscriptionServicePart
             creditCardNumber = CardNumberTextBox.Text.Trim();
             expirationDate = ExpirationDateTextBox.Text.Trim();
             cVV = CVVTextBox.Text.Trim();
-            validCreditCradNumber = creditCardInformationValidator.ValidCreditCardNumber(creditCardNumber);
-            validExpirationDate = creditCardInformationValidator.ValidExpirationDate(expirationDate);
-            validCVV = creditCardInformationValidator.ValidCVV(cvvPattern, cVV);
-
-            if (validCreditCradNumber && validExpirationDate && validCVV)
+            if ((bool)this.DataContext.GetType().GetMethod("ValidCreditCardInformation").Invoke(this.DataContext, new object[] { creditCardNumber, cVV, expirationDate }) == true)
             {
                 var result = MessageBox.Show("ok");
                 Console.WriteLine("[+] SUCCESSFULLY VALIDATED DATA. PREPARING TO COMMIT TO DATABASE");
-                CommitToDatabase.Commit(userToInsertCreditCard.GetId(), creditCardHolder, creditCardNumber, expirationDate, cVV);
+                this.DataContext.GetType().GetMethod("SaveCreditCard").Invoke(this.DataContext, new object[] { creditCardHolder, creditCardNumber, cVV, expirationDate });
             }
         }
         private void PayButton_MouseEnter(object sender, MouseEventArgs e)

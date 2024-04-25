@@ -37,6 +37,7 @@ namespace ISSProject.Common.Mikha.Groups
             this.id = id;
             this.group_name = group_name;
             this.is_private = is_private;
+            this.members_id = new List<int>();
         }
 
         public int GetId()

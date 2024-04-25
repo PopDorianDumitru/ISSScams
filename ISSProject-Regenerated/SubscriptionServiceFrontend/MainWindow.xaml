@@ -10,6 +10,7 @@
         ResizeMode="NoResize"
         Background="White">
     <Window.Resources>
+        
         <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
             <Style BasedOn="{StaticResource {x:Type TextBox}}"

@@ -15,7 +15,6 @@ namespace ISSProject.Common.Test.ScamBots
         public static void Test()
         {
             /// --- Preparing test data ---         ///
-
             List<string> templates = new List<string>() { "template1", "template2", "template3", "template4" };
             List<string> links = new List<string>() { "http://link1.com", "https://link2.org", "http://link3.co.uk", "http://link4.something" };
             List<ScamMessageTemplate> savedTemplates = new List<ScamMessageTemplate>();
@@ -40,7 +39,6 @@ namespace ISSProject.Common.Test.ScamBots
             }
 
             /// --- Actual testing ---         ///
-
             ScamMessageGenerator generator = new ScamMessageGenerator();
             Regex messagePattern = new Regex(@"\A.*https?:\/\/[a-zA-Z0-9-_]+(\.[a-zA-Z]+)+\Z");
 
@@ -56,7 +54,6 @@ namespace ISSProject.Common.Test.ScamBots
             }
 
             /// --- Clean-up ---         ///
-
             foreach (ScamMessageTemplate template in savedTemplates)
             {
                 Debug.Assert(scamMessageRepository.Delete(template));

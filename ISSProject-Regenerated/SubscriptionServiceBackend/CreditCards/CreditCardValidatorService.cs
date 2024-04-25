@@ -5,15 +5,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ISSProject_Regenerated.SubscriptionServiceBackend
+namespace ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards
 {
     internal class CreditCardValidatorService : ICreditCardValidatorService
     {
         public CreditCardValidatorService()
         {
         }
-        public bool ValidCVV(string cvvPattern, string cvv)
+        public bool ValidCVV(string cvv)
         {
+            string cvvPattern = @"^\d{3}$";
             Regex regexCVV = new Regex(cvvPattern);
             MatchCollection matchesCVV = regexCVV.Matches(cvv);
             return matchesCVV.Count > 0;
@@ -22,6 +23,10 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend
         public bool ValidExpirationDate(string expirationDate)
         {
             string[] dateComponent = expirationDate.Split('/');
+            if (dateComponent.Length == 1)
+            {
+                return false;
+            }
             int month, year;
 
             var successfullyParsedMonth = int.TryParse(dateComponent[0], out month);
