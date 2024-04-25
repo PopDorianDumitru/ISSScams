@@ -22,8 +22,8 @@ namespace TestSubscriptionService
         [TestInitialize]
         public void TestInitializer()
         {
-            premiumUserRepository = new PremiumUserInMemoryRepository();
-            messageRepository = new Message
+           // premiumUserRepository = new PremiumUserInMemoryRepository();
+           // messageRepository = new Message;
 
         }
     }
