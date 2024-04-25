@@ -1,9 +1,9 @@
-﻿using ISSProject.Common.Mikha.Groups;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mikha.Groups;
 
 namespace TestSubscriptionService
 {
@@ -59,8 +59,5 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedIsPrivate, clone.IsPrivate);
             Assert.AreEqual(expectedNrOfMembers, clone.MembersID.Count);
         }
-
-
-
     }
 }

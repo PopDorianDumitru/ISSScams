@@ -1,9 +1,9 @@
-﻿using ISSProject.Common.Mikha;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mikha;
 
 namespace TestSubscriptionService
 {
@@ -84,6 +84,5 @@ namespace TestSubscriptionService
             PostWrapper postWrapper = new PostWrapper(mockPost);
             Assert.AreEqual(expectedPosterId, postWrapper.GetUserId());
         }
-
     }
 }

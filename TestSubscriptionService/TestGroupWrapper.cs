@@ -1,9 +1,9 @@
-﻿using ISSProject.Common.Mikha.Groups;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mikha.Groups;
 
 namespace TestSubscriptionService
 {
@@ -13,7 +13,6 @@ namespace TestSubscriptionService
         [TestMethod]
         public void GroupWrapper_GetPureReference()
         {
-
             string expectedGroupName = "Soccer";
             int expectedId = 1;
             bool expectedIsPrivate = false;

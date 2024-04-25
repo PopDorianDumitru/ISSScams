@@ -1,13 +1,13 @@
-﻿using ISSProject_Regenerated.SubscriptionServiceBackend.Groups;
-using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ISSProject.Common.Mikha.Groups;
 using System.Text;
 using System.Threading.Tasks;
-using ISSProject.Common.Wrapper;
 using System.Windows.Forms;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Groups;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
+using ISSProject.Common.Mikha.Groups;
+using ISSProject.Common.Wrapper;
 
 namespace TestSubscriptionService
 {
@@ -121,6 +121,5 @@ namespace TestSubscriptionService
             string filter = "Filter";
             Assert.AreEqual(expectedNrOfGroups, controller.ExecuteSearch(user, filter).Count);
         }
-
     }
 }
