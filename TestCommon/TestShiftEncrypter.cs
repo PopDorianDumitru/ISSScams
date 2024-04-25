@@ -31,7 +31,6 @@ namespace TestCommon
         [TestMethod]
         public void DecryptCharacter_ShouldDecryptCharacterUsingShiftCipher()
         {
-
             char decryptedChar = encrypter.DecryptCharacter('d');
 
             Assert.AreEqual('a', decryptedChar);

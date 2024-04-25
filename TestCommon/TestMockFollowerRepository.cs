@@ -1,5 +1,4 @@
-﻿using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -8,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ISSProject.Common.Mock;
 
 namespace TestCommon
 {
     [TestClass]
     public class TestMockFollowerRepository
     {
-
         [TestMethod]
 
         public void Insert_ValidFollowerWithNonExistentId_ShouldInsert()
@@ -49,7 +48,7 @@ namespace TestCommon
             MockFollowerRepository singleton;
             singleton = MockFollowerRepository.Provided();
 
-            //Assert.AreEqual(new MockFollower(1, 2, 3), singleton.ById(1000));
+            // Assert.AreEqual(new MockFollower(1, 2, 3), singleton.ById(1000));
             Assert.ThrowsException<KeyNotFoundException>(() => { singleton.ById(1000); });
         }
 
@@ -65,15 +64,12 @@ namespace TestCommon
                 MockFollower invalidFollower = new MockFollower(2, 1, 4);
                 singleton.Insert(newFollower);
                 singleton.Insert(invalidFollower);
-
             }
             catch (MockKeyConstraintViolation ex)
             {
                 Assert.AreEqual(ex.Message, "Key Constraint Violation in Mock Database for key: 2");
             }
         }
-
-
         [TestMethod]
         public void Update_ValidFollowerWithExistingId_ShouldUpdate()
         {
@@ -99,7 +95,6 @@ namespace TestCommon
                 singleton = MockFollowerRepository.Provided();
                 MockFollower newFollower = new MockFollower(30, 5, 10);
                 singleton.Update(newFollower);
-
             }
             catch (MockNoEntityViolation ex)
             {
@@ -149,8 +144,6 @@ namespace TestCommon
             Assert.IsTrue(list.Contains(100));
             Assert.IsTrue(list.Contains(101));
             Assert.IsTrue(list.Contains(102));
-
-
         }
     }
 }

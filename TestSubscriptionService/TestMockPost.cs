@@ -4,7 +4,7 @@
     using ISSProject.Common.Mikha;
 
     [TestClass]
-    public class TestMockPost 
+    public class TestMockPost
     {
         [TestMethod]
         public void MockPost_Clone()
@@ -15,7 +15,7 @@
             string expectedPostTitle = "title";
             DateTime expectedPostDate = new DateTime(2024, 12, 15, 0, 0, 0);
 
-            MockPost mockPost = new MockPost(expectedId,expectedPosterId,expectedPostTitle, expectedPostContent, expectedPostDate);
+            MockPost mockPost = new MockPost(expectedId, expectedPosterId, expectedPostTitle, expectedPostContent, expectedPostDate);
             MockPost mockPostClone = (MockPost)mockPost.Clone();
 
             Assert.AreEqual(expectedPostContent, mockPostClone.PostContent);

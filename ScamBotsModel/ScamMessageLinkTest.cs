@@ -3,7 +3,7 @@ using ISSProject.ScamBots.Model;
 namespace ScamBotsModel
 {
     [TestClass]
-    public class ScamMessageLinkTests 
+    public class ScamMessageLinkTests
     {
         [TestMethod]
         public void Constructor_WithIdAndLinkUrl_ShouldSetPropertiesCorrectly()
@@ -47,7 +47,7 @@ namespace ScamBotsModel
 
             Assert.AreEqual(originalLink.Id, clonedLink.Id);
             Assert.AreEqual(originalLink.LinkUrl, clonedLink.LinkUrl);
-            Assert.AreNotSame(originalLink, clonedLink); 
+            Assert.AreNotSame(originalLink, clonedLink);
         }
     }
 }

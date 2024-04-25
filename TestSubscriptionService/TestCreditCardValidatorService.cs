@@ -37,7 +37,7 @@
         [TestMethod]
         public void ValidExpirationDate_EmptyDate()
         {
-            string valueToTest = "";
+            string valueToTest = string.Empty;
             ICreditCardValidatorService creditCardValidatorService = new CreditCardValidatorService();
             Assert.IsFalse(creditCardValidatorService.ValidExpirationDate(valueToTest));
         }
@@ -113,13 +113,13 @@
             Assert.IsFalse(creditCardValidatorService.ValidCreditCardNumber(valueToTest));
         }
 
-        //[TestMethod]
-        //public void ValidExpirationDate(string expirationDate)
-        //{
-        //}
-        //[TestMethod]
-        //public void ValidCreditCardNumber(string creditCardNumber)
-        //{
-        //}
+        // [TestMethod]
+        // public void ValidExpirationDate(string expirationDate)
+        // {
+        // }
+        // [TestMethod]
+        // public void ValidCreditCardNumber(string creditCardNumber)
+        // {
+        // }
     }
 }

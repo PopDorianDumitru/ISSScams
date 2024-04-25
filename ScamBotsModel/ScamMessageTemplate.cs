@@ -24,7 +24,7 @@ namespace ScamBotsModel
 
             ScamMessageTemplate template = new ScamMessageTemplate(expectedMessageContent);
 
-            Assert.AreEqual(-1, template.Id);  
+            Assert.AreEqual(-1, template.Id);
             Assert.AreEqual(expectedMessageContent, template.MessageContent);
         }
 
@@ -47,7 +47,7 @@ namespace ScamBotsModel
 
             Assert.AreEqual(originalTemplate.Id, clonedTemplate.Id);
             Assert.AreEqual(originalTemplate.MessageContent, clonedTemplate.MessageContent);
-            Assert.AreNotSame(originalTemplate, clonedTemplate);  
+            Assert.AreNotSame(originalTemplate, clonedTemplate);
         }
     }
 }

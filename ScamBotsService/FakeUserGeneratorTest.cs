@@ -7,7 +7,7 @@ namespace ScamBotsService
     {
         [TestMethod]
         public void TestGenerateFakeUser()
-        { 
+        {
             var fakeUserGenerator = new FakeUserGenerator();
 
             var fakeUser = fakeUserGenerator.GenerateFakeUser();

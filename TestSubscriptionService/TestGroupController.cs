@@ -14,9 +14,9 @@ namespace TestSubscriptionService
     [TestClass]
     public class TestGroupController
     {
-        IPremiumUserRepository premiumUserRepository;
-        IMockGroupRepository groupRepository;
-        IGroupController controller;
+        private IPremiumUserRepository? premiumUserRepository;
+        private IMockGroupRepository? groupRepository;
+        private IGroupController? controller;
         [TestInitialize]
         public void TestInitializer()
         {
@@ -45,11 +45,10 @@ namespace TestSubscriptionService
             groupRepository.Insert(firstPrivateGroup);
 
             controller = new GroupController(premiumUserRepository, groupRepository);
-            
         }
         [TestMethod]
         public void GroupController_Constructor()
-        {         
+        {
             Assert.IsNotNull(controller);
         }
 
@@ -64,7 +63,7 @@ namespace TestSubscriptionService
 
             Assert.AreEqual(expectedGroupId, groupReturnedByController.GetId());
             Assert.AreEqual(expectedGroupName, groupReturnedByController.GroupName);
-            Assert.AreEqual(expectedIsPrivate, groupReturnedByController.IsPrivate);          
+            Assert.AreEqual(expectedIsPrivate, groupReturnedByController.IsPrivate);
         }
         [TestMethod]
         public void GetGroup_GroupThatDoesntExists()
@@ -73,7 +72,6 @@ namespace TestSubscriptionService
 
             MockGroup groupReturnedByController = controller.GetGroup(-1);
             Assert.AreEqual(groupReturnedByController, expectedResult);
-
         }
         [TestMethod]
         public void MatchesFilter_GroupIsNull()
@@ -102,7 +100,6 @@ namespace TestSubscriptionService
             string filter = "Filter";
             Assert.AreEqual(expectedNrOfGroups, controller.ExecuteSearch(user, filter).Count);
         }
-        
         [TestMethod]
         public void ExecuteSearch_PremiumUserGetsAllGroupsWhenNotUsingFilter()
         {
@@ -110,7 +107,6 @@ namespace TestSubscriptionService
             UserWrapper user = new UserWrapper(1);
             string filter = string.Empty;
             List<MockGroup> groups = controller.ExecuteSearch(user, filter);
-            
             Assert.AreEqual(expectedNrOfGroups, controller.ExecuteSearch(user, filter).Count);
         }
         [TestMethod]

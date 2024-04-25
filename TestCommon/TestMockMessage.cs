@@ -10,7 +10,6 @@ namespace TestCommon
     [TestClass]
     public class TestMockMessage
     {
-
         private MockMessage message;
 
         [TestMethod]
