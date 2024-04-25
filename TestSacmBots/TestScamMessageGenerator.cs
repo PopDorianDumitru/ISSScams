@@ -1,10 +1,10 @@
 namespace TestSacmBots
 {
     [TestClass]
-    public class UnitTest1
+    public class TestScamMessageGenerator
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Test()
         {
         }
     }
