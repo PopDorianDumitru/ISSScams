@@ -10,4 +10,8 @@ using System.Windows;
                                                 // app, or any theme specific resource dictionaries)
     InternalsVisibleTo("ISSProject-Regenerated"),
     InternalsVisibleTo("MaliciousSubscriptionsDomain")
+                                              // app, or any theme specific resource dictionaries)
+    InternalsVisibleTo("TestGraphAnalyzer"),
+    InternalsVisibleTo("TestCommon")
+    InternalsVisibleTo("TestSubscriptionService")
 ]

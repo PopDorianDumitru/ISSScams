@@ -1,5 +1,4 @@
-﻿
-namespace ISSProject.Common.Mock
+﻿namespace ISSProject.Common.Mock
 {
     internal interface IMockMessageRepository : ISizedRepository<MockMessage, int>
     {

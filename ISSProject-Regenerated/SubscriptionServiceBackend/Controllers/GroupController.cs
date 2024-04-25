@@ -52,32 +52,31 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
         {
             if (premiumUserRepository.ById(searcher.GetId()) != null)
             {
-                IEnumerable<MockGroup> groups = groupRepository.All();
+                List<MockGroup> groups = (List<MockGroup>)groupRepository.All();
                 if (filter != string.Empty)
                 {
-                    List<MockGroup> filteredGroups = (List<MockGroup>)(from g in groups where MatchesFilter(g, filter) select g);
-                    return filteredGroups;
+                    groups.RemoveAll(group => !MatchesFilter(group, filter));
+                    return groups;
                 }
                 else
                 {
-                    return groups.ToList();
+                    return groups;
                 }
             }
             else
             {
-                IEnumerable<MockGroup> groups = groupRepository.All();
-                groups = groups.Where(g => g.IsPrivate == false);
+                List<MockGroup> groups = (List<MockGroup>)groupRepository.All();
+                groups.RemoveAll(g => g.IsPrivate == true);
                 if (filter != string.Empty)
                 {
-                    List<MockGroup> filteredGroups = (List<MockGroup>)(from g in groups where MatchesFilter(g, filter) select g);
-                    return filteredGroups;
+                    groups.RemoveAll(group => !MatchesFilter(group, filter));
+                    return groups;
                 }
                 else
                 {
-                    return groups.ToList();
+                    return groups;
                 }
             }
-            throw new GroupControllerError();
         }
     }
 }

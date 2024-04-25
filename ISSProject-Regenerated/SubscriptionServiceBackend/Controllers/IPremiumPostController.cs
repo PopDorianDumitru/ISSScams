@@ -1,5 +1,4 @@
-﻿
-namespace ISSProject.Common.Mikha.Controllers
+﻿namespace ISSProject.Common.Mikha.Controllers
 {
     internal interface IPremiumPostController
     {
