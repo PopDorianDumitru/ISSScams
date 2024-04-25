@@ -11,7 +11,6 @@ namespace TestCommon
     [TestClass]
     public class TestMockUser
     {
-
         [TestMethod]
         public void ToString_AllConstructors_ShouldReturnTheStringRepresentationOfTheObject()
         {
@@ -22,7 +21,6 @@ namespace TestCommon
             MockUser user5 = new MockUser("lucaratan03", "iss@yahoo.com", "Luca", "Ratan", new DateTime(2022, 4, 26, 10, 30, 0), "0731427290");
 
             // "User " + first_name + " " + last_name + ", with ID " + Id + ", born on " + birthdate + ", having email address " + email + " and phone number " + phone_number;
-
             Assert.AreEqual(user1.ToString(), "User  , with ID -1, born on " + user1.Birthdate + ", having email address  and phone number ");
             Assert.AreEqual(user2.ToString(), "User Luca Ratan, with ID 1, born on 26/04/2022 10:30:00, having email address iss@yahoo.com and phone number ");
             Assert.AreEqual(user3.ToString(), "User Luca Ratan, with ID 1, born on 26/04/2022 10:30:00, having email address iss@yahoo.com and phone number ");

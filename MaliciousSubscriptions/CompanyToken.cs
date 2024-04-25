@@ -22,6 +22,5 @@ namespace MaliciousSubscriptions
             Assert.AreEqual(expectedToken, companyToken.GetToken());
             Assert.AreEqual(expectedServiceSeverity, companyToken.GetServiceSeverity());
         }
-
     }
 }

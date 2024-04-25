@@ -18,13 +18,10 @@ namespace TestSubscriptionService
             bool expectedIsPrivate = false;
             MockGroup mockGroup = new MockGroup(expectedId, expectedGroupName, expectedIsPrivate);
             GroupWrapper groupWrapper = new GroupWrapper(mockGroup);
-            
             MockGroup result = groupWrapper.GetPureReference();
-
             Assert.AreEqual(mockGroup.GroupName, expectedGroupName);
             Assert.AreEqual(mockGroup.Id, expectedId);
             Assert.AreEqual(mockGroup.IsPrivate, expectedIsPrivate);
-
         }
 
         [TestMethod]

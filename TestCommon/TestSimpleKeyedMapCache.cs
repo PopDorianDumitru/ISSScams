@@ -33,7 +33,6 @@ namespace TestCommon
     [TestClass]
     public class TestSimpleKeyedMapCache
     {
-
         private SimpleKeyedMapCache<Person, int> cache;
 
         [TestInitialize]
@@ -45,11 +44,7 @@ namespace TestCommon
         public void Add_WhenItemNotInCache_ShouldReturnTrueAndAddItem()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
-
-
             var result = cache.Add(person);
-
-
             Assert.IsTrue(result);
             Assert.IsTrue(cache.Any(person.GetId()));
         }
@@ -63,21 +58,16 @@ namespace TestCommon
             var result = cache.Add(person);
 
             Assert.IsFalse(result);
-            Assert.AreEqual(1, cache.GetCache().Count); 
+            Assert.AreEqual(1, cache.GetCache().Count);
         }
 
         [TestMethod]
         public void Update_WhenItemInCache_ShouldReturnTrueAndUpdateItem()
         {
-            
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
-            cache.Add(person); 
-
-
+            cache.Add(person);
             var updatedPerson = new Person(1, "John Doe Updated", new DateTime(1990, 1, 1));
             var result = cache.Update(updatedPerson);
-
-
             Assert.IsTrue(result);
             Assert.AreEqual(updatedPerson.GetId(), cache.ById(updatedPerson.GetId()).GetId());
             Assert.AreEqual(updatedPerson.Name, cache.ById(updatedPerson.GetId()).Name);
@@ -88,7 +78,7 @@ namespace TestCommon
         public void Remove_WhenItemInCache_ShouldReturnTrueAndRemoveItem()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
-            cache.Add(person); 
+            cache.Add(person);
 
             var result = cache.Remove(person);
 
@@ -102,8 +92,6 @@ namespace TestCommon
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
 
             var result = cache.Remove(person);
-
-
             Assert.IsFalse(result);
         }
 
@@ -111,12 +99,8 @@ namespace TestCommon
         public void ById_WhenItemInCache_ShouldReturnCorrectItem()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
-            cache.Add(person); 
-
-
+            cache.Add(person);
             var retrievedPerson = cache.ById(person.GetId());
-
-
             Assert.AreEqual(person.Name, retrievedPerson.Name);
             Assert.AreEqual(person.BirthDate, retrievedPerson.BirthDate);
             Assert.AreEqual(person.Id, retrievedPerson.Id);
@@ -124,11 +108,10 @@ namespace TestCommon
 
         [TestMethod]
         public void ById_WhenItemNotInCache_ShouldThrowKeyNotFoundException()
-        { 
+        {
             var nonExistingId = 999;
 
             Assert.ThrowsException<KeyNotFoundException>(() => { cache.ById(nonExistingId); });
-  
         }
 
         [TestMethod]

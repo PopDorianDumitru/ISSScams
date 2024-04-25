@@ -1,12 +1,12 @@
-﻿using ISSProject.MaliciousSubscriptionsBackend.Storage;
-using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
-using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
-using SubscriptionServicePart.MVVM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.MaliciousSubscriptionsBackend.Storage;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
+using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
+using SubscriptionServicePart.MVVM.ViewModel;
 
 namespace TestSubscriptionService
 {
@@ -85,7 +85,7 @@ namespace TestSubscriptionService
             string expirationDate = "12/20";
             string cVV = "123";
             bool expectedResult = false;
-            bool result = mainViewModel.SaveCreditCard("", creditCardNumber, cVV, expirationDate);
+            bool result = mainViewModel.SaveCreditCard(string.Empty, creditCardNumber, cVV, expirationDate);
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
@@ -95,7 +95,7 @@ namespace TestSubscriptionService
             string expirationDate = "12/25";
             string cVV = "123";
             bool expectedResult = true;
-            bool result = mainViewModel.SaveCreditCard("", creditCardNumber, cVV, expirationDate);
+            bool result = mainViewModel.SaveCreditCard(string.Empty, creditCardNumber, cVV, expirationDate);
             Assert.AreEqual(expectedResult, result);
         }
     }

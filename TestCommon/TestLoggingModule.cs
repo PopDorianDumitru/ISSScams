@@ -29,10 +29,8 @@ namespace TestCommon
                 loggingModule.WriteToConsole = true;
 
                 loggingModule.Log(LogSeverity.Info, message);
-
-
                 Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
-                //Assert.IsTrue(ConsoleOutputContains(message));
+                // Assert.IsTrue(ConsoleOutputContains(message));
                 Assert.IsTrue(sw.ToString().Contains(message));
             }
         }
@@ -48,8 +46,6 @@ namespace TestCommon
                 loggingModule.WriteToConsole = false;
 
                 loggingModule.Log(LogSeverity.Info, message);
-
-
                 string fileContent = File.ReadAllText(TestFileName);
                 Assert.IsTrue(fileContent.Contains(message));
                 Assert.IsFalse(sw.ToString().Contains(message));
@@ -68,8 +64,6 @@ namespace TestCommon
                 loggingModule.WriteToConsole = true;
 
                 loggingModule.Log(LogSeverity.Info, message);
-
-
                 Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
                 Assert.IsTrue(sw.ToString().Contains(message));
             }
@@ -87,8 +81,6 @@ namespace TestCommon
                 loggingModule.WriteToConsole = false;
 
                 loggingModule.Log(LogSeverity.Info, message);
-
-
                 Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
                 Assert.IsFalse(sw.ToString().Contains(message));
             }
@@ -106,8 +98,6 @@ namespace TestCommon
                 loggingModule.WriteToConsole = false;
 
                 loggingModule.Log(LogSeverity.Info, message);
-
-
                 Assert.IsTrue(File.ReadAllText("logs.txt").Contains(message));
                 Assert.IsFalse(sw.ToString().Contains(message));
             }
@@ -125,8 +115,6 @@ namespace TestCommon
                 loggingModule.WriteToConsole = true;
 
                 loggingModule.Log(LogSeverity.Info, message);
-
-
                 Assert.IsTrue(File.ReadAllText("logs.txt").Contains(message));
                 Assert.IsTrue(sw.ToString().Contains(message));
             }

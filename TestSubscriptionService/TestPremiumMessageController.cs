@@ -23,7 +23,7 @@
             UserWrapper premiumUser = new UserWrapper(1);
             premiumUserRepository.Insert(premiumUser);
             premiumMessageController = new PremiumMessageController(premiumUserRepository, messageRepository, premiumMessageRepository);
-            MessageWrapper message1 = new MessageWrapper(1, 1, 2, "Hello", new DateTime(2024,12,15, 0, 0, 0));
+            MessageWrapper message1 = new MessageWrapper(1, 1, 2, "Hello", new DateTime(2024, 12, 15, 0, 0, 0));
             MessageWrapper message2 = new MessageWrapper(2, 2, 1, "Hi", new DateTime(2024, 12, 15, 0, 0, 0));
             premiumMessageRepository.Insert(message1);
             messageRepository.Insert(message1);
@@ -61,6 +61,5 @@
             bool result = premiumMessageController.DeletePremiumMessage(message);
             Assert.AreEqual(expectedResult, result);
         }
-
     }
 }
