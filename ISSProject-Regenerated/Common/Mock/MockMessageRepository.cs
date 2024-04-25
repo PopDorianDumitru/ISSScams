@@ -106,9 +106,9 @@ namespace ISSProject.Common.Mock
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new MessageRepositoryException("An error occured while trying to delete message from the database: " + ex.Message);
+                throw new MessageRepositoryException("An error occured while trying to delete message from the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -136,9 +136,9 @@ namespace ISSProject.Common.Mock
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new MessageRepositoryException("An error occured while trying to insert message into the database: " + ex.Message);
+                throw new MessageRepositoryException("An error occured while trying to insert message into the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -167,9 +167,9 @@ namespace ISSProject.Common.Mock
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new MessageRepositoryException("An error occured while trying to update message into the database: " + ex.Message);
+                throw new MessageRepositoryException("An error occured while trying to update message into the database: " + exception.Message);
             }
 
             return result >= 1;

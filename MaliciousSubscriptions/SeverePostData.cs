@@ -1,5 +1,4 @@
-﻿
-using ISSProject.MaliciousSubscriptionsBackend.Domain;
+﻿using ISSProject.MaliciousSubscriptionsBackend.Domain;
 
 namespace MaliciousSubscriptionsDomain
 {

@@ -3,7 +3,7 @@ using ISSProject.ScamBots.Model;
 namespace ScamBotsModel
 {
     [TestClass]
-    public class ScamMessageLinkTests
+    public class ScamMessageLinkTests 
     {
         [TestMethod]
         public void Constructor_WithIdAndLinkUrl_ShouldSetPropertiesCorrectly()
