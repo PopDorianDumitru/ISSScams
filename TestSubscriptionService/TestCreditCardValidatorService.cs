@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
-
-namespace TestSubscriptionService
+﻿namespace TestSubscriptionService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
+
     [TestClass]
     public class TestCreditCardValidatorService
     {

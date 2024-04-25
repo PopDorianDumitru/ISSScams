@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ISSProject.Common.Mikha;
-
-namespace TestSubscriptionService
+﻿namespace TestSubscriptionService
 {
+    using System;
+    using ISSProject.Common.Mikha;
+
     [TestClass]
     public class TestPostWrapper
     {
@@ -53,6 +49,7 @@ namespace TestSubscriptionService
 
             Assert.AreEqual(expectedId, postWrapper.GetId());
         }
+
         [TestMethod]
         public void PostWrapper_Clone()
         {
@@ -70,6 +67,7 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedResult.GetUserId(), expectedPosterId);
             Assert.AreEqual(expectedResult.GetPureReference(), postWrapper.GetPureReference());
         }
+
         [TestMethod]
         public void PostWrapper_GetUserId()
         {
