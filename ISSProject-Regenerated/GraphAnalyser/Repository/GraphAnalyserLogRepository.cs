@@ -120,8 +120,8 @@ namespace ISSProject.GraphAnalyser.Repository
         {
             int result = 0;
             string queryString = "INSERT INTO " +
-                "GraphAnalyzerLogs(LogTime, SourceUserID, TargetUserID, Score, GeneratedMessage) " +
-                "VALUES(@LogTime, @SourceUserID, @TargetUserID, @Score, @GeneratedMessage)";
+                "GraphAnalyzerLogs(LogID, LogTime, SourceUserID, TargetUserID, Score, GeneratedMessage) " +
+                "VALUES(@LogID, @LogTime, @SourceUserID, @TargetUserID, @Score, @GeneratedMessage)"; // LUCA - ADDED THE LOGID COLUMN
 
             try
             {
@@ -130,6 +130,7 @@ namespace ISSProject.GraphAnalyser.Repository
                     SqlCommand command = new SqlCommand(queryString, connection);
                     connection.Open();
 
+                    command.Parameters.AddWithValue("@LogID", entity.LogId); // changed by Luca
                     command.Parameters.AddWithValue("@LogTime", entity.LogTime);
                     command.Parameters.AddWithValue("@SourceUserID", entity.SourceUserId);
                     command.Parameters.AddWithValue("@TargetUserID", entity.TargetUserId);

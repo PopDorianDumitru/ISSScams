@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using ISSProject.Common.Mock;
+using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
+using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
 using SubscriptionServicePart.MVVM.ViewModel;
 
 namespace SubscriptionServicePart
@@ -12,22 +14,17 @@ namespace SubscriptionServicePart
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MockUser userToInsertCreditCard = new MockUser(58, "8h717xii2u8", "nicol.nikolaus@yahoo.com", "Johnathan", "Bins", DateTime.Now, "+40780880054");
-
         private string creditCardHolder = string.Empty;
         private string creditCardNumber = string.Empty;
         private string expirationDate = string.Empty;
         private string cVV = string.Empty;
-        private string numberPattern = @"^(?:\d[ -]*?){16}$";
-        private string cvvPattern = @"^\d{3}$";
-        private string[] dateComponent;
         private bool validCreditCradNumber = false;
         private bool validExpirationDate = false;
         private bool validCVV = false;
-
-        public MainWindow()
+        public MainWindow(MainViewModel model)
         {
             InitializeComponent();
+            this.DataContext = model;
         }
 
         private void PayButton_Click(object sender, RoutedEventArgs e)
@@ -36,43 +33,13 @@ namespace SubscriptionServicePart
             creditCardNumber = CardNumberTextBox.Text.Trim();
             expirationDate = ExpirationDateTextBox.Text.Trim();
             cVV = CVVTextBox.Text.Trim();
-
-            Regex regexCard = new Regex(numberPattern);
-            MatchCollection matchesCardNumber = regexCard.Matches(creditCardNumber);
-            if (matchesCardNumber.Count > 0)
-            {
-                validCreditCradNumber = true;
-            }
-
-            dateComponent = expirationDate.Split('/');
-            int month, year;
-
-            var successfullyParsedMonth = int.TryParse(dateComponent[0], out month);
-            var successfullyParsedYear = int.TryParse(dateComponent[1], out year);
-
-            if (successfullyParsedMonth && successfullyParsedYear && dateComponent[0].Length == 2 && dateComponent[1].Length == 2)
-            {
-                if (month <= 12 && year >= 25)
-                {
-                    validExpirationDate = true;
-                }
-            }
-
-            Regex regexCVV = new Regex(cvvPattern);
-            MatchCollection matchesCVV = regexCVV.Matches(cVV);
-            if (matchesCVV.Count > 0)
-            {
-                validCVV = true;
-            }
-
-            if (validCreditCradNumber && validExpirationDate && validCVV)
+            if ((bool)this.DataContext.GetType().GetMethod("ValidCreditCardInformation").Invoke(this.DataContext, new object[] { creditCardNumber, cVV, expirationDate }) == true)
             {
                 var result = MessageBox.Show("ok");
                 Console.WriteLine("[+] SUCCESSFULLY VALIDATED DATA. PREPARING TO COMMIT TO DATABASE");
-                CommitToDatabase.Commit(userToInsertCreditCard.GetId(), creditCardHolder, creditCardNumber, expirationDate, cVV);
+                this.DataContext.GetType().GetMethod("SaveCreditCard").Invoke(this.DataContext, new object[] { creditCardHolder, creditCardNumber, cVV, expirationDate });
             }
         }
-
         private void PayButton_MouseEnter(object sender, MouseEventArgs e)
         {
             PayButton.Background = new BrushConverter().ConvertFrom("#757fe0") as Brush;
