@@ -28,7 +28,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void GetId_TestGetFollowerId()
+        public void GetId_()
         {
             Assert.AreEqual(1, mockFollower.GetId());
         }

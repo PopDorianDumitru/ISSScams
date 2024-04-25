@@ -83,9 +83,9 @@ namespace ISSProject.Common.Mock
 
         public bool Update(MockFollower entity)
         {
-            if (!mockDatabase.ContainsKey(entity.Id))
+            if (mockDatabase.ContainsKey(entity.Id))
             {
-                mockDatabase.Add(entity.Id, entity);
+                mockDatabase[entity.Id] = entity;
                 return true;
             }
             else
