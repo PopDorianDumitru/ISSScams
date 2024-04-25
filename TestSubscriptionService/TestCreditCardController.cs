@@ -1,18 +1,16 @@
-﻿using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
-using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestSubscriptionService
+﻿namespace TestSubscriptionService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
+    using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
+
     [TestClass]
     public class TestCreditCardController
     {
         [TestMethod]
-        public void CreditCardController_SaveCard()
+        public void CreditCardControllerSaveCard()
         {
             CreditCardController controller = new CreditCardController(new CreditCardInMemoryRepository());
             int expectedId = 1;
@@ -31,7 +29,7 @@ namespace TestSubscriptionService
         }
 
         [TestMethod]
-        public void CreditCardController_GetAll()
+        public void CreditCardControllerGetAll()
         {
             CreditCardController controller = new CreditCardController(new CreditCardInMemoryRepository());
             int expectedId = 1;

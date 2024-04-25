@@ -1,16 +1,10 @@
-﻿using ISSProject.Common.Mikha.Groups;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestSubscriptionService
+﻿namespace TestSubscriptionService
 {
+    using ISSProject.Common.Mikha.Groups;
+
     [TestClass]
     public class TestMockGroup
     {
-
         [TestMethod]
         public void MockGroup_TestConstructor()
         {
@@ -25,6 +19,7 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedId, mockGroup.GetId());
             Assert.AreEqual(expectedNrOfMembers, mockGroup.MembersID.Count);
         }
+
         [TestMethod]
         public void MockGroup_TestAddMember()
         {

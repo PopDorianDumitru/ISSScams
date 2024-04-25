@@ -172,7 +172,7 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
                 {
                     var response = postToCompany.PostAsync(PrioritizedCompany.GetToken(), content).Result;
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
                     Console.WriteLine("[-] ADDRESS NOT EXISTENT.");
                 }

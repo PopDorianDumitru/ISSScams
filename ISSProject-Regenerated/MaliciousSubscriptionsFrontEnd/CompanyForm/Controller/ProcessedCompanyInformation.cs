@@ -47,7 +47,7 @@ namespace ISSProject.CompanyForm.Controller
                 conn.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 return false;
             }

@@ -1,14 +1,8 @@
-﻿using ISSProject.Common.Mikha;
-using ISSProject.MaliciousSubscriptionsBackend.Domain;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestSubscriptionService
+﻿namespace TestSubscriptionService
 {
+    using System;
+    using ISSProject.Common.Mikha;
+
     [TestClass]
     public class TestMockPost 
     {

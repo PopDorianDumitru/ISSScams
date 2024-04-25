@@ -1,17 +1,17 @@
-﻿using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestSubscriptionService
+﻿namespace TestSubscriptionService
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
+
     [TestClass]
     public class TestCreditCard
     {
         [TestMethod]
-        public void CreditCard_Constructor()
+        public void CreditCardConstructor()
         {
             int expectedId = 1;
             string expectedHolderName = "Dorian";
