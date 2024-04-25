@@ -23,7 +23,7 @@ namespace ISSProject.Common.Mock
             int mockKey = 1;
             foreach (var user in users)
             {
-                for (int i = 0; i < random.Next(25) + 1; i++)
+                for (int index = 0; index < random.Next(25) + 1; index++)
                 {
                     MockUser anotherUser;
                     do
