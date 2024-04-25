@@ -1,9 +1,9 @@
-﻿using ISSProject.Common.Mock;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
 
 namespace TestCommon
 {
@@ -28,7 +28,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void GetId_TestGetFollowerId()
+        public void GetId_()
         {
             Assert.AreEqual(1, mockFollower.GetId());
         }

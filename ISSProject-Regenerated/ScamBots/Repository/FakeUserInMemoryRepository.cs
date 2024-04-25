@@ -54,7 +54,6 @@ namespace ISSProject_Regenerated.ScamBots.Repository
             }
             return false;
         }
-
         public int UserIdByEmail(string email)
         {
             foreach (var user in mockUsers)

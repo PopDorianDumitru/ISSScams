@@ -54,8 +54,5 @@
             Assert.AreEqual(expectedIsPrivate, clone.IsPrivate);
             Assert.AreEqual(expectedNrOfMembers, clone.MembersID.Count);
         }
-
-
-
     }
 }

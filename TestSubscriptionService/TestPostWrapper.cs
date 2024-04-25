@@ -82,6 +82,5 @@
             PostWrapper postWrapper = new PostWrapper(mockPost);
             Assert.AreEqual(expectedPosterId, postWrapper.GetUserId());
         }
-
     }
 }

@@ -36,16 +36,14 @@ namespace SubscriptionServicePart.MVVM.ViewModel
             this.creditCardController = creditCardController;
         }
 
-        public void SaveCreditCard(string holderName, string cardNumber, string cvv, string expirationDate)
+        public bool SaveCreditCard(string holderName, string cardNumber, string cvv, string expirationDate)
         {
             if (ValidCreditCardInformation(cardNumber, expirationDate, cvv))
             {
                 creditCardController.SaveCard(userToInsertCreditCard.Id, holderName, cardNumber, expirationDate, cvv);
+                return true;
             }
-            else
-            {
-                MessageBox.Show("Invalid credit card information");
-            }
+            return false;
         }
         public MainViewModel()
         {

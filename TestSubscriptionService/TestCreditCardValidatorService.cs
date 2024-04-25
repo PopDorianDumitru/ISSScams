@@ -113,9 +113,6 @@
             Assert.IsFalse(creditCardValidatorService.ValidCreditCardNumber(valueToTest));
         }
 
-
-
-
         //[TestMethod]
         //public void ValidExpirationDate(string expirationDate)
         //{

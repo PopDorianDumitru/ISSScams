@@ -1,5 +1,4 @@
-﻿
-using ISSProject.ScamBots.Model;
+﻿using ISSProject.ScamBots.Model;
 
 namespace ScamBotsModel
 {

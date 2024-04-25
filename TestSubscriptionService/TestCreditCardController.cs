@@ -64,6 +64,5 @@
 
             Assert.AreEqual(expectedNumberOfCards, cards.Count());
         }
-
     }
 }

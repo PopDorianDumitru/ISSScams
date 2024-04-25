@@ -1,7 +1,7 @@
+using System;
 using ISSProject.Common;
 using ISSProject.Common.Cache;
 using ISSProject.GraphAnalyser.Domain;
-using System;
 
 namespace TestCommon
 {
