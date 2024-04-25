@@ -11,7 +11,7 @@ namespace TestSubscriptionService
     public class TestGroupWrapper
     {
         [TestMethod]
-        public void GroupWrapper_GetPureReference()
+        public void GetPureReference_ValidGroup_ReferenceShouldBeEqual()
         {
             string expectedGroupName = "Soccer";
             int expectedId = 1;
@@ -19,13 +19,12 @@ namespace TestSubscriptionService
             MockGroup mockGroup = new MockGroup(expectedId, expectedGroupName, expectedIsPrivate);
             GroupWrapper groupWrapper = new GroupWrapper(mockGroup);
             MockGroup result = groupWrapper.GetPureReference();
-            Assert.AreEqual(mockGroup.GroupName, expectedGroupName);
-            Assert.AreEqual(mockGroup.Id, expectedId);
-            Assert.AreEqual(mockGroup.IsPrivate, expectedIsPrivate);
+
+            Assert.IsTrue(mockGroup.Equals(result));
         }
 
         [TestMethod]
-        public void GroupWrapper_CloneGroupWrapper()
+        public void Clone_CreateValidWrapper_ClonedWrapperShouldHaveTheSameGroup()
         {
             string expectedGroupName = "Soccer";
             int expectedId = 1;
@@ -33,13 +32,12 @@ namespace TestSubscriptionService
             MockGroup mockGroup = new MockGroup(expectedId, expectedGroupName, expectedIsPrivate);
             GroupWrapper groupWrapper = new GroupWrapper(mockGroup);
             GroupWrapper clonedGroupWrapperToTest = (GroupWrapper)groupWrapper.Clone();
-            Assert.AreEqual(clonedGroupWrapperToTest.GetGroupName(), expectedGroupName);
-            Assert.AreEqual(expectedIsPrivate, clonedGroupWrapperToTest.GetGroupVisibility());
-            Assert.AreEqual(expectedId, clonedGroupWrapperToTest.GetId());
+
+            Assert.IsTrue(clonedGroupWrapperToTest.Equals(mockGroup));
         }
 
         [TestMethod]
-        public void GroupWrapper_AddingAUserShouldIncreaseTheNumberOfUsers()
+        public void MockGroupAddMember_AddValidIdToGroup_CountShouldBeOne()
         {
             string expectedGroupName = "Soccer";
             int expectedId = 1;
@@ -60,9 +58,8 @@ namespace TestSubscriptionService
             MockGroup mockGroup = new MockGroup(expectedId, expectedGroupName, expectedIsPrivate);
             GroupWrapper groupWrapper = new GroupWrapper(mockGroup);
             MockGroup result = groupWrapper.FetchUsingId(1);
-            Assert.AreEqual(expectedGroupName, result.GroupName);
-            Assert.AreEqual(expectedId, result.Id);
-            Assert.AreEqual(expectedIsPrivate, result.IsPrivate);
+
+            Assert.IsTrue(mockGroup.Equals(result));
         }
     }
 }

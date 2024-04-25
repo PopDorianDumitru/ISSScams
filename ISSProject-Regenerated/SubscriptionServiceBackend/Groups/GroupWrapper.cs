@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.MaliciousSubscriptionsBackend.Domain;
 
 namespace ISSProject.Common.Mikha.Groups
 {
     internal class GroupWrapper : IDomainEntityWrapper<MockGroup, int>, IKeyedEntity<int>
     {
         private MockGroup group;
+        public override bool Equals(object comparisonObject)
+        {
+                MockGroup comparisonGroup = (MockGroup)comparisonObject;
+                return (this.GetGroupName() == comparisonGroup.GroupName) && (this.GetGroupVisibility() == comparisonGroup.IsPrivate) && (this.GetId() == comparisonGroup.Id);
+        }
 
         public GroupWrapper(MockGroup post)
         {

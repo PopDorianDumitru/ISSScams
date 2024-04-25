@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.MaliciousSubscriptionsBackend.Domain;
 
 namespace ISSProject.Common.Mikha.Groups
 {
     internal class MockGroup : IKeyedEntity<int>
     {
+        public override bool Equals(object comparisonObject)
+        {
+            // Check for null and compare run-time types.
+            if ((comparisonObject == null) || !this.GetType().Equals(comparisonObject.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                MockGroup creditCard = (MockGroup)comparisonObject;
+                return (Id == creditCard.Id) && (GroupName == creditCard.GroupName) && (IsPrivate == creditCard.IsPrivate);
+            }
+        }
         private int id;
         public int Id
         {
