@@ -128,8 +128,8 @@ namespace ISSProject.ScamBots
             // MainTester.Test();
             // HandleMaliciousSubscriptionsBackendViaThread(); // Razvan - WORKS
             // CreateBotThread(); // Florin - WORKS
-            AnalyseRandomUsers(); // Rares - WORKS
-            // HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
+            // AnalyseRandomUsers(); // Rares - WORKS
+            HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
             // HandleMaliciousSubscriptionsFrontendViaThread(); // Nico - WORKS
             // HandleSubscriptionServiceBackendOperations(); // Dragos - WORKS
             // HandleScamBotsPhishingFrontendViaThread(); // Dan - WORKS

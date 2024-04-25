@@ -22,9 +22,10 @@ namespace TestCommon
         public void Clone_ValidMockInstance_ReturnsACloneOfTheObject()
         {
             MockFollower clone = (MockFollower)mockFollower.Clone();
-            Assert.AreEqual(mockFollower.Id, clone.Id);
-            Assert.AreEqual(mockFollower.UserId, clone.UserId);
-            Assert.AreEqual(mockFollower.FollowedUserId, clone.FollowedUserId);
+            Assert.IsTrue(clone.Equals(mockFollower));
+            // Assert.AreEqual(mockFollower.Id, clone.Id);
+            // Assert.AreEqual(mockFollower.UserId, clone.UserId);
+            // Assert.AreEqual(mockFollower.FollowedUserId, clone.FollowedUserId);
         }
 
         [TestMethod]

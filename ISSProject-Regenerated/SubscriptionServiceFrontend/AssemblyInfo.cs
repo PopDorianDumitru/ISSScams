@@ -17,4 +17,5 @@ using System.Windows;
     InternalsVisibleTo("ScamBotsModel"),
     InternalsVisibleTo("TestGraphAnalyzer"),
     InternalsVisibleTo("TestCommon"),
+    InternalsVisibleTo("DynamicProxyGenAssembly2")
 ]

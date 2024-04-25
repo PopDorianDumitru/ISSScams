@@ -5,36 +5,34 @@
     using ISSProject.Common.Wrapper;
     using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Messages;
     using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
+    using Moq;
 
     [TestClass]
     public class TestPremiumMessageController
     {
-        private IPremiumUserRepository premiumUserRepository;
-        private IMessageRepository messageRepository;
-        private IPremiumMessageRepository premiumMessageRepository;
+        private Mock<IPremiumUserRepository> premiumUserRepository;
+        private Mock<IMessageRepository> messageRepository;
+        private Mock<IPremiumMessageRepository> premiumMessageRepository;
         private IPremiumMessageController premiumMessageController;
 
         [TestInitialize]
         public void TestInitializer()
         {
-            premiumUserRepository = new PremiumUserInMemoryRepository();
-            messageRepository = new MessageRepository();
-            premiumMessageRepository = new PremiumMessageInMemoryRepository();
-            UserWrapper premiumUser = new UserWrapper(1);
-            premiumUserRepository.Insert(premiumUser);
-            premiumMessageController = new PremiumMessageController(premiumUserRepository, messageRepository, premiumMessageRepository);
-            MessageWrapper message1 = new MessageWrapper(1, 1, 2, "Hello", new DateTime(2024, 12, 15, 0, 0, 0));
-            MessageWrapper message2 = new MessageWrapper(2, 2, 1, "Hi", new DateTime(2024, 12, 15, 0, 0, 0));
-            premiumMessageRepository.Insert(message1);
-            messageRepository.Insert(message1);
-            premiumUserRepository = new PremiumUserInMemoryRepository();
+            premiumUserRepository = new Mock<IPremiumUserRepository>();
+            messageRepository = new Mock<IMessageRepository>();
+            premiumMessageRepository = new Mock<IPremiumMessageRepository>();
+            premiumMessageController = new PremiumMessageController(premiumUserRepository.Object, messageRepository.Object, premiumMessageRepository.Object);
         }
         [TestMethod]
         public void AddPremiumMessage_WhenMessageIsPremiumAndSenderIsPremium_ShouldReturnTrue()
         {
-            MessageWrapper message = new MessageWrapper(3, 1, 2, "Hello", new DateTime(2024, 12, 15, 0, 0, 0));
             bool expectedResult = true;
-            bool result = premiumMessageController.AddPremiumMessage(message);
+            UserWrapper expectedUser = new UserWrapper(1, "mail", "name", "lName", new DateTime(2014, 12, 12, 0, 0, 0));
+            MessageWrapper messageSent = new MessageWrapper(1, 1, 2, "Hello", new DateTime(2024, 12, 15, 0, 0, 0));
+            premiumUserRepository.Setup(repo => repo.ById(1)).Returns(expectedUser);
+            messageRepository.Setup(repo => repo.Insert(messageSent)).Returns(true);
+            premiumMessageRepository.Setup(repo => repo.Insert(messageSent)).Returns(true);
+            bool result = premiumMessageController.AddPremiumMessage(messageSent);
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
