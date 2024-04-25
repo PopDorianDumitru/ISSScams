@@ -29,7 +29,7 @@ namespace ISSProject.GraphAnalyser.Repository
 
         public IEnumerable<GraphAnalyserLog> All()
         {
-            string queryString = "SELECT * From GraphAnalyzerLogs"; 
+            string queryString = "SELECT * From GraphAnalyzerLogs";
 
             using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {

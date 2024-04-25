@@ -7,6 +7,5 @@ namespace TestSacmBots
     [TestClass]
     public class TestFakeUserController
     {
-       
     }
 }

@@ -1,17 +1,16 @@
-﻿using ISSProject.Common.Cache;
-using ISSProject.Common.DataEncryption;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Cache;
+using ISSProject.Common.DataEncryption;
 
 namespace TestCommon
 {
     [TestClass]
     public class TestShiftEncrypter
     {
-
         private EncrypterBase encrypter;
         private int key = 3;
 
