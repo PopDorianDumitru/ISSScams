@@ -92,7 +92,8 @@ namespace ISSProject.GraphAnalyser.Domain
         public void GenerateGraph()
         {
             relations.Clear();
-            foreach (UserWrapper userA in users) // O(n^2), maybe revise?
+            // O(n^2), maybe revise?
+            foreach (UserWrapper userA in users)
             {
                 logger.Log(LogSeverity.Info, $"Outer loop: {userA.GetId()}");
                 foreach (UserWrapper userB in users)

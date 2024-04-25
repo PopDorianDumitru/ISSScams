@@ -1,17 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ISSProject;
+using ISSProject.MaliciousSubscriptionsBackend.Domain;
 using Microsoft.Data.SqlClient;
-namespace SubscriptionServicePart.MVVM.ViewModel
+using SubscriptionServicePart.MVVM.ViewModel;
+
+namespace ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards
 {
-    public static class CommitToDatabase
+    internal class CreditCardRepository : ICreditCardRepository
     {
-        static public void Commit(int userID, string holderName, string creditCardNumber, string expirationDate, string cvv)
+        public CreditCardRepository()
         {
+        }
+
+        public IEnumerable<CreditCard> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(CreditCard card)
+        {
+            int userID = card.UserID;
+            string holderName = card.HolderName;
+            string expirationDate = card.ExpirationDate;
+            string creditCardNumber = card.CreditCardNumber;
+            string cvv = card.CVV;
             using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();

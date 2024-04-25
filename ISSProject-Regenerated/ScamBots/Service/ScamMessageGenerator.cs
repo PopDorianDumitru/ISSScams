@@ -18,8 +18,8 @@ namespace ISSProject.ScamBots
         public ScamMessageGenerator()
         {
             randomGenerator = new Random();
-            scamWebsiteLinks = new ScamMessageLinkRepository();
-            messageTemplates = new ScamMessageRepository();
+            scamWebsiteLinks = (IScamMessageLinkRepository)new ScamMessageLinkRepository();
+            messageTemplates = (IScamMessageRepository)new ScamMessageRepository();
         }
 
         /// <summary>
