@@ -30,7 +30,6 @@ namespace TestCommon
 
                 loggingModule.Log(LogSeverity.Info, message);
                 Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
-                // Assert.IsTrue(ConsoleOutputContains(message));
                 Assert.IsTrue(sw.ToString().Contains(message));
             }
         }

@@ -9,6 +9,21 @@ namespace ISSProject.Common.Mock
     internal class MockFollower : IKeyedEntity<int>
     {
         private int id;
+
+        public override bool Equals(object obj)
+        {
+            // Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                MockFollower mf = (MockFollower)obj;
+                return (Id == mf.Id) && (UserId == mf.UserId) && (FollowedUserId == mf.FollowedUserId);
+            }
+        }
+
         public int Id
         {
             get { return id; } set { id = value; }
