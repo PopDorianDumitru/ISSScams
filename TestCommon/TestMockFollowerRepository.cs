@@ -22,7 +22,7 @@ namespace TestCommon
             MockFollowerRepository singleton;
             singleton = MockFollowerRepository.Provided();
 
-            MockFollower newFollower = new MockFollower(2, 5, 10);
+            MockFollower newFollower = new MockFollower(4, 5, 10);
 
             Assert.IsTrue(singleton.Insert(newFollower));
         }
