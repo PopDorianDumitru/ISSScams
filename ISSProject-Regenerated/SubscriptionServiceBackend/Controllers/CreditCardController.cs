@@ -17,7 +17,8 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Controllers
         }
         public void SaveCard(int userID, string holderName, string creditCardNumber, string expirationDate, string cvv)
         {
-            creditCardRepository.Insert(new CreditCard(userID, holderName, creditCardNumber, expirationDate, cvv));
+            CreditCard card = new CreditCard(userID, holderName, creditCardNumber, expirationDate, cvv);
+            creditCardRepository.Insert(card);
         }
 
         public IEnumerable<CreditCard> GetAll()

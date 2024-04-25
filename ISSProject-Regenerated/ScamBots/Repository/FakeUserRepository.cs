@@ -263,8 +263,6 @@ namespace ISSProject.ScamBots
 
             return userId;
         }
-
-
         public static int RemoveBannedBotAccounts()
         {
             string queryString = "SELECT * FROM BannedUsers WHERE mockuser_id IN (SELECT fake_user_id FROM FakeUsers)";

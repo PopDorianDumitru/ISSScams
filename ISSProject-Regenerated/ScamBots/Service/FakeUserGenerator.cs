@@ -26,10 +26,10 @@ namespace ISSProject.ScamBots.Service
             encrypter1 = new ShiftEncrypter(5);
             encrypter2 = new ShiftEncrypter(15);
 
-            string filePath = "C:/Users/crist/source/repos/Domane/ISSProject-Regenerated/ScamBots/first_names.txt";
+            string filePath = "C:\\Users\\doria\\source\\repos\\ISSScams\\ISSProject-Regenerated\\ScamBots\\first_names.txt";
             fakeFirstNames = File.ReadAllLines(filePath).ToList();
 
-            filePath = "C:/Users/crist/source/repos/Domane/ISSProject-Regenerated/ScamBots/last_names.txt";
+            filePath = "C:\\Users\\doria\\source\\repos\\ISSScams\\ISSProject-Regenerated\\ScamBots\\last_names.txt";
             fakeLastNames = File.ReadAllLines(filePath).ToList();
         }
 

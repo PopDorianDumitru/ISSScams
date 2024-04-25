@@ -10,7 +10,6 @@ namespace ISSProject_Regenerated.ScamBots.Repository
 {
     internal class FakeUserInMemoryRepository : IFakeUserRepository
     {
-
         private readonly List<MockUser> mockUsers = new List<MockUser>();
         public IEnumerable<MockUser> All()
         {
@@ -55,7 +54,6 @@ namespace ISSProject_Regenerated.ScamBots.Repository
             }
             return false;
         }
-
         public int UserIdByEmail(string email)
         {
             foreach (var user in mockUsers)
