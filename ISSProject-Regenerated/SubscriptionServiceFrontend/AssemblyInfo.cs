@@ -7,8 +7,13 @@ using System.Windows;
                                      // or application resource dictionaries)
     ResourceDictionaryLocation.SourceAssembly), // where the generic resource dictionary is located
                                               // (used if a resource is not found in the page,
+                                                // app, or any theme specific resource dictionaries)
+    InternalsVisibleTo("ISSProject-Regenerated"),
+    InternalsVisibleTo("MaliciousSubscriptionsDomain"),
                                               // app, or any theme specific resource dictionaries)
     InternalsVisibleTo("TestSubscriptionService"),
     InternalsVisibleTo("ScamBotsService"),
-    InternalsVisibleTo("ScamBotsModel")
+    InternalsVisibleTo("ScamBotsModel"),
+    InternalsVisibleTo("TestGraphAnalyzer"),
+    InternalsVisibleTo("TestCommon"),
 ]

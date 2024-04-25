@@ -126,11 +126,10 @@ namespace ISSProject.ScamBots
         {
             // TESTS ARE NOT THREAD SAFE : RUN THIS BEFORE ANYTHING ELSE (OR NOT AT ALL)
             // MainTester.Test();
-
             // HandleMaliciousSubscriptionsBackendViaThread(); // Razvan - WORKS
-            // createBotThread(); // Florin - WORKS
-            // AnalyseRandomUsers(); // Rares - WORKS
-            HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
+            // CreateBotThread(); // Florin - WORKS
+            AnalyseRandomUsers(); // Rares - WORKS
+            // HandleSubscriptionServiceFrontendViaThread(); // Diana - WORKS
             // HandleMaliciousSubscriptionsFrontendViaThread(); // Nico - WORKS
             // HandleSubscriptionServiceBackendOperations(); // Dragos - WORKS
             // HandleScamBotsPhishingFrontendViaThread(); // Dan - WORKS

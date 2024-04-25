@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using ISSProject.Common;
 using ISSProject.Common.Mock;
+using ISSProject.Common.Repository;
+using ISSProject_Regenerated.ScamBots.Service;
 using Microsoft.Data.SqlClient;
 namespace ISSProject.ScamBots
 {
@@ -259,6 +262,104 @@ namespace ISSProject.ScamBots
             }
 
             return userId;
+        }
+
+
+        public static int RemoveBannedBotAccounts()
+        {
+            string queryString = "SELECT * FROM BannedUsers WHERE mockuser_id IN (SELECT fake_user_id FROM FakeUsers)";
+            int deletedAccountsCount = 0;
+
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    SqlConnection connection2 = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING);
+                    connection2.Open();
+                    string queryString2 = "DELETE FROM FakeUsers WHERE fake_user_id = @userId";
+
+                    while (reader.Read())
+                    {
+                        int userId = (int)reader[0];
+
+                        SqlCommand command2 = new SqlCommand(queryString2, connection2);
+                        command2.Parameters.AddWithValue("@userId", userId);
+                        command2.ExecuteNonQuery();
+                        deletedAccountsCount++;
+                    }
+
+                    connection2.Close();
+                }
+
+                connection.Close();
+            }
+
+            return deletedAccountsCount;
+        }
+
+        public static int SendScamMessages(int messagesPerBot, int populationSizePercentage, ISizedRepository<MockMessage, int> messageRepository, IScamMessageGenerator templateMessages)
+        {
+            string queryString = "SELECT * FROM FakeUsers WHERE fake_user_id NOT IN (SELECT * FROM BannedUsers)";
+            int messageCount = 0;
+
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
+            {
+                SqlCommand command1 = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                DataTable fakeUserIds = new DataTable();
+
+                using (SqlDataReader readerFakeUserIds = command1.ExecuteReader())
+                {
+                    fakeUserIds.Load(readerFakeUserIds);
+                }
+
+                queryString = "SELECT TOP " + (messagesPerBot * populationSizePercentage) + " PERCENT Result.mockuser_id FROM " +
+                    "(SELECT mockuser_id FROM MockUsers WHERE NOT EXISTS " +
+                        "(SELECT fake_user_id FROM FakeUsers WHERE fake_user_id = MockUsers.mockuser_id)) Result " +
+                        "ORDER BY NEWID()";
+
+                DataTable targetedUserIds = new DataTable();
+                SqlCommand command2 = new SqlCommand(queryString, connection);
+
+                using (SqlDataReader readerLegitimateUserIds = command2.ExecuteReader())
+                {
+                    targetedUserIds.Load(readerLegitimateUserIds);
+                }
+
+                int numberOfSelectedUsers = targetedUserIds.Rows.Count;
+                int currentUserIndex = 0;
+                foreach (DataRow row in fakeUserIds.Rows)
+                {
+                    int messagesSent = 0;
+                    int currentBotId = (int)row["fake_user_id"];
+
+                    for (messagesSent = 0; messagesSent < messagesPerBot; messagesSent++, currentUserIndex++)
+                    {
+                        if (currentUserIndex >= numberOfSelectedUsers)
+                        {
+                            break;
+                        }
+
+                        string messageContent = templateMessages.GenerateScamMessage();
+                        int selectedUserId = (int)targetedUserIds.Rows[currentUserIndex]["mockuser_id"];
+                        messageRepository.Insert(new MockMessage(currentBotId, selectedUserId, messageContent, DateTime.Now));
+                        messageCount++;
+                    }
+
+                    if (messagesSent == 0)
+                    {
+                        break;
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return messageCount;
         }
     }
 }
