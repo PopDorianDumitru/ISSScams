@@ -1,5 +1,4 @@
-﻿
-namespace ISSProject.GraphAnalyser.Domain
+﻿namespace ISSProject.GraphAnalyser.Domain
 {
     internal interface IGraphAnalyserLog
     {
