@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ISSProject.MaliciousSubscriptionsBackend.Storage;
 using ISSProject_Regenerated.SubscriptionServiceBackend.Controllers;
 using ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards;
+using Moq;
 using SubscriptionServicePart.MVVM.ViewModel;
 
 namespace TestSubscriptionService
@@ -13,77 +14,96 @@ namespace TestSubscriptionService
     [TestClass]
     public class TestMainMenuViewModel
     {
-        private ICreditCardValidatorService creditCardInformationValidator;
-        private ICreditCardController creditCardController;
-        private ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards.ICreditCardRepository creditCardRepository;
+        private Mock<ICreditCardValidatorService> creditCardInformationValidator;
+        private Mock<ICreditCardController> creditCardController;
+        private Mock<ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards.ICreditCardRepository> creditCardRepository;
         private MainViewModel mainViewModel;
         [TestInitialize]
         public void TestInitializer()
         {
-            creditCardRepository = new CreditCardInMemoryRepository();
-            creditCardInformationValidator = new CreditCardValidatorService();
-            creditCardController = new CreditCardController(creditCardRepository);
-            mainViewModel = new MainViewModel(creditCardController, creditCardInformationValidator);
+            creditCardRepository = new Mock<ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards.ICreditCardRepository>();
+            creditCardInformationValidator = new Mock<ICreditCardValidatorService>();
+            creditCardController = new Mock<ICreditCardController>();
+            mainViewModel = new MainViewModel(creditCardController.Object, creditCardInformationValidator.Object);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_ValidDataReturnsTrue()
+        public void ValidCreditCardInformation_ValidInformation_ShouldReturnTrue()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12/25";
             string cVV = "123";
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(true);
             bool expectedResult = true;
             bool result = mainViewModel.ValidCreditCardInformation(creditCardNumber, expirationDate, cVV);
             // Assert
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_InvalidCreditCardNumberReturnsFalse()
+        public void ValidCreditCardInformation_InvalidInformation_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 345";
             string expirationDate = "12/25";
             string cVV = "123";
             bool expectedResult = false;
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(false);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(false);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(false);
             bool result = mainViewModel.ValidCreditCardInformation(creditCardNumber, expirationDate, cVV);
             // Assert
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_InvalidExpirationDateReturnsFalse()
+        public void ValidCreditCardInformation_InvalidExpirationDate_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12/20";
             string cVV = "123";
             bool expectedResult = false;
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(false);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(true);
             bool result = mainViewModel.ValidCreditCardInformation(creditCardNumber, expirationDate, cVV);
             // Assert
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_InvalidCVVReturnsFalse()
+        public void ValidCreditCardInformation_InvalidCVV_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12/25";
             string cVV = "12";
             bool expectedResult = false;
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(false);
             bool result = mainViewModel.ValidCreditCardInformation(creditCardNumber, expirationDate, cVV);
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_ExpirationDateWrongFormatReturnsFalse()
+        public void ValidCreditCardInformation_ExpirationDateWrongFormat_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12.25";
             string cVV = "123";
             bool expectedResult = false;
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(false);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(true);
             bool result = mainViewModel.ValidCreditCardInformation(creditCardNumber, expirationDate, cVV);
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void SaveCreditCard_ReturnsFalseWhenCreditCardInformationIsInvalid()
+        public void SaveCreditCard_CreditCardInformationIsInvalid_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 345";
             string expirationDate = "12/20";
             string cVV = "123";
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(false);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(false);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(false);
+            creditCardController.Setup(controller => controller.SaveCard(58, string.Empty, creditCardNumber, expirationDate, cVV));
             bool expectedResult = false;
             bool result = mainViewModel.SaveCreditCard(string.Empty, creditCardNumber, cVV, expirationDate);
             Assert.AreEqual(expectedResult, result);
@@ -95,6 +115,10 @@ namespace TestSubscriptionService
             string expirationDate = "12/25";
             string cVV = "123";
             bool expectedResult = true;
+            creditCardInformationValidator.Setup(validator => validator.ValidCreditCardNumber(creditCardNumber)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidExpirationDate(expirationDate)).Returns(true);
+            creditCardInformationValidator.Setup(validator => validator.ValidCVV(cVV)).Returns(true);
+            creditCardController.Setup(controller => controller.SaveCard(58, string.Empty, creditCardNumber, expirationDate, cVV));
             bool result = mainViewModel.SaveCreditCard(string.Empty, creditCardNumber, cVV, expirationDate);
             Assert.AreEqual(expectedResult, result);
         }

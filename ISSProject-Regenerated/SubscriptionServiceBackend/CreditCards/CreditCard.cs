@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ISSProject.Common.Mock;
 using ISSProject.MaliciousSubscriptionsBackend.Domain;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards
 {
@@ -14,6 +16,20 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards
         private string creditCardNumber;
         private string expirationDate;
         private string cvv;
+
+        public override bool Equals(object comparisonObject)
+        {
+            // Check for null and compare run-time types.
+            if ((comparisonObject == null) || !this.GetType().Equals(comparisonObject.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                CreditCard creditCard = (CreditCard)comparisonObject;
+                return (UserID == creditCard.UserID) && (HolderName == creditCard.HolderName) && (CreditCardNumber == creditCard.CreditCardNumber) && (ExpirationDate == creditCard.ExpirationDate) && (CVV == creditCard.CVV);
+            }
+        }
 
         public CreditCard(int userID, string holderName, string creditCardNumber, string expirationDate, string cvv)
         {
