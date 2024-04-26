@@ -92,9 +92,9 @@ namespace ISSProject.ScamBots
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new ScamMessageRepositoryException("An error occured while trying to delete message template from the database: " + ex.Message);
+                throw new ScamMessageRepositoryException("An error occured while trying to delete message template from the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -118,9 +118,9 @@ namespace ISSProject.ScamBots
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new ScamMessageRepositoryException("An error occured while trying to insert message template into the database: " + ex.Message);
+                throw new ScamMessageRepositoryException("An error occured while trying to insert message template into the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -145,9 +145,9 @@ namespace ISSProject.ScamBots
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new ScamMessageRepositoryException("An error occured while trying to update message template into the database: " + ex.Message);
+                throw new ScamMessageRepositoryException("An error occured while trying to update message template into the database: " + exception.Message);
             }
 
             return result >= 1;

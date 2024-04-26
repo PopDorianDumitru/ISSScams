@@ -12,7 +12,7 @@ public class MockNoEntityViolation : Exception
     public MockNoEntityViolation(string message) : base(message)
     {
     }
-    public MockNoEntityViolation(object obj) : base($"No entity found in Mock Database for key: {obj}")
+    public MockNoEntityViolation(object key) : base($"No entity found in Mock Database for key: {key}")
     {
     }
 }

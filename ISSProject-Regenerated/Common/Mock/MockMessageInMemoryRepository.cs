@@ -78,11 +78,11 @@ namespace ISSProject_Regenerated.Common.Mock
 
         public bool Update(MockMessage entity)
         {
-            for (int i = 0; i < messages.Count; i++)
+            for (int index = 0; index < messages.Count; index++)
             {
-                if (messages[i].Id == entity.Id)
+                if (messages[index].Id == entity.Id)
                 {
-                    messages[i] = entity;
+                    messages[index] = entity;
                     return true;
                 }
             }

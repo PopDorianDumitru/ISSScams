@@ -183,9 +183,9 @@ namespace ISSProject.ScamBots
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new FakeUserRepositoryException("An error occured while trying to update fake user into the database: " + ex.Message);
+                throw new FakeUserRepositoryException("An error occured while trying to update fake user into the database: " + exception.Message);
             }
 
             return result >= 1;

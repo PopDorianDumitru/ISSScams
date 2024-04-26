@@ -53,7 +53,7 @@ namespace ISSProject.Common.Mikha.Controllers
                 }
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 return false;
             }

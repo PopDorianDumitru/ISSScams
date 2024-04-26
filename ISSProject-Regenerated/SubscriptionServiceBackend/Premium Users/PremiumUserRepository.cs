@@ -96,9 +96,9 @@ namespace ISSProject.Common.Mikha.Premium_Users
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new UserRepositoryException("An error occured while trying to delete user from the database: " + ex.Message);
+                throw new UserRepositoryException("An error occured while trying to delete user from the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -123,9 +123,9 @@ namespace ISSProject.Common.Mikha.Premium_Users
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new UserRepositoryException("An error occured while trying to insert user into the database: " + ex.Message);
+                throw new UserRepositoryException("An error occured while trying to insert user into the database: " + exception.Message);
             }
 
             return result >= 1;

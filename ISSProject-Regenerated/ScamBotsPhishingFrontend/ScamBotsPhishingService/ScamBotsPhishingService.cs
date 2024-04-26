@@ -12,8 +12,8 @@ namespace ISSProject_Regenerated.ScamBotsPhishingFrontend.ScamBotsPhishingServic
     {
         public static void AddToDatabase(string name, string creditNr, string cvv, string expYear, int randomUserId)
         {
-            SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING); // SQL connection string
-            conn.Open();
+            SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING); // SQL connection string
+            connection.Open();
             string query = "INSERT INTO CreditCards VALUES (" +
                                                             randomUserId + ",'" +
                                                             name + "','" +
@@ -21,9 +21,9 @@ namespace ISSProject_Regenerated.ScamBotsPhishingFrontend.ScamBotsPhishingServic
                                                             expYear + "','" +
                                                             cvv + "')";
 
-            SqlCommand command = new SqlCommand(query, conn);
+            SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
-            conn.Close();
+            connection.Close();
         }
     }
 }

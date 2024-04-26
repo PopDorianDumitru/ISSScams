@@ -34,17 +34,17 @@ namespace ISSProject.CompanyForm.Controller
         {
             try
             {
-                SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING);
-                conn.Open();
+                SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING);
+                connection.Open();
 
                 // Inserting without id because id increments automatically
                 string insertQuery = "INSERT INTO CompanyTokens VALUES ('" +
                     companyInfo.GetCompanyName() + "','" + companyInfo.GetLinkToAPI()
                     + "','" + companyInfo.GetToken() + "'," + companyInfo.GetServiceSeverity() + ")";
 
-                SqlCommand cmd = new SqlCommand(insertQuery, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                SqlCommand command = new SqlCommand(insertQuery, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
                 return true;
             }
             catch (Exception exception)

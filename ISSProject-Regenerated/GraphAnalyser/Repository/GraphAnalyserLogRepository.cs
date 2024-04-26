@@ -106,11 +106,11 @@ namespace ISSProject.GraphAnalyser.Repository
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 throw new GraphAnalyserLogRepositoryException(
                     "Something went wrong when trying to delete a graph " +
-                    "analyser log from the database.\n" + ex.Message);
+                    "analyser log from the database.\n" + exception.Message);
             }
 
             return result >= 1;
@@ -142,11 +142,11 @@ namespace ISSProject.GraphAnalyser.Repository
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 throw new GraphAnalyserLogRepositoryException(
                     "An error occured while trying to insert a new graph analyser " +
-                    "log into the database.\n" + ex.Message);
+                    "log into the database.\n" + exception.Message);
             }
 
             return result >= 1;
@@ -180,11 +180,11 @@ namespace ISSProject.GraphAnalyser.Repository
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 throw new GraphAnalyserLogRepositoryException(
                     "An error occured while trying to update a graph analyzer " +
-                    "log in the database.\n" + ex.Message);
+                    "log in the database.\n" + exception.Message);
             }
 
             return result >= 1;

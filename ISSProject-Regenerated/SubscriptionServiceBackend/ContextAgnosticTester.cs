@@ -86,12 +86,12 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.Groups
             Debug.Assert(succesfullydeletedpremium == true && succesfullyinsertedpremium == true);
             Debug.Assert(succesfullydeletedvanilla == false && succesfullyinsertedvanilla == false);
 
-            var prioQueue = premiumPostController.GetPostQueue();
+            var priorityQueue = premiumPostController.GetPostQueue();
 
-            while (prioQueue.Count > 0)
+            while (priorityQueue.Count > 0)
             {
-                var elem = prioQueue.Dequeue();
-                Console.WriteLine(elem);
+                var element = priorityQueue.Dequeue();
+                Console.WriteLine(element);
             }
         }
 

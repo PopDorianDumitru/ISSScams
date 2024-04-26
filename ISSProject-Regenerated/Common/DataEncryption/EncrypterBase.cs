@@ -30,9 +30,9 @@ namespace ISSProject.Common.DataEncryption
         public string EncryptString(string inputString)
         {
             string result = string.Empty;
-            for (int i = 0; i < inputString.Length; ++i)
+            for (int index = 0; index < inputString.Length; ++index)
             {
-                result += EncryptCharacter(inputString[i]);
+                result += EncryptCharacter(inputString[index]);
             }
 
             return result;
@@ -57,9 +57,9 @@ namespace ISSProject.Common.DataEncryption
         public string DecryptString(string encryptedString)
         {
             string result = string.Empty;
-            for (int i = 0; i < encryptedString.Length; ++i)
+            for (int index = 0; index < encryptedString.Length; ++index)
             {
-                result += DecryptCharacter(encryptedString[i]);
+                result += DecryptCharacter(encryptedString[index]);
             }
 
             return result;

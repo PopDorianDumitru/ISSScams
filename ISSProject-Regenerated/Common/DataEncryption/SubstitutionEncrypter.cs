@@ -17,23 +17,23 @@ namespace ISSProject.Common.DataEncryption
                 throw new Exception("Arguments must be a 1:1 map");
             }
 
-            for (int i = 0; i < replacedCharacters.Length; i++)
+            for (int index = 0; index < replacedCharacters.Length; index++)
             {
-                if (!replacementCharacters.Contains(replacedCharacters[i]))
+                if (!replacementCharacters.Contains(replacedCharacters[index]))
                 {
                     throw new Exception("A character must be present in both arguments.");
                 }
             }
 
-            for (int i = 0; i < replacedCharacters.Length; i++)
+            for (int index = 0; index < replacedCharacters.Length; index++)
             {
-                if (encryptionMap.ContainsKey(replacedCharacters[i]) || decryptionMap.ContainsKey(replacementCharacters[i]))
+                if (encryptionMap.ContainsKey(replacedCharacters[index]) || decryptionMap.ContainsKey(replacementCharacters[index]))
                 {
                     throw new Exception("A character cannot be mapped to multiple characters");
                 }
 
-                encryptionMap.Add(replacedCharacters[i], replacementCharacters[i]);
-                decryptionMap.Add(replacementCharacters[i], replacedCharacters[i]);
+                encryptionMap.Add(replacedCharacters[index], replacementCharacters[index]);
+                decryptionMap.Add(replacementCharacters[index], replacedCharacters[index]);
             }
         }
     }
