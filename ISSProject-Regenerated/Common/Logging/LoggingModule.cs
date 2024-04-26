@@ -71,10 +71,10 @@ namespace ISSProject.Common.Logging
 
             try
             {
-                StreamWriter sw = new StreamWriter(fileName, true);
-                sw.WriteLine(line);
-                sw.Flush();
-                sw.Close();
+                StreamWriter streamWriter = new StreamWriter(fileName, true);
+                streamWriter.WriteLine(line);
+                streamWriter.Flush();
+                streamWriter.Close();
 
                 if (writeToConsole)
                 {
@@ -83,9 +83,9 @@ namespace ISSProject.Common.Logging
                     Console.ResetColor();
                 }
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine("Logging module error: " + e.Message);
+                Console.WriteLine("Logging module error: " + exception.Message);
             }
         }
     }

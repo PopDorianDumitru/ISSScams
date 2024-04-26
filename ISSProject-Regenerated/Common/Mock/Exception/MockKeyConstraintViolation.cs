@@ -12,7 +12,7 @@ public class MockKeyConstraintViolation : Exception
     public MockKeyConstraintViolation(string message) : base(message)
     {
     }
-    public MockKeyConstraintViolation(object obj) : base($"Key Constraint Violation in Mock Database for key: {obj}")
+    public MockKeyConstraintViolation(object key) : base($"Key Constraint Violation in Mock Database for key: {key}")
     {
     }
 }

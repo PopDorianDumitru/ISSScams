@@ -18,8 +18,8 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
             using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
                 conn.Open();
-                string dbToSelect = (company.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";
-                string queryString = $"SELECT * FROM {dbToSelect} WHERE company_id = {company.GetId()}";
+                string databaseToSelect = (company.GetServiceSeverity() == 0) ? "BenignFlaggedCrossedWithCompany" : "SevereFlaggedCrossedWithCompany";
+                string queryString = $"SELECT * FROM {databaseToSelect} WHERE company_id = {company.GetId()}";
                 SqlCommand command = new SqlCommand(queryString, conn);
 
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -43,12 +43,12 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Service
         }
         public static List<T> PerformFisherYatesShuffle<T>(this List<T> list)
         {
-            Random rnd = new Random();
+            Random randomNumber = new Random();
             int shuffles = list.Count;
             while (shuffles > 1)
             {
                 shuffles--;
-                int swapper = rnd.Next(0, shuffles + 1);
+                int swapper = randomNumber.Next(0, shuffles + 1);
                 T value = list[swapper];
                 list[swapper] = list[shuffles];
                 list[shuffles] = value;

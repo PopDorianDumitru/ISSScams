@@ -102,9 +102,9 @@ namespace ISSProject.Common.Mikha.Premium_Messages
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new PremiumMessageRepositoryError("An error occured while trying to delete message from the database: " + ex.Message);
+                throw new PremiumMessageRepositoryError("An error occured while trying to delete message from the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -129,9 +129,9 @@ namespace ISSProject.Common.Mikha.Premium_Messages
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new PremiumMessageRepositoryError("An error occured while trying to insert message into the database: " + ex.Message);
+                throw new PremiumMessageRepositoryError("An error occured while trying to insert message into the database: " + exception.Message);
             }
 
             return result >= 1;

@@ -45,7 +45,7 @@ namespace ISSProject.ScamBots.Service
             lastName = fakeLastNames[randomGenerator.Next(1, fakeLastNames.Count + 1) - 1];
             phoneNumber = "22";
 
-            for (int i = 0; i < 8; ++i)
+            for (int index = 0; index < 8; ++index)
             {
                 phoneNumber += (randomGenerator.Next(1, 11) - 1).ToString();
             }
@@ -78,7 +78,7 @@ namespace ISSProject.ScamBots.Service
         {
             List<MockUser> fakeUsers = new List<MockUser>();
 
-            for (int i = 0; i < count; i++)
+            for (int index = 0; index < count; index++)
             {
                 fakeUsers.Add(GenerateFakeUser());
             }

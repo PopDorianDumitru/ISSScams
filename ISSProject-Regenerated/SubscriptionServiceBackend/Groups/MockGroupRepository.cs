@@ -136,9 +136,9 @@ namespace ISSProject.Common.Mikha.Groups
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new GroupRepositoryError("An error occured while trying to delete group from the database: " + ex.Message);
+                throw new GroupRepositoryError("An error occured while trying to delete group from the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -163,9 +163,9 @@ namespace ISSProject.Common.Mikha.Groups
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new GroupRepositoryError("An error occured while trying to insert group into the database: " + ex.Message);
+                throw new GroupRepositoryError("An error occured while trying to insert group into the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -191,9 +191,9 @@ namespace ISSProject.Common.Mikha.Groups
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new GroupRepositoryError("An error occured while trying to update group into the database: " + ex.Message);
+                throw new GroupRepositoryError("An error occured while trying to update group into the database: " + exception.Message);
             }
 
             return result >= 1;

@@ -36,11 +36,11 @@ namespace ISSProject_Regenerated.GraphAnalyser.Repository
 
         public bool Update(GraphAnalyserLog entity)
         {
-            for (int i = 0; i < graphsAnalyserLogs.Count; i++)
+            for (int index = 0; index < graphsAnalyserLogs.Count; index++)
             {
-                if (graphsAnalyserLogs[i].GetId == entity.GetId)
+                if (graphsAnalyserLogs[index].GetId == entity.GetId)
                 {
-                    graphsAnalyserLogs[i] = entity;
+                    graphsAnalyserLogs[index] = entity;
                     return true;
                 }
             }

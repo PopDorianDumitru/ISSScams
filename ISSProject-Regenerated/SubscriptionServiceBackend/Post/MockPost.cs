@@ -8,15 +8,15 @@ namespace ISSProject.Common.Mikha
 {
     internal class MockPost : IKeyedEntity<int>
     {
-        public override bool Equals(object? obj)
+        public override bool Equals(object? comparisonObject)
         {
-            if (obj == null || !GetType().Equals(obj.GetType()))
+            if (comparisonObject == null || !GetType().Equals(comparisonObject.GetType()))
             {
                 return false;
             }
             else
             {
-                MockPost post = (MockPost)obj;
+                MockPost post = (MockPost)comparisonObject;
                 return (Id == post.Id) && (PosterId == post.PosterId) && (PostTitle == post.PostTitle) && (PostContent == post.PostContent) && (PostDate == post.PostDate);
             }
         }

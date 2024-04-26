@@ -44,7 +44,7 @@ namespace ISSProject.ScamBots
         {
             List<string> messages = new List<string>();
 
-            for (int i = 0; i < count; i++)
+            for (int index = 0; index < count; index++)
             {
                 messages.Add(GenerateScamMessage());
             }

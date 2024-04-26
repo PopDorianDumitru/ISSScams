@@ -27,11 +27,11 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Storage
                       @"Integrated Security=true;";
 
             List<CompanyToken> companyTokens = new List<CompanyToken>();
-            using (SqlConnection conn = new SqlConnection(connString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
-                conn.Open();
+                connection.Open();
                 string queryString = "SELECT * FROM CompanyTokens";
-                SqlCommand command = new SqlCommand(queryString, conn);
+                SqlCommand command = new SqlCommand(queryString, connection);
 
                 CompanyToken companyToken;
                 using (SqlDataReader reader = command.ExecuteReader())

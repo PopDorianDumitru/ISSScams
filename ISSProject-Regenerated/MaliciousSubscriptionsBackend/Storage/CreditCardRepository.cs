@@ -20,16 +20,16 @@ namespace ISSProject.MaliciousSubscriptionsBackend.Storage
 
         public override IEnumerable<CreditCard> All()
         {
-            string connString = @"Data Source=DESKTOP-MAIN;" +
+            string connectionString = @"Data Source=DESKTOP-MAIN;" +
                       @"Initial Catalog=CelebrationOfCapitalism;" +
                       @"Integrated Security=true;";
 
             List<CreditCard> creditCards = new List<CreditCard>();
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
-                conn.Open();
+                connection.Open();
                 string queryString = "SELECT * FROM CreditCards";
-                SqlCommand command = new SqlCommand(queryString, conn);
+                SqlCommand command = new SqlCommand(queryString, connection);
 
                 CreditCard creditCard;
                 using (SqlDataReader reader = command.ExecuteReader())

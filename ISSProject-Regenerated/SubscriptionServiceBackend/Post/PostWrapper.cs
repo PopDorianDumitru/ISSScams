@@ -10,15 +10,15 @@ namespace ISSProject.Common.Mikha
     internal class PostWrapper : IDomainEntityWrapper<MockPost, int>, IKeyedEntity<int>
     {
         private MockPost post;
-        public override bool Equals(object? obj)
+        public override bool Equals(object? comparisonObject)
         {
-            if (obj == null || !GetType().Equals(obj.GetType()))
+            if (comparisonObject == null || !GetType().Equals(comparisonObject.GetType()))
             {
                 return false;
             }
             else
             {
-                PostWrapper postWrapper = (PostWrapper)obj;
+                PostWrapper postWrapper = (PostWrapper)comparisonObject;
                 return post.Equals(postWrapper.GetPureReference());
             }
         }

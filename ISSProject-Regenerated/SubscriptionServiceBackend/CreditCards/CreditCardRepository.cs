@@ -28,13 +28,13 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards
             string expirationDate = card.ExpirationDate;
             string creditCardNumber = card.CreditCardNumber;
             string cvv = card.CVV;
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
-                conn.Open();
+                connection.Open();
                 string dbToInsert = "CreditCards";
                 string queryString = $@"INSERT INTO {dbToInsert} VALUES (@UserID, @HolderName, @CreditCardNumber, @ExpirationDate, @CVV)";
 
-                SqlCommand command = new SqlCommand(queryString, conn);
+                SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@UserID", userID);
                 command.Parameters.AddWithValue("@HolderName", holderName);
                 command.Parameters.AddWithValue("@CreditCardNumber", creditCardNumber);
@@ -44,12 +44,12 @@ namespace ISSProject_Regenerated.SubscriptionServiceBackend.CreditCards
                 command.Dispose();
             }
 
-            using (SqlConnection conn = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
+            using (SqlConnection connection = new SqlConnection(ProgramConfig.DATABASE_CONNECTION_STRING))
             {
-                conn.Open();
+                connection.Open();
                 string dbToInsert = "PremiumUsers";
                 string queryString = $@"INSERT INTO {dbToInsert} VALUES (@UserID)";
-                SqlCommand command = new SqlCommand(queryString, conn);
+                SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@UserID", userID);
                 command.ExecuteNonQuery();
                 command.Dispose();

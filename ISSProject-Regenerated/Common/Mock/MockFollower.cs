@@ -10,16 +10,16 @@ namespace ISSProject.Common.Mock
     {
         private int id;
 
-        public override bool Equals(object obj)
+        public override bool Equals(object mockFollower)
         {
             // Check for null and compare run-time types.
-            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            if ((mockFollower == null) || !this.GetType().Equals(mockFollower.GetType()))
             {
                 return false;
             }
             else
             {
-                MockFollower mf = (MockFollower)obj;
+                MockFollower mf = (MockFollower)mockFollower;
                 return (Id == mf.Id) && (UserId == mf.UserId) && (FollowedUserId == mf.FollowedUserId);
             }
         }

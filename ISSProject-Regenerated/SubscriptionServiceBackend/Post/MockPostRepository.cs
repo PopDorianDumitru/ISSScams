@@ -117,9 +117,9 @@ namespace ISSProject.Common.Mikha
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new MockPostError("An error occured while trying to delete post from the database: " + ex.Message);
+                throw new MockPostError("An error occured while trying to delete post from the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -147,9 +147,9 @@ namespace ISSProject.Common.Mikha
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new MockPostError("An error occured while trying to insert post into the database: " + ex.Message);
+                throw new MockPostError("An error occured while trying to insert post into the database: " + exception.Message);
             }
 
             return result >= 1;
@@ -177,9 +177,9 @@ namespace ISSProject.Common.Mikha
                     connection.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new MockPostError("An error occured while trying to update post into the database: " + ex.Message);
+                throw new MockPostError("An error occured while trying to update post into the database: " + exception.Message);
             }
 
             return result >= 1;
