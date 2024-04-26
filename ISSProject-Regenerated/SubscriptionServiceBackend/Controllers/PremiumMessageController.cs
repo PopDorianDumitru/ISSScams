@@ -42,7 +42,7 @@ namespace ISSProject.Common.Mikha.Controllers
                         }
                         else
                         {
-                            premiumMessageRepository.Delete(message);
+                            messageRepository.Delete(message);
                             return false;
                         }
                     }

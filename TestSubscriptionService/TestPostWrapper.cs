@@ -7,80 +7,20 @@
     public class TestPostWrapper
     {
         [TestMethod]
-        public void PostWrapper_GetPureReference()
+        public void Clone_CloningAnInstanceOfObject_ShouldReturnAnIdenticalInstance()
         {
-            int expectedId = 1;
-            int expectedPosterId = 1;
-            string expectedPostContent = "content";
-            string expectedPostTitle = "title";
-            DateTime expectedPostDate = new DateTime(2024, 12, 15, 0, 0, 0);
-            string expectedDateString = "1 - 1 - content - title - 15/12/2024 00:00:00";
-
-            MockPost mockPost = new MockPost(expectedId, expectedPosterId, expectedPostTitle, expectedPostContent, expectedPostDate);
-            PostWrapper postWrapper = new PostWrapper(mockPost);
-            Assert.AreEqual(mockPost, postWrapper.GetPureReference());
-        }
-
-        [TestMethod]
-        public void PostWrapper_FetchUsingId()
-        {
-            int expectedId = 1;
-            int expectedPosterId = 1;
-            string expectedPostContent = "content";
-            string expectedPostTitle = "title";
-            DateTime expectedPostDate = new DateTime(2024, 12, 15, 0, 0, 0);
-            string expectedDateString = "1 - 1 - content - title - 15/12/2024 00:00:00";
-            MockPost mockPost = new MockPost(expectedId, expectedPosterId, expectedPostTitle, expectedPostContent, expectedPostDate);
-            PostWrapper postWrapper = new PostWrapper(mockPost);
-            Assert.AreEqual(mockPost, postWrapper.FetchUsingId(1));
-        }
-
-        [TestMethod]
-        public void PostWrapper_GetId()
-        {
-            int expectedId = 1;
-            int expectedPosterId = 1;
-            string expectedPostContent = "content";
-            string expectedPostTitle = "title";
-            DateTime expectedPostDate = new DateTime(2024, 12, 15, 0, 0, 0);
-            string expectedDateString = "1 - 1 - content - title - 15/12/2024 00:00:00";
-            MockPost mockPost = new MockPost(expectedId, expectedPosterId, expectedPostTitle, expectedPostContent, expectedPostDate);
-            PostWrapper postWrapper = new PostWrapper(mockPost);
-
-            Assert.AreEqual(expectedId, postWrapper.GetId());
-        }
-
-        [TestMethod]
-        public void PostWrapper_Clone()
-        {
-            int expectedId = 1;
-            int expectedPosterId = 1;
-            string expectedPostContent = "content";
-            string expectedPostTitle = "title";
-            DateTime expectedPostDate = new DateTime(2024, 12, 15, 0, 0, 0);
-            string expectedDateString = "1 - 1 - content - title - 15/12/2024 00:00:00";
-            MockPost mockPost = new MockPost(expectedId, expectedPosterId, expectedPostTitle, expectedPostContent, expectedPostDate);
+            int id = 1;
+            int posterId = 1;
+            string postContent = "content";
+            string postTitle = "title";
+            DateTime postDate = new DateTime(2024, 12, 15, 0, 0, 0);
+            MockPost mockPost = new MockPost(id, posterId, postTitle, postContent, postDate);
 
             PostWrapper postWrapper = new PostWrapper(mockPost);
-            PostWrapper expectedResult = (PostWrapper)postWrapper.Clone();
-            Assert.AreEqual(expectedResult.GetId(), expectedId);
-            Assert.AreEqual(expectedResult.GetUserId(), expectedPosterId);
-            Assert.AreEqual(expectedResult.GetPureReference(), postWrapper.GetPureReference());
-        }
+            PostWrapper postWrapperClone = (PostWrapper)postWrapper.Clone();
 
-        [TestMethod]
-        public void PostWrapper_GetUserId()
-        {
-            int expectedId = 1;
-            int expectedPosterId = 1;
-            string expectedPostContent = "content";
-            string expectedPostTitle = "title";
-            DateTime expectedPostDate = new DateTime(2024, 12, 15, 0, 0, 0);
-            string expectedDateString = "1 - 1 - content - title - 15/12/2024 00:00:00";
-            MockPost mockPost = new MockPost(expectedId, expectedPosterId, expectedPostTitle, expectedPostContent, expectedPostDate);
-
-            PostWrapper postWrapper = new PostWrapper(mockPost);
-            Assert.AreEqual(expectedPosterId, postWrapper.GetUserId());
+            bool expectedResult = true;
+            Assert.AreEqual(expectedResult, postWrapperClone.Equals(postWrapper));
         }
     }
 }

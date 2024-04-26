@@ -39,7 +39,6 @@ namespace TestSubscriptionService
             MockGroup groupReturnedByController = groupController.GetGroup(expectedGroupId);
 
             Assert.IsTrue(groupReturnedByController.Equals(createdGroup));
-
         }
         [TestMethod]
         public void GetGroup_GroupThatDoesntExist_ShouldReturnNull()

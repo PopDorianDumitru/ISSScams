@@ -8,6 +8,19 @@ namespace ISSProject.Common.Mikha
 {
     internal class MockPost : IKeyedEntity<int>
     {
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                MockPost post = (MockPost)obj;
+                return (Id == post.Id) && (PosterId == post.PosterId) && (PostTitle == post.PostTitle) && (PostContent == post.PostContent) && (PostDate == post.PostDate);
+            }
+        }
+
         private int id;
         public int Id
         {

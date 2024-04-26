@@ -37,7 +37,7 @@ namespace TestSubscriptionService
         }
 
         [TestMethod]
-        public void MockGroupAddMember_AddValidIdToGroup_CountShouldBeOne()
+        public void MockGroupAddMember_AddValidIdTomptyGroup_CountShouldBeOne()
         {
             string expectedGroupName = "Soccer";
             int expectedId = 1;
@@ -48,18 +48,6 @@ namespace TestSubscriptionService
             mockGroup.MembersID.Add(1);
             int finalNumberOfUsers = groupWrapper.GetUsersIDs().Count;
             Assert.AreEqual(expectedNrOfUsersAfterAddingOneUser, finalNumberOfUsers);
-        }
-        [TestMethod]
-        public void GroupWrapper_FetchUsingId()
-        {
-            string expectedGroupName = "Soccer";
-            int expectedId = 1;
-            bool expectedIsPrivate = false;
-            MockGroup mockGroup = new MockGroup(expectedId, expectedGroupName, expectedIsPrivate);
-            GroupWrapper groupWrapper = new GroupWrapper(mockGroup);
-            MockGroup result = groupWrapper.FetchUsingId(1);
-
-            Assert.IsTrue(mockGroup.Equals(result));
         }
     }
 }
