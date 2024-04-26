@@ -10,7 +10,18 @@ namespace ISSProject.Common.Mikha
     internal class PostWrapper : IDomainEntityWrapper<MockPost, int>, IKeyedEntity<int>
     {
         private MockPost post;
-
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                PostWrapper postWrapper = (PostWrapper)obj;
+                return post.Equals(postWrapper.GetPureReference());
+            }
+        }
         public PostWrapper(MockPost post)
         {
             this.post = post;

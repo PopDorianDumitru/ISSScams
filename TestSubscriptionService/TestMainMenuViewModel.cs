@@ -27,7 +27,7 @@ namespace TestSubscriptionService
             mainViewModel = new MainViewModel(creditCardController.Object, creditCardInformationValidator.Object);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_ValidInformation_ShouldReturnTrue()
+        public void ValidCreditCardInformation_ForValidInformation_ShouldReturnTrue()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12/25";
@@ -41,7 +41,7 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_InvalidInformation_ShouldReturnFalse()
+        public void ValidCreditCardInformation_ForInvalidInformation_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 345";
             string expirationDate = "12/25";
@@ -55,7 +55,7 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_InvalidExpirationDate_ShouldReturnFalse()
+        public void ValidCreditCardInformation_ForInvalidExpirationDate_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12/20";
@@ -69,7 +69,7 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_InvalidCVV_ShouldReturnFalse()
+        public void ValidCreditCardInformation_ForInvalidCVV_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12/25";
@@ -82,7 +82,7 @@ namespace TestSubscriptionService
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void ValidCreditCardInformation_ExpirationDateWrongFormat_ShouldReturnFalse()
+        public void ValidCreditCardInformation_ForExpirationDateWrongFormat_ShouldReturnFalse()
         {
             string creditCardNumber = "1234 5678 9012 3456";
             string expirationDate = "12.25";

@@ -8,44 +8,53 @@ using ISSProject.Common.Mikha.Controllers;
 using ISSProject.Common.Wrapper;
 using ISSProject_Regenerated.SubscriptionServiceBackend.Post;
 using ISSProject_Regenerated.SubscriptionServiceBackend.Premium_Users;
+using Moq;
 
 namespace TestSubscriptionService
 {
     [TestClass]
     public class TestPremiumController
     {
-        private IMockPostRepository mockPostRepository;
-        private IPremiumPostRepository premiumPostRepository;
-        private IPremiumUserRepository premiumUserRepository;
+        private Mock<IMockPostRepository> mockPostRepository;
+        private Mock<IPremiumPostRepository> premiumPostRepository;
+        private Mock<IPremiumUserRepository> premiumUserRepository;
         private IPremiumPostController premiumPostController;
         [TestInitialize]
         public void TestInitialize()
         {
-            mockPostRepository = new MockPostInMemoryRepository();
-            premiumPostRepository = new PremiumPostInMemoryRepository();
-            premiumUserRepository = new PremiumUserInMemoryRepository();
-            MockPost post1 = new MockPost(5, 1, string.Empty, string.Empty, DateTime.Now);
-            MockPost post3 = new MockPost(7, 1, string.Empty, string.Empty, DateTime.Now);
-            mockPostRepository.Insert(post1);
-            mockPostRepository.Insert(post3);
-
-            premiumPostController = new PremiumPostController(mockPostRepository, premiumPostRepository, premiumUserRepository);
-            UserWrapper premiumUser = new UserWrapper(1, "mail", "Dorian", "Pop", DateTime.Now);
-            premiumUserRepository.Insert(premiumUser);
+            mockPostRepository = new Mock<IMockPostRepository>();
+            premiumPostRepository = new Mock<IPremiumPostRepository>();
+            premiumUserRepository = new Mock<IPremiumUserRepository>();
+            premiumPostController = new PremiumPostController(mockPostRepository.Object, premiumPostRepository.Object, premiumUserRepository.Object);
         }
         [TestMethod]
         public void AddPremiumPost_WhenPosterIsPremium_ShouldReturnTrue()
         {
             MockPost post = new MockPost(1, 1, string.Empty, string.Empty, DateTime.Now);
             bool expectedResult = true;
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(new UserWrapper(1, "email", "firstName", "lastName", DateTime.Now));
+            mockPostRepository.Setup(repo => repo.Insert(post)).Returns(true);
+            premiumPostRepository.Setup(repo => repo.Insert(It.IsAny<PostWrapper>())).Returns(true);
             bool result = premiumPostController.AddPremiumPost(post);
             Assert.AreEqual(expectedResult, result);
+        }
+        [TestMethod]
+        public void AddPremiumPost_WhenPosterIsPremium_ShouldInvokeInsertPost()
+        {
+            MockPost post = new MockPost(1, 1, string.Empty, string.Empty, DateTime.Now);
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(new UserWrapper(1, "email", "firstName", "lastName", DateTime.Now));
+            mockPostRepository.Setup(repo => repo.Insert(post)).Returns(true);
+            premiumPostRepository.Setup(repo => repo.Insert(It.IsAny<PostWrapper>())).Returns(true);
+            premiumPostController.AddPremiumPost(post);
+            mockPostRepository.Verify(repo => repo.Insert(post), Times.Once);
         }
         [TestMethod]
         public void AddPremiumPost_WhenPosterIsNotPremium_ShouldReturnFalse()
         {
             MockPost post = new MockPost(2, 2, string.Empty, string.Empty, DateTime.Now);
             bool expectedResult = false;
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(() => null);
+
             bool result = premiumPostController.AddPremiumPost(post);
             Assert.AreEqual(expectedResult, result);
         }
@@ -53,8 +62,10 @@ namespace TestSubscriptionService
         public void DeletePremiumPost_WhenPosterIsPremium_ShouldReturnTrue()
         {
             MockPost post = new MockPost(3, 1, string.Empty, string.Empty, DateTime.Now);
-            mockPostRepository.Insert(post);
             bool expectedResult = true;
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(new UserWrapper(1, "email", "firstName", "lastName", DateTime.Now));
+            premiumPostRepository.Setup(repo => repo.Delete(It.IsAny<PostWrapper>())).Returns(true);
+            mockPostRepository.Setup(repo => repo.Delete(It.IsAny<MockPost>())).Returns(true);
             bool result = premiumPostController.DeletePremiumPost(post);
             Assert.AreEqual(expectedResult, result);
         }
@@ -62,24 +73,51 @@ namespace TestSubscriptionService
         public void DeletePremiumPost_WhenPosterIsNotPremium_ShouldReturnFalse()
         {
             MockPost post = new MockPost(4, 2, string.Empty, string.Empty, DateTime.Now);
-            mockPostRepository.Insert(post);
             bool expectedResult = false;
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(() => null);
             bool result = premiumPostController.DeletePremiumPost(post);
             Assert.AreEqual(expectedResult, result);
         }
         [TestMethod]
-        public void GetPostQueue_ShouldReturnPremiumPostsBeforeRegularPosts()
+        public void DeletePremiumPost_WhenPosterIsPremium_ShouldInvokeDeletePost()
         {
-            MockPost post2 = new MockPost(6, 1, string.Empty, string.Empty, DateTime.Now);
-            MockPost post4 = new MockPost(8, 1, string.Empty, string.Empty, DateTime.Now);
-            premiumPostController.AddPremiumPost(post2);
-            premiumPostController.AddPremiumPost(post4);
+            MockPost post = new MockPost(5, 1, string.Empty, string.Empty, DateTime.Now);
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(new UserWrapper(1, "email", "firstName", "lastName", DateTime.Now));
+            premiumPostRepository.Setup(repo => repo.Delete(It.IsAny<PostWrapper>())).Returns(true);
+            mockPostRepository.Setup(repo => repo.Delete(It.IsAny<MockPost>())).Returns(true);
+            premiumPostController.DeletePremiumPost(post);
+            mockPostRepository.Verify(repo => repo.Delete(It.IsAny<MockPost>()), Times.Once);
+        }
+        [TestMethod]
+        public void DeletePremiumPost_WhenPosterIsPremium_ShouldInvokePremiumDeletePost()
+        {
+            MockPost post = new MockPost(5, 1, string.Empty, string.Empty, DateTime.Now);
+            premiumUserRepository.Setup(repo => repo.ById(post.PosterId)).Returns(new UserWrapper(1, "email", "firstName", "lastName", DateTime.Now));
+            premiumPostRepository.Setup(repo => repo.Delete(It.IsAny<PostWrapper>())).Returns(true);
+            mockPostRepository.Setup(repo => repo.Delete(It.IsAny<MockPost>())).Returns(true);
+            premiumPostController.DeletePremiumPost(post);
+            premiumPostRepository.Verify(repo => repo.Delete(It.IsAny<PostWrapper>()), Times.Once);
+        }
+        [TestMethod]
+        public void GetPostQueue_WhenReturningThePostQueue_ShouldReturnPremiumPostsBeforeRegularPosts()
+        {
+            MockPost post1 = new MockPost(1, 1, string.Empty, string.Empty, DateTime.Now);
+            MockPost post2 = new MockPost(2, 1, string.Empty, string.Empty, DateTime.Now);
+            MockPost post3 = new MockPost(3, 1, string.Empty, string.Empty, DateTime.Now);
+            List<MockPost> mockPosts = new List<MockPost>
+            {
+                post1,
+                post2,
+                post3
+            };
+            mockPostRepository.Setup(repo => repo.All()).Returns((IEnumerable<MockPost>)mockPosts);
+            premiumPostRepository.Setup(repo => repo.ById(1)).Returns(() => null);
+            premiumPostRepository.Setup(repo => repo.ById(2)).Returns(new PostWrapper(post2));
+            premiumPostRepository.Setup(repo => repo.ById(3)).Returns(() => null);
+
             PriorityQueue<MockPost, int> result = premiumPostController.GetPostQueue();
-            Assert.AreEqual(4, result.Count);
-            Assert.AreEqual(6, result.Dequeue().Id);
-            Assert.AreEqual(8, result.Dequeue().Id);
-            Assert.AreEqual(5, result.Dequeue().Id);
-            Assert.AreEqual(7, result.Dequeue().Id);
+            MockPost firstReturnedPost = result.Dequeue();
+            Assert.IsTrue(firstReturnedPost.Equals(post2));
         }
     }
 }

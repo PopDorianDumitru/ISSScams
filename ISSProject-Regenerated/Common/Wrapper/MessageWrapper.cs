@@ -10,7 +10,18 @@ namespace ISSProject.Common.Wrapper
     internal class MessageWrapper : IDomainEntityWrapper<MockMessage, int>, IKeyedEntity<int>, IMessageWrapper
     {
         private MockMessage message;
-
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                MessageWrapper messageWrapper = (MessageWrapper)obj;
+                return message.Equals(messageWrapper.GetPureReference());
+            }
+        }
         public MessageWrapper(MockMessage message)
         {
             this.message = message;
