@@ -6,7 +6,7 @@ namespace MaliciousSubscriptionsDomain
     public class UserIDTests
     {
         [TestMethod]
-        public void Equals_ShouldReturnTrue_WhenComparingEqualUserIds()
+        public void Equals_WhenComparingEqualUserIds_ShouldReturnTrue()
         {
             int userIdValue = 123;
             var userId1 = new UserID(userIdValue);
@@ -16,7 +16,7 @@ namespace MaliciousSubscriptionsDomain
         }
 
         [TestMethod]
-        public void Equals_ShouldReturnFalse_WhenComparingDifferentUserIds()
+        public void Equals_WhenComparingDifferentUserIds_ShouldReturnFalse()
         {
             var userId1 = new UserID(123);
             var userId2 = new UserID(456);
@@ -25,7 +25,7 @@ namespace MaliciousSubscriptionsDomain
         }
 
         [TestMethod]
-        public void GetHashCode_ShouldReturnSameValue_ForEqualUserIds()
+        public void GetHashCode_ForEqualUserIds_ShouldReturnSameValue()
         {
             int userIdValue = 123;
             var userId1 = new UserID(userIdValue);
