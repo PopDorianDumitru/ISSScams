@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ISSProject.MaliciousSubscriptionsBackend.Domain;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -66,6 +67,23 @@ namespace ISSProject.Common.Mock
         public object Clone()
         {
             return MemberwiseClone();
+        }
+
+        public override bool Equals(object @object)
+        {
+            if (@object == null || GetType() != @object.GetType())
+            {
+                return false;
+            }
+
+            MockMessage other = (MockMessage)@object;
+
+            // Check all fields for equality
+            return Id == other.Id &&
+                   SenderId == other.SenderId &&
+                   ReceiverId == other.ReceiverId &&
+                   MessageContent == other.MessageContent &&
+                   CommunicationDate == other.CommunicationDate;
         }
     }
 }

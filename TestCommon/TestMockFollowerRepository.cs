@@ -36,9 +36,10 @@ namespace TestCommon
             MockFollower newFollower = new MockFollower(20, 11, 12);
             singleton.Insert(newFollower);
 
-            Assert.AreEqual(singleton.ById(20).Id, 20);
-            Assert.AreEqual(singleton.ById(20).UserId, 11);
-            Assert.AreEqual(singleton.ById(20).FollowedUserId, 12);
+            // Assert.AreEqual(singleton.ById(20).Id, 20);
+            // Assert.AreEqual(singleton.ById(20).UserId, 11);
+            // Assert.AreEqual(singleton.ById(20).FollowedUserId, 12);
+            Assert.AreEqual(singleton.ById(20), newFollower);
         }
 
         [TestMethod]
@@ -71,7 +72,7 @@ namespace TestCommon
             }
         }
         [TestMethod]
-        public void Update_ValidFollowerWithExistingId_ShouldUpdate()
+        public void Update_ValidFollowerWithExistingId_ShouldReturnTrue()
         {
             MockFollowerRepository singleton;
             singleton = MockFollowerRepository.Provided();
@@ -81,8 +82,24 @@ namespace TestCommon
             MockFollower updatedFollower = new MockFollower(10, 13, 15);
 
             Assert.IsTrue(singleton.Update(updatedFollower));
-            Assert.AreEqual(13, singleton.ById(10).UserId);
-            Assert.AreEqual(15, singleton.ById(10).FollowedUserId);
+            // Assert.AreEqual(13, singleton.ById(10).UserId);
+            // Assert.AreEqual(15, singleton.ById(10).FollowedUserId);
+        }
+
+        [TestMethod]
+        public void Update_ValidFollowerWithExistingId_ShouldUpdateElement()
+        {
+            MockFollowerRepository singleton;
+            singleton = MockFollowerRepository.Provided();
+
+            MockFollower newFollower = new MockFollower(11, 11, 12);
+            singleton.Insert(newFollower);
+            MockFollower updatedFollower = new MockFollower(11, 13, 15);
+            singleton.Update(updatedFollower);
+            // Assert.IsTrue(singleton.Update(updatedFollower));
+            // Assert.AreEqual(13, singleton.ById(10).UserId);
+            // Assert.AreEqual(15, singleton.ById(10).FollowedUserId);
+            Assert.AreEqual(singleton.ById(11), updatedFollower);
         }
 
         [TestMethod]
@@ -141,9 +158,10 @@ namespace TestCommon
             singleton.Insert(newFollower2);
             singleton.Insert(newFollower3);
             IEnumerable<int> list = singleton.FollowersOf(40);
-            Assert.IsTrue(list.Contains(100));
-            Assert.IsTrue(list.Contains(101));
-            Assert.IsTrue(list.Contains(102));
+            // Assert.IsTrue(list.Contains(100));
+            // Assert.IsTrue(list.Contains(101));
+            // Assert.IsTrue(list.Contains(102));
+            Assert.IsTrue(list.Contains(100) && list.Contains(101) && list.Contains(102));
         }
     }
 }

@@ -11,19 +11,19 @@ namespace TestCommon
     [TestClass]
     public class TestShiftEncrypter
     {
-        private EncrypterBase encrypter;
+        private EncrypterBase encryptor;
         private int key = 3;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            encrypter = new ShiftEncrypter(key);
+            encryptor = new ShiftEncrypter(key);
         }
 
         [TestMethod]
         public void EncryptCharacter_ShouldEncryptCharacterUsingShiftCipher()
         {
-            char encryptedChar = encrypter.EncryptCharacter('a');
+            char encryptedChar = encryptor.EncryptCharacter('a');
 
             Assert.AreEqual('d', encryptedChar);
         }
@@ -31,7 +31,7 @@ namespace TestCommon
         [TestMethod]
         public void DecryptCharacter_ShouldDecryptCharacterUsingShiftCipher()
         {
-            char decryptedChar = encrypter.DecryptCharacter('d');
+            char decryptedChar = encryptor.DecryptCharacter('d');
 
             Assert.AreEqual('a', decryptedChar);
         }
@@ -41,7 +41,7 @@ namespace TestCommon
         {
             string inputString = "hello";
 
-            string encryptedString = encrypter.EncryptString(inputString);
+            string encryptedString = encryptor.EncryptString(inputString);
 
             Assert.AreEqual("khoor", encryptedString);
         }
@@ -51,7 +51,7 @@ namespace TestCommon
         {
             string encryptedString = "khoor";
 
-            string decryptedString = encrypter.DecryptString(encryptedString);
+            string decryptedString = encryptor.DecryptString(encryptedString);
 
             Assert.AreEqual("hello", decryptedString);
         }
