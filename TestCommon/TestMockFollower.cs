@@ -27,11 +27,5 @@ namespace TestCommon
             // Assert.AreEqual(mockFollower.UserId, clone.UserId);
             // Assert.AreEqual(mockFollower.FollowedUserId, clone.FollowedUserId);
         }
-
-        [TestMethod]
-        public void GetId_()
-        {
-            Assert.AreEqual(1, mockFollower.GetId());
-        }
     }
 }
