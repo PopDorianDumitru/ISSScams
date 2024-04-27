@@ -28,6 +28,21 @@ namespace TestCommon
             // Implement cloning logic if needed
             return new Person(Id, Name, BirthDate);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Person other = (Person)obj;
+
+            // Check all fields for equality
+            return Id == other.Id &&
+                   Name == other.Name &&
+                   BirthDate == other.BirthDate;
+        }
     }
 
     [TestClass]
@@ -41,16 +56,25 @@ namespace TestCommon
             cache = new SimpleKeyedMapCache<Person, int>();
         }
         [TestMethod]
-        public void Add_WhenItemNotInCache_ShouldReturnTrueAndAddItem()
+        public void Add_WhenItemNotInCache_ShouldReturnTrue()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
             var result = cache.Add(person);
             Assert.IsTrue(result);
+            // Assert.IsTrue(cache.Any(person.GetId()));
+        }
+
+        [TestMethod]
+        public void Add_WhenItemNotInCache_ShouldAddItem()
+        {
+            var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
+            var result = cache.Add(person);
+            // Assert.IsTrue(result);
             Assert.IsTrue(cache.Any(person.GetId()));
         }
 
         [TestMethod]
-        public void Add_WhenItemAlreadyInCache_ShouldReturnFalseAndNotAddItem()
+        public void Add_WhenItemAlreadyInCache_ShouldReturnFalse()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
             cache.Add(person);
@@ -58,24 +82,50 @@ namespace TestCommon
             var result = cache.Add(person);
 
             Assert.IsFalse(result);
+            // Assert.AreEqual(1, cache.GetCache().Count);
+        }
+
+        [TestMethod]
+        public void Add_WhenItemAlreadyInCache_ShouldNotAddItem()
+        {
+            var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
+            cache.Add(person);
+
+            var result = cache.Add(person);
+
+            // Assert.IsFalse(result);
             Assert.AreEqual(1, cache.GetCache().Count);
         }
 
         [TestMethod]
-        public void Update_WhenItemInCache_ShouldReturnTrueAndUpdateItem()
+        public void Update_WhenItemInCache_ShouldReturnTrue()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
             cache.Add(person);
             var updatedPerson = new Person(1, "John Doe Updated", new DateTime(1990, 1, 1));
             var result = cache.Update(updatedPerson);
             Assert.IsTrue(result);
-            Assert.AreEqual(updatedPerson.GetId(), cache.ById(updatedPerson.GetId()).GetId());
-            Assert.AreEqual(updatedPerson.Name, cache.ById(updatedPerson.GetId()).Name);
-            Assert.AreEqual(updatedPerson.BirthDate, cache.ById(updatedPerson.GetId()).BirthDate);
+            // Assert.AreEqual(updatedPerson.GetId(), cache.ById(updatedPerson.GetId()).GetId());
+            // Assert.AreEqual(updatedPerson.Name, cache.ById(updatedPerson.GetId()).Name);
+            // Assert.AreEqual(updatedPerson.BirthDate, cache.ById(updatedPerson.GetId()).BirthDate);
         }
 
         [TestMethod]
-        public void Remove_WhenItemInCache_ShouldReturnTrueAndRemoveItem()
+        public void Update_WhenItemInCache_ShouldUpdateItem()
+        {
+            var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
+            cache.Add(person);
+            var updatedPerson = new Person(1, "John Doe Updated", new DateTime(1990, 1, 1));
+            var result = cache.Update(updatedPerson);
+            // Assert.IsTrue(result);
+            // Assert.AreEqual(updatedPerson.GetId(), cache.ById(updatedPerson.GetId()).GetId());
+            // Assert.AreEqual(updatedPerson.Name, cache.ById(updatedPerson.GetId()).Name);
+            // Assert.AreEqual(updatedPerson.BirthDate, cache.ById(updatedPerson.GetId()).BirthDate);
+            Assert.AreEqual(cache.ById(1), updatedPerson);
+        }
+
+        [TestMethod]
+        public void Remove_WhenItemInCache_ShouldReturnTrue()
         {
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
             cache.Add(person);
@@ -83,6 +133,18 @@ namespace TestCommon
             var result = cache.Remove(person);
 
             Assert.IsTrue(result);
+            // Assert.IsFalse(cache.Any(person.GetId()));
+        }
+
+        [TestMethod]
+        public void Remove_WhenItemInCache_ShouldRemoveItem()
+        {
+            var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
+            cache.Add(person);
+
+            var result = cache.Remove(person);
+
+            // Assert.IsTrue(result);
             Assert.IsFalse(cache.Any(person.GetId()));
         }
 
@@ -101,9 +163,10 @@ namespace TestCommon
             var person = new Person(1, "John Doe", new DateTime(1990, 1, 1));
             cache.Add(person);
             var retrievedPerson = cache.ById(person.GetId());
-            Assert.AreEqual(person.Name, retrievedPerson.Name);
-            Assert.AreEqual(person.BirthDate, retrievedPerson.BirthDate);
-            Assert.AreEqual(person.Id, retrievedPerson.Id);
+            // Assert.AreEqual(person.Name, retrievedPerson.Name);
+            // Assert.AreEqual(person.BirthDate, retrievedPerson.BirthDate);
+            // Assert.AreEqual(person.Id, retrievedPerson.Id);
+            Assert.AreEqual(person, retrievedPerson);
         }
 
         [TestMethod]
@@ -138,7 +201,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void GetCache_ShouldReturnCorrectCacheContent()
+        public void GetCache_ShouldReturnCorrectCacheSize()
         {
             var cache = new SimpleKeyedMapCache<Person, int>();
             var person1 = new Person(1, "John Doe", new DateTime(1990, 1, 1));
@@ -149,8 +212,23 @@ namespace TestCommon
             var cacheContent = cache.GetCache();
 
             Assert.AreEqual(2, cacheContent.Count);
-            Assert.IsTrue(cacheContent.ContainsKey(person1.GetId()));
-            Assert.IsTrue(cacheContent.ContainsKey(person2.GetId()));
+            // Assert.IsTrue(cacheContent.ContainsKey(person1.GetId()));
+            // Assert.IsTrue(cacheContent.ContainsKey(person2.GetId()));
+        }
+
+        [TestMethod]
+        public void GetCache_ShouldReturnCorrectCacheContent()
+        {
+            var cache = new SimpleKeyedMapCache<Person, int>();
+            var person1 = new Person(1, "John Doe", new DateTime(1990, 1, 1));
+            var person2 = new Person(2, "Jane Doe", new DateTime(1995, 5, 10));
+            cache.Add(person1);
+            cache.Add(person2);
+
+            var cacheContent = cache.GetCache();
+
+            // Assert.AreEqual(2, cacheContent.Count);
+            Assert.IsTrue(cacheContent.ContainsKey(1) && cacheContent.ContainsKey(2));
         }
     }
 }

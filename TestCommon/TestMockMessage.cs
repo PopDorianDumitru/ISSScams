@@ -19,11 +19,12 @@ namespace TestCommon
 
             MockMessage clone = (MockMessage)message.Clone();
 
-            Assert.AreEqual(message.Id, clone.Id);
-            Assert.AreEqual(message.SenderId, clone.SenderId);
-            Assert.AreEqual(message.ReceiverId, clone.ReceiverId);
-            Assert.AreEqual(message.MessageContent, clone.MessageContent);
-            Assert.AreEqual(message.CommunicationDate, clone.CommunicationDate);
+            // Assert.AreEqual(message.Id, clone.Id);
+            // Assert.AreEqual(message.SenderId, clone.SenderId);
+            // Assert.AreEqual(message.ReceiverId, clone.ReceiverId);
+            // Assert.AreEqual(message.MessageContent, clone.MessageContent);
+            // Assert.AreEqual(message.CommunicationDate, clone.CommunicationDate);
+            Assert.AreEqual(message, clone);
         }
 
         [TestMethod]
@@ -33,11 +34,14 @@ namespace TestCommon
 
             MockMessage clone = (MockMessage)message.Clone();
 
-            Assert.AreEqual(message.Id, clone.Id);
-            Assert.AreEqual(message.SenderId, clone.SenderId);
-            Assert.AreEqual(message.ReceiverId, clone.ReceiverId);
-            Assert.AreEqual(message.MessageContent, clone.MessageContent);
-            Assert.AreEqual(message.CommunicationDate, clone.CommunicationDate);
+            Console.WriteLine(message.ToString());
+
+            // Assert.AreEqual(message.Id, clone.Id);
+            // Assert.AreEqual(message.SenderId, clone.SenderId);
+            // Assert.AreEqual(message.ReceiverId, clone.ReceiverId);
+            // Assert.AreEqual(message.MessageContent, clone.MessageContent);
+            // Assert.AreEqual(message.CommunicationDate, clone.CommunicationDate);
+            Assert.AreEqual(message, clone);
         }
 
         [TestMethod]
