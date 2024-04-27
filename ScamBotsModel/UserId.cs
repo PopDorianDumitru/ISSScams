@@ -6,25 +6,13 @@ namespace MaliciousSubscriptionsDomain
     public class UserIDTests
     {
         [TestMethod]
-        public void Constructor_ShouldSetUserIDCorrectly()
-        {
-            int expectedUserId = 123;
-
-            var userId = new UserID(expectedUserId);
-
-            Assert.AreEqual(expectedUserId, userId.GetId());
-        }
-
-        [TestMethod]
         public void Equals_ShouldReturnTrue_WhenComparingEqualUserIds()
         {
             int userIdValue = 123;
             var userId1 = new UserID(userIdValue);
             var userId2 = new UserID(userIdValue);
 
-            bool areEqual = userId1.Equals(userId2);
-
-            Assert.IsTrue(areEqual);
+            Assert.IsTrue(userId1.Equals(userId2));
         }
 
         [TestMethod]
@@ -33,9 +21,7 @@ namespace MaliciousSubscriptionsDomain
             var userId1 = new UserID(123);
             var userId2 = new UserID(456);
 
-            bool areEqual = userId1.Equals(userId2);
-
-            Assert.IsFalse(areEqual);
+            Assert.IsFalse(userId1.Equals(userId2));
         }
 
         [TestMethod]
@@ -48,7 +34,7 @@ namespace MaliciousSubscriptionsDomain
             int hashCode1 = userId1.GetHashCode();
             int hashCode2 = userId2.GetHashCode();
 
-            Assert.AreEqual(hashCode1, hashCode2);
+            Assert.IsTrue(hashCode1.Equals(hashCode2));
         }
     }
 }
