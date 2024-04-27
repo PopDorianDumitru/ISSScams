@@ -21,7 +21,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void EncryptCharacter_ShouldEncryptCharacterUsingShiftCipher()
+        public void EncryptCharacter_WhenEncryptingOneCharacter_ShouldReturnEncryptedCharacterUsingShiftCipher()
         {
             char encryptedChar = encryptor.EncryptCharacter('a');
 
@@ -29,7 +29,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void DecryptCharacter_ShouldDecryptCharacterUsingShiftCipher()
+        public void DecryptCharacter_WhenDecryptingOneCharacter_ShouldDecryptCharacterUsingShiftCipher()
         {
             char decryptedChar = encryptor.DecryptCharacter('d');
 
@@ -37,7 +37,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void EncryptString_ShouldEncryptStringUsingShiftCipher()
+        public void EncryptString_WhenEncryptingString_ShouldEncryptStringUsingShiftCipher()
         {
             string inputString = "hello";
 
@@ -47,7 +47,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void DecryptString_ShouldDecryptStringUsingShiftCipher()
+        public void DecryptString_WhenDecryptingString_ShouldDecryptStringUsingShiftCipher()
         {
             string encryptedString = "khoor";
 

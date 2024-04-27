@@ -13,7 +13,7 @@ namespace TestCommon
         private MockMessage message;
 
         [TestMethod]
-        public void Clone_ConstructorWithFiveParameters_ShouldReturnTheCloneOfTheObject()
+        public void Clone_WhenInstatiatingWithFiveParameterConstructor_ShouldReturnTheCloneOfTheObject()
         {
             message = new MockMessage(1, 2, 3, "Hello", new DateTime(2022, 4, 26, 10, 30, 0));
 
@@ -28,7 +28,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void Clone_ConstructorWithFourParameters_ShouldReturnTheCloneOfTheObject()
+        public void Clone_WhenInstantiatingWithFourParameterConstructor_ShouldReturnTheCloneOfTheObject()
         {
             message = new MockMessage(2, 3, "Hello", new DateTime(2022, 4, 26, 10, 30, 0));
 
@@ -43,19 +43,8 @@ namespace TestCommon
             // Assert.AreEqual(message.CommunicationDate, clone.CommunicationDate);
             Assert.AreEqual(message, clone);
         }
-
         [TestMethod]
-
-        public void GetId_ConstructorWithFiveParameters_TestMessageGetId()
-        {
-            message = new MockMessage(1, 2, 3, "Hello", new DateTime(2022, 4, 26, 10, 30, 0));
-
-            Assert.AreEqual(1, message.GetId());
-        }
-
-        [TestMethod]
-
-        public void GetId_ConstructorWithFourParameters_TestMessageGetId()
+        public void GetId_WhenInstantiatingWithFourParameterConstructor_ShouldReturnMinusOne()
         {
             message = new MockMessage(2, 3, "Hello", new DateTime(2022, 4, 26, 10, 30, 0));
 

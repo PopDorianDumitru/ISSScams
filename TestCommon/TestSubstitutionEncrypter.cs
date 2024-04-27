@@ -21,7 +21,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void EncryptString_ShouldEncryptStringUsingSubstitutionCipher()
+        public void EncryptString_WhenEncryptingString_ShouldEncryptStringUsingSubstitutionCipher()
         {
             string encryptedString = encryptor.EncryptString("hello");
 
@@ -29,7 +29,7 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void DecryptString_ShouldDecryptStringUsingSubstitutionCipher()
+        public void DecryptString_WhenDecryptingString_ShouldDecryptStringUsingSubstitutionCipher()
         {
             string decryptedString = encryptor.DecryptString("ifmmp");
 
@@ -37,15 +37,14 @@ namespace TestCommon
         }
 
         [TestMethod]
-        public void EncryptCharacter_ShouldEncryptCharacterUsingSubstitutionCipher()
+        public void EncryptCharacter_WhenEncryptingOneCharacter_ShouldEncryptCharacterUsingSubstitutionCipher()
         {
             char encryptedChar = encryptor.EncryptCharacter('a');
 
             Assert.AreEqual('b', encryptedChar);
         }
-
         [TestMethod]
-        public void DecryptCharacter_ShouldDecryptCharacterUsingSubstitutionCipher()
+        public void DecryptCharacter_WhenDecryptingOneCharacter_ShouldDecryptCharacterUsingSubstitutionCipher()
         {
             char decryptedChar = encryptor.DecryptCharacter('b');
 
