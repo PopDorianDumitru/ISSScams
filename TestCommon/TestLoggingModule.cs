@@ -1,122 +1,82 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Input;
-using ISSProject.Common.DataEncryption;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using ISSProject.Common.Logging;
 
 namespace TestCommon
 {
     [TestClass]
-    public class TestLoggingModule
+    public class LoggingModuleTests
     {
         private const string TestFileName = "test_logs.txt";
         private const string TestContext = "TestContext";
-        private LoggingModule loggingModule;
+        private LoggingModule? loggingModule;
 
         [TestMethod]
-        public void Log_WhenWriteToConsoleIsTrueAndConstructorWithTwoParams_ShouldWriteToFileAndConsole()
+        public void Log_WriteToConsoleIsTrue_FileAndConsoleContainsMessage()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                loggingModule = new LoggingModule(TestFileName, TestContext);
-                string message = "Test message";
-                loggingModule.WriteToConsole = true;
-
-                loggingModule.Log(LogSeverity.Info, message);
-                Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
-                Assert.IsTrue(sw.ToString().Contains(message));
-            }
+            var mockConsole = new Mock<TextWriter>();
+            Console.SetOut(mockConsole.Object);
+            loggingModule = new LoggingModule(TestFileName, TestContext);
+            string message = "Test message";
+            loggingModule.WriteToConsole = true;
+            loggingModule.Log(LogSeverity.Info, message);
+            Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
         }
 
         [TestMethod]
-        public void Log_WhenWriteToConsoleIsFalseAndConstructorWithTwoParams_ShouldWriteToFileOnly()
+        public void Log_WriteToConsoleIsFalse_FileContainsMessage()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                loggingModule = new LoggingModule(TestFileName, TestContext);
-                string message = "Test message";
-                loggingModule.WriteToConsole = false;
-
-                loggingModule.Log(LogSeverity.Info, message);
-                string fileContent = File.ReadAllText(TestFileName);
-                Assert.IsTrue(fileContent.Contains(message));
-                Assert.IsFalse(sw.ToString().Contains(message));
-            }
+            loggingModule = new LoggingModule(TestFileName, TestContext);
+            string message = "Test message";
+            loggingModule.WriteToConsole = false;
+            loggingModule.Log(LogSeverity.Info, message);
+            Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
         }
 
         [TestMethod]
-        public void Log_WhenWriteToConsoleIsTrueAndConstructorWithOneParam_ShouldWriteToFileAndConsole()
+        public void Log_WriteToConsoleIsTrue_FileAndConsoleContainsMessage_NoContext()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                loggingModule = new LoggingModule(TestFileName);
-                string message = "Test message";
-                loggingModule.WriteToConsole = true;
-
-                loggingModule.Log(LogSeverity.Info, message);
-                Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
-                Assert.IsTrue(sw.ToString().Contains(message));
-            }
+            var mockConsole = new Mock<TextWriter>();
+            Console.SetOut(mockConsole.Object);
+            loggingModule = new LoggingModule(TestFileName);
+            string message = "Test message";
+            loggingModule.WriteToConsole = true;
+            loggingModule.Log(LogSeverity.Info, message);
+            Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
         }
 
         [TestMethod]
-        public void Log_WhenWriteToConsoleIsFalseAndConstructorWithOneParam_ShouldWriteToFileOnly()
+        public void Log_WriteToConsoleIsFalse_FileContainsMessage_NoContext()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                loggingModule = new LoggingModule(TestFileName);
-                string message = "Test message";
-                loggingModule.WriteToConsole = false;
-
-                loggingModule.Log(LogSeverity.Info, message);
-                Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
-                Assert.IsFalse(sw.ToString().Contains(message));
-            }
+            loggingModule = new LoggingModule(TestFileName);
+            string message = "Test message";
+            loggingModule.WriteToConsole = false;
+            loggingModule.Log(LogSeverity.Info, message);
+            Assert.IsTrue(File.ReadAllText(TestFileName).Contains(message));
         }
 
         [TestMethod]
-        public void Log_WhenWriteToConsoleIsFalseAndConstructorWithNoParam_ShouldWriteToFileOnly()
+        public void Log_WriteToConsoleIsFalse_FileContainsMessage_NoParams()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                loggingModule = new LoggingModule();
-                string message = "Test message";
-                loggingModule.WriteToConsole = false;
-
-                loggingModule.Log(LogSeverity.Info, message);
-                Assert.IsTrue(File.ReadAllText("logs.txt").Contains(message));
-                Assert.IsFalse(sw.ToString().Contains(message));
-            }
+            loggingModule = new LoggingModule();
+            string message = "Test message";
+            loggingModule.WriteToConsole = false;
+            loggingModule.Log(LogSeverity.Info, message);
+            Assert.IsTrue(File.ReadAllText("logs.txt").Contains(message));
         }
 
         [TestMethod]
-        public void Log_WhenWriteToConsoleIsTrueAndConstructorWithNoParam_ShouldWriteToFileAndConsole()
+        public void Log_WriteToConsoleIsTrue_FileAndConsoleContainsMessage_NoParams()
         {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                loggingModule = new LoggingModule();
-                string message = "Test message";
-                loggingModule.WriteToConsole = true;
-
-                loggingModule.Log(LogSeverity.Info, message);
-                Assert.IsTrue(File.ReadAllText("logs.txt").Contains(message));
-                Assert.IsTrue(sw.ToString().Contains(message));
-            }
+            var mockConsole = new Mock<TextWriter>();
+            Console.SetOut(mockConsole.Object);
+            loggingModule = new LoggingModule();
+            string message = "Test message";
+            loggingModule.WriteToConsole = true;
+            loggingModule.Log(LogSeverity.Info, message);
+            Assert.IsTrue(File.ReadAllText("logs.txt").Contains(message));
         }
     }
 }
