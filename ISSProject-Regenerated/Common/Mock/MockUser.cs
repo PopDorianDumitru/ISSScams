@@ -29,7 +29,18 @@ namespace ISSProject.Common.Mock
         {
             get { return last_name; } set { last_name = value; }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
 
+            MockUser other = (MockUser)obj;
+
+            // Compare string representations of the objects
+            return ToString() == other.ToString();
+        }
         private string phone_number;
         public string PhoneNumber
         {
@@ -109,6 +120,21 @@ namespace ISSProject.Common.Mock
         public object Clone()
         {
             return MemberwiseClone();
+        }
+        public bool Equals(MockUser other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            return Id == other.Id &&
+                   Password == other.Password &&
+                   Email == other.Email &&
+                   FirstName == other.FirstName &&
+                   LastName == other.LastName &&
+                   Birthdate == other.Birthdate &&
+                   PhoneNumber == other.PhoneNumber;
         }
     }
 }
